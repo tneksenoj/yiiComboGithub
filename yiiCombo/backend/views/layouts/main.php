@@ -36,8 +36,14 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Permissions', 'url' => ['/admin/']],
+        ['label' => 'Projects', 'url' => ['/projects/index']],
+        ['label' => 'Data', 'url' => ['/site-data/index']],
+        ['label' => 'Project Association', 'url' => ['/credentials/index']],
+        ['label' => 'User', 'url' => ['/user/index']],
     ];
+    if (Yii::$app->user->can('permission_admin')) {
+        $menuItems[] = ['label' => 'Permissions', 'url' => ['/admin/']];
+    }
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     }else {
