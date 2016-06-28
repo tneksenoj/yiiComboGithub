@@ -2,16 +2,26 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\UploadForm;
+use frontend\models\CreateProject;
+use backend\models\Projects;
+use backend\models\ProjectsSearch;
+use backend\models\ProjectsController;
+use backend\models\SiteData;;
+use backend\models\SiteDataSearch;
+use backend\models\SiteDataController;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
+use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -26,15 +36,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'projects', 'data'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
-                        'allow' => true,
+                        'actions' => ['projects', 'data'],
+                        'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'projects', 'data'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -66,6 +76,34 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays a single Projects model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Finds the Projects model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Projects the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Projects::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
      * Displays homepage.
      *
      * @return mixed
@@ -82,7 +120,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -107,6 +145,19 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+    /**
+    *
+    *
+    * @return mixed
+    */
+    /*public function actionCreateProject()
+    {
+        $model = new CreateProject();
+
+        return $this->render('createProject', ['model' => $model]);
+    }
+    */
 
     /**
      * Displays contact page.
@@ -140,6 +191,48 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    /**
+    * Displays Projects page
+    * Displays all projects too
+    * @return mixed
+    */
+    public function actionProjects()
+    {
+        $query = Projects::find()->all();
+        return $this->render('projects/data', ['Projects' => $query]);
+
+    }
+
+    /**
+    * Displays Data on projects view - Function not wroking all the way yet
+    * @return mixed
+    */
+    public function actionDisplayData()
+    {
+        $query = SiteData::find()->all();
+        return $this->render('view', array('Datatype' => $query));
+    }
+
+
+    /**
+    * Allows to upload files "data"
+    * @return mixed
+    */
+    public function actionData()
+    {
+
+        $model = new UploadForm();
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+
+            if ($model->validate()) {
+                $model->file->saveAs('uploads/' . $model->file->baseName . '.' . $model->file->extension);
+            }
+        }
+
+        return $this->render('projects', ['model' => $model]);
+    }
+
 
     /**
      * Signs user up.

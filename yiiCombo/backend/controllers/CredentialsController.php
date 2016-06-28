@@ -53,13 +53,18 @@ class CredentialsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CredentialsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      if (Yii::$app->user->can('read'))
+      {
+          $searchModel = new CredentialsSearch();
+          $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+          return $this->render('index', [
+              'searchModel' => $searchModel,
+              'dataProvider' => $dataProvider,
+          ]);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -70,9 +75,14 @@ class CredentialsController extends Controller
      */
     public function actionView($UID, $PID)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($UID, $PID),
-        ]);
+      if (Yii::$app->user->can('read'))
+      {
+          return $this->render('view', [
+              'model' => $this->findModel($UID, $PID),
+          ]);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -82,15 +92,20 @@ class CredentialsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Credentials();
+      if (Yii::$app->user->can('create'))
+      {
+          $model = new Credentials();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'UID' => $model->UID, 'PID' => $model->PID]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+              return $this->redirect(['view', 'UID' => $model->UID, 'PID' => $model->PID]);
+          } else {
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -102,15 +117,20 @@ class CredentialsController extends Controller
      */
     public function actionUpdate($UID, $PID)
     {
-        $model = $this->findModel($UID, $PID);
+      if (Yii::$app->user->can('update'))
+      {
+          $model = $this->findModel($UID, $PID);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'UID' => $model->UID, 'PID' => $model->PID]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+              return $this->redirect(['view', 'UID' => $model->UID, 'PID' => $model->PID]);
+          } else {
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+          }
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -122,9 +142,14 @@ class CredentialsController extends Controller
      */
     public function actionDelete($UID, $PID)
     {
+      if (Yii::$app->user->can('delete'))
+      {
         $this->findModel($UID, $PID)->delete();
 
         return $this->redirect(['index']);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
