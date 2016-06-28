@@ -20,6 +20,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link rel="icon" type="image/ico" href="/yiiplus/frontend/assets/favicon.ico">
     <?php $this->head() ?>
 </head>
 <body>
@@ -28,14 +29,23 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    ?>
+
+    <a href="http://localhost/yiiplus/frontend/web/index.php?r=site%2Findex"> <img src="/yiiplus/frontend/assets/white.png" href="site/index" class="pull-left" id="logo" type="image" height=104 width=246> </a>
+
+    <?php
+    //These are the items used in the main bar
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Projects', 'url' => ['/site/projects']],
+        //['label' => 'Data', 'url' => ['/site/data']],
+        //['label' => 'CreateProjects', 'url' => ['/site/createProject']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
@@ -70,7 +80,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Center of Excellence for Bioinformatics Research <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

@@ -53,13 +53,18 @@ class ProjectsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      if (Yii::$app->user->can('read'))
+      {
+          $searchModel = new ProjectsSearch();
+          $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+          return $this->render('index', [
+              'searchModel' => $searchModel,
+              'dataProvider' => $dataProvider,
+          ]);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -69,9 +74,14 @@ class ProjectsController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+      if (Yii::$app->user->can('read'))
+      {
+          return $this->render('view', [
+              'model' => $this->findModel($id),
+          ]);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -81,15 +91,20 @@ class ProjectsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Projects();
+      if (Yii::$app->user->can('create'))
+      {
+          $model = new Projects();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->PID]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+              return $this->redirect(['view', 'id' => $model->PID]);
+          } else {
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -100,15 +115,20 @@ class ProjectsController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+      if (Yii::$app->user->can('update'))
+      {
+          $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->PID]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+              return $this->redirect(['view', 'id' => $model->PID]);
+          } else {
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+          }
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -119,9 +139,14 @@ class ProjectsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+      if (Yii::$app->user->can('delete'))
+      {
+          $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+          return $this->redirect(['index']);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -135,8 +160,8 @@ class ProjectsController extends Controller
     {
         if (($model = Projects::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+        }else {
+              throw new ForbiddenHttpException('You do not have permission to access this page!');
+            }
     }
 }

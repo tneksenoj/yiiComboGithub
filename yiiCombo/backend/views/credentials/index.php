@@ -17,6 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Credentials', ['create'], ['class' => 'btn btn-success']) ?>
+        <br></br>
+        <h4>Use this page to add users to a given project based on thier user ID and project ID.</h4>
+        <br></br>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
