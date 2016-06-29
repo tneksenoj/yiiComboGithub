@@ -1,16 +1,11 @@
 <?php
-
+/*
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+class m160629_224855_database_create extends Migration
 {
     public function up()
     {
-        $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-        }
         $this->createTable('auth_assignment', [
             'item_name' => $this->string()->notNull(),
             'user_id' => $this->string()->notNull(),
@@ -72,7 +67,7 @@ class m130524_201442_init extends Migration
             'status' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-        ]);*/
+        ]);
 
         $this->addPrimaryKey(
             'pk-auth_assignment-item_name',
@@ -254,4 +249,14 @@ class m130524_201442_init extends Migration
       $this->dropTable('user');
     }
 
+      /*
+      // Use safeUp/safeDown to run migration code within a transaction
+      public function safeUp()
+      {
+      }
+
+      public function safeDown()
+      {
+      }
+      */
 }
