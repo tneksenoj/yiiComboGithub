@@ -20,7 +20,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="icon" type="image/ico" href="@app/frontend/assets/favicon.ico">
+    <link rel="icon" type="image/ico" href= "<?php echo Yii::getAlias('@web') . '/images/favicon.ico'; ?>">
     <?php $this->head() ?>
 </head>
 <body>
@@ -37,7 +37,7 @@ AppAsset::register($this);
     ]);
     ?>
 
-    <a href="@app/web/index.php?r=site%2Findex"> <img src="@app/assets/white.png" href="site/index" class="pull-left" id="logo" type="image" height=104 width=246> </a>
+    <a href=<?php echo Yii::getAlias('@web') . "/index.php/site/index"; ?>> <img src="<?php echo Yii::getAlias('@web') . '/images/white.png'; ?>" href="site/index" class="pull-left" id="logo" type="image" height=104 width=246> </a>
 
     <?php
     //These are the items used in the main bar
