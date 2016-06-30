@@ -20,7 +20,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="icon" type="image/ico" href="/yiiplus/frontend/assets/favicon.ico">
+    <link rel="icon" type="image/ico" href="/crab/frontend/assets/favicon.ico">
     <?php $this->head() ?>
 </head>
 <body>
@@ -37,7 +37,7 @@ AppAsset::register($this);
     ]);
     ?>
 
-    <a href="http://localhost/yiiplus/frontend/web/index.php?r=site%2Findex"> <img src="/yiiplus/frontend/assets/white.png" href="site/index" class="pull-left" id="logo" type="image" height=104 width=246> </a>
+    <a href="https://ec2-54-213-250-28.us-west-2.compute.amazonaws.com/crab/frontend/web/index.php?r=site%2Findex"> <img src="/crab/frontend/assets/white.png" href="site/index" class="pull-left" id="logo" type="image" height=104 width=246> </a>
 
     <?php
     //These are the items used in the main bar
