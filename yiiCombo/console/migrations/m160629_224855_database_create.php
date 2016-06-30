@@ -248,15 +248,5 @@ class m160629_224855_database_create extends Migration
       $this->dropTable('sitedata');
       $this->dropTable('user');
     }
-
-      /*
-      // Use safeUp/safeDown to run migration code within a transaction
-      public function safeUp()
-      {
-      }
-
-      public function safeDown()
-      {
-      }
-      */
 }
+?>
