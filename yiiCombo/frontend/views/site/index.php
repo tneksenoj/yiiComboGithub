@@ -10,7 +10,7 @@ $this->title = 'Center of Excellence for Bioinformatics Research';
 <div class="site-index" id="sciencebg">
 
     <div class="jumbotron">
-        <img src="/crab/frontend/assets/white.png">
+        <img src="<?php echo Yii::getAlias('@web') . '/images/white.png'; ?>">
 
         <p class="lead" id="poop">This is a dynamic inter-collegiate biology research sharing platform.</p>
         <p><a class="btn btn-primary btn-lg" href="/crab/frontend/web/index.php?r=site%2Fabout">Learn More</a>
