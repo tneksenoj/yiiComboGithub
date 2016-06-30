@@ -10,7 +10,7 @@ class m130524_201442_init extends Migration
         if ($this->db->driverName === 'mysql') {
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-        }
+        } /*
         $this->createTable('auth_assignment', [
             'item_name' => $this->string()->notNull(),
             'user_id' => $this->string()->notNull(),
@@ -62,7 +62,7 @@ class m130524_201442_init extends Migration
             'Location' => $this->string()->notNull(),
         ]);
 
-        /*$this->createTable('user', [
+        $this->createTable('user', [
             'id' => $this->integer()->notNull(),
             'username' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string()->notNull(),
@@ -72,7 +72,7 @@ class m130524_201442_init extends Migration
             'status' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
-        ]);*/
+        ]);
 
         $this->addPrimaryKey(
             'pk-auth_assignment-item_name',
@@ -239,10 +239,10 @@ class m130524_201442_init extends Migration
             'PID'
         );
 
-    }
+    }*/
 
     public function down()
-    {
+    {/*
       $this->dropTable('auth_assignment');
       $this->dropTable('auth_item');
       $this->dropTable('auth_item_child');
@@ -251,7 +251,7 @@ class m130524_201442_init extends Migration
       $this->dropTable('credentials');
       $this->dropTable('projects');
       $this->dropTable('sitedata');
-      $this->dropTable('user');
+      $this->dropTable('user');*/
     }
 
 }
