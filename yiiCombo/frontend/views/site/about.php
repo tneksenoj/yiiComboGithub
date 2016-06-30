@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<li>Provide opportunities for students and faculty to contribute their bioinformatics analysis skills to real world biological research projects.</li>
 			</h4>
 		</ul> <br>
-		<h4> We want users to take part in the research community, as this site is dedicated to the persuit greater knowledge. Here you can contribute to the community by helping out fellow researchers solve problems and add to our body of knowledge. Whether you are a seasoned vet or a brand new researcher this is a place to get started. There are many research topics to choose from, hope you find a topic to your liking! Good luck with your research.
+		<h4> We want users to take part in the research community, as this site is dedicated to the pursuit greater knowledge. Here you can contribute to the community by helping out fellow researchers solve problems and add to our body of knowledge. Whether you are a seasoned vet or a brand new researcher this is a place to get started. There are many research topics to choose from, hope you find a topic to your liking! Good luck with your research.
     	</h4>
     </p>
 </div>
