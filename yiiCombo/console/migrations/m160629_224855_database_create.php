@@ -127,7 +127,7 @@ class m160629_224855_database_create extends Migration
             'fk-auth_assignment-item_name',
             'auth_assignment',
             'item_name',
-            'auth_rule',
+            'auth_item',
             'name',
             'CASCADE'
         );
