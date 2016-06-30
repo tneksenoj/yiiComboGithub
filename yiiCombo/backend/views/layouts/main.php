@@ -40,10 +40,11 @@ AppAsset::register($this);
         //['label' => 'Data', 'url' => ['/site-data/index']],
         ['label' => 'Project Association', 'url' => ['/credentials/index']],
         ['label' => 'User', 'url' => ['/user/index']],
+        ['label' => 'Permissions', 'url' => ['/admin/']],
     ];
-    if (Yii::$app->user->can('permission_admin')) {
-        $menuItems[] = ['label' => 'Permissions', 'url' => ['/admin/']];
-    }
+    //if (Yii::$app->user->can('permission_admin')) {
+        //$menuItems[] = ['label' => 'Permissions', 'url' => ['/admin/']];
+    //}
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     }else {
