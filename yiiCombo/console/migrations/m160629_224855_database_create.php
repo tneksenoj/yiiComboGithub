@@ -1,5 +1,5 @@
 <?php
-/*
+
 use yii\db\Migration;
 
 class m160629_224855_database_create extends Migration
@@ -57,7 +57,7 @@ class m160629_224855_database_create extends Migration
             'Location' => $this->string()->notNull(),
         ]);
 
-        /*$this->createTable('user', [
+        $this->createTable('user', [
             'id' => $this->integer()->notNull(),
             'username' => $this->string()->notNull()->unique(),
             'auth_key' => $this->string()->notNull(),
