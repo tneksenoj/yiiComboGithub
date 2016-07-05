@@ -7,11 +7,15 @@ use backend\models\Projects;
 use backend\models\ProjectsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\filters\AccessRule;
 use yii\helpers\BaseUrl;
 use yii\web\ForbiddenHttpException;
+use yii\httpclient\Client as WebClient;
+use creocoder\flysystem;
+use creocoder\flysystem\fs;
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
@@ -94,8 +98,14 @@ class ProjectsController extends Controller
       if (Yii::$app->user->can('create'))
       {
           $model = new Projects();
-
+          //$oc_client = new WebClient();
+          //error_log("HERE IS THE CONFIG FILE " . json_encode(Yii::$app->params['OC_files']));
           if ($model->load(Yii::$app->request->post()) && $model->save()) {
+              if(!Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)) {
+                  if(!Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $model->Name)) {
+                    thow new ServerErrorHttpException('Error creating project directory on OwnCloud server.');
+                  }
+                }
               return $this->redirect(['view', 'id' => $model->PID]);
           } else {
               return $this->render('create', [
