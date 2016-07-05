@@ -7,6 +7,7 @@ use backend\models\Projects;
 use backend\models\ProjectsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\filters\AccessRule;
@@ -98,13 +99,12 @@ class ProjectsController extends Controller
       {
           $model = new Projects();
           //$oc_client = new WebClient();
-          error_log("Made it to create action");
           //error_log("HERE IS THE CONFIG FILE " . json_encode(Yii::$app->params['OC_files']));
           if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            error_log("Checking if made it to if statement" . $model->Name);
               if(!Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)) {
-                  error_log("Can create folder.");
-                  Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $model->Name);
+                  if(!Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $model->Name)) {
+                    thow new ServerErrorHttpException('Error creating project directory on OwnCloud server.');
+                  }
                 }
               return $this->redirect(['view', 'id' => $model->PID]);
           } else {
