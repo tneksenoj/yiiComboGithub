@@ -38,6 +38,11 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'webdavFs' => [
+            'class' => 'creocoder\flysystem\WebDAVFilesystem',
+            //'baseUri' => 'https://ocadmin:oc3578jcd@ec2-54-213-250-28.us-west-2.compute.amazonaws.com/',
+            'baseUri' => 'http://admin:whitworth16@localhost/',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             //'showScriptName' => false,

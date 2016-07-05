@@ -12,6 +12,9 @@ use yii\filters\AccessControl;
 use yii\filters\AccessRule;
 use yii\helpers\BaseUrl;
 use yii\web\ForbiddenHttpException;
+use yii\httpclient\Client as WebClient;
+use creocoder\flysystem;
+use creocoder\flysystem\fs;
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
@@ -94,8 +97,15 @@ class ProjectsController extends Controller
       if (Yii::$app->user->can('create'))
       {
           $model = new Projects();
-
+          //$oc_client = new WebClient();
+          error_log("Made it to create action");
+          //error_log("HERE IS THE CONFIG FILE " . json_encode(Yii::$app->params['OC_files']));
           if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            error_log("Checking if made it to if statement" . $model->Name);
+              if(!Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)) {
+                  error_log("Can create folder.");
+                  Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $model->Name);
+                }
               return $this->redirect(['view', 'id' => $model->PID]);
           } else {
               return $this->render('create', [
