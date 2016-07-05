@@ -40,8 +40,7 @@ return [
         ],
         'webdavFs' => [
             'class' => 'creocoder\flysystem\WebDAVFilesystem',
-            'baseUri' => 'https://ocadmin:GH78#$zebrasarehappy@ec2-54-213-250-28.us-west-2.compute.amazonaws.com/',
-            //'baseUri' => 'http://admin:whitworth16@localhost/',
+            'baseUri' => 'https://USERNAME:PASSWORD@SERVERURL',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
