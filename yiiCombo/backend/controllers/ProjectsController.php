@@ -101,6 +101,20 @@ class ProjectsController extends Controller
       return false;
     }
 
+
+    /**
+     * Creates a new Projects on owncloud.
+     * @return bool
+     */
+    public function deleteProjectOnOwncloud($projectName)
+    {
+      if(Yii::$app->webdavFs->deleteDir(Yii::$app->params['OC_files'] . $projectName))
+        {
+          return true;
+        }
+      return false;
+    }
+
     /**
      * Creates a new Projects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -162,7 +176,10 @@ class ProjectsController extends Controller
     {
       if (Yii::$app->user->can('delete'))
       {
-          $this->findModel($id)->delete();
+          $model = $this->findModel($id);
+          error_log("This is the model name... " . $model->Name);
+          $model->delete();
+          $this->deleteProjectOnOwncloud($model->Name);
 
           return $this->redirect(['index']);
       }else {
