@@ -103,7 +103,7 @@ class ProjectsController extends Controller
           if ($model->load(Yii::$app->request->post()) && $model->save()) {
               if(!Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)) {
                   if(!Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $model->Name)) {
-                    thow new ServerErrorHttpException('Error creating project directory on OwnCloud server.');
+                    throw new ServerErrorHttpException('Error creating project directory on OwnCloud server.');
                   }
                 }
               return $this->redirect(['view', 'id' => $model->PID]);
