@@ -33,6 +33,17 @@ class Projects extends \yii\db\ActiveRecord
         return [
             [['Description'], 'string'],
             [['Name'], 'string', 'max' => 255],
+            [['Name'], function ($attribute, $params){
+                  if(preg_match('/\s/', $this->$attribute)) {
+                    $this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');
+                  }
+                  if(Projects::find()->where(['Name' => $this->$attribute])->exists()) {
+                    $this->addError($this->$attribute, 'Sorry, that project name is already in use.');
+                  }
+                  if(Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $this->$attribute)){
+                    $this->addError($this->$attribute, 'Sorry, that name is already in use on the project server.');
+                  }
+                }],
         ];
     }
 
@@ -46,13 +57,6 @@ class Projects extends \yii\db\ActiveRecord
             'Name' => 'Name',
             'Description' => 'Description',
         ];
-    }
-
-    public function createProjectOC()
-    {
-
-
-
     }
 
     /**

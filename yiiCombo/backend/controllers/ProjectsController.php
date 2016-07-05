@@ -89,29 +89,39 @@ class ProjectsController extends Controller
     }
 
     /**
+     * Creates a new Projects on owncloud.
+     * @return bool
+     */
+    public function createProjectOnOwncloud($projectName)
+    {
+      if(Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $projectName))
+        {
+          return true;
+        }
+      return false;
+    }
+
+    /**
      * Creates a new Projects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-      if (Yii::$app->user->can('create'))
-      {
+      if (Yii::$app->user->can('create')) {
           $model = new Projects();
-          //$oc_client = new WebClient();
-          //error_log("HERE IS THE CONFIG FILE " . json_encode(Yii::$app->params['OC_files']));
-          if ($model->load(Yii::$app->request->post()) && $model->save()) {
-              if(!Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)) {
-                  if(!Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $model->Name)) {
-                    $this->findModel($model->PID)->delete();
-                    throw new ServerErrorHttpException('Error creating project directory on OwnCloud server.');
-                  }
-                }
-              return $this->redirect(['view', 'id' => $model->PID]);
-          } else {
-              return $this->render('create', [
-                  'model' => $model,
-              ]);
+          if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
+              if( $this->createProjectOnOwncloud($model->Name) ) {
+                return $this->redirect(['view', 'id' => $model->PID]);
+              } else {
+                $this->findModel($model->PID)->delete();
+                return $this->render('create', [
+                    'model' => $model, ]);
+              }
+          }else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
           }
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
