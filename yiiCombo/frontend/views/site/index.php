@@ -13,8 +13,8 @@ $this->title = 'Center of Excellence for Bioinformatics Research';
         <img src="<?php echo Yii::getAlias('@web') . '/images/white.png'; ?>">
 
         <p class="lead" id="poop">This is a dynamic inter-collegiate biology research sharing platform.</p>
-        <p><a class="btn btn-primary btn-lg" href="/crab/frontend/web/index.php?r=site%2Fabout">Learn More</a>
-        <a class="btn btn-primary btn-lg" href="/crab/frontend/web/index.php?r=site%2Fsignup">Request Access</a></p>
+        <p><a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php?r=site%2Fabout"; ?>>Learn More</a>
+        <a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/signup?r=site%2Fsignup"; ?>>Request Access</a></p>
     </div>
 
 </div>

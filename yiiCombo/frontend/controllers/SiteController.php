@@ -36,15 +36,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'projects', 'data'],
+                'only' => ['logout', 'projects', 'files'],
                 'rules' => [
                     [
-                        'actions' => ['projects', 'data'],
+                        'actions' => ['projects', 'files'],
                         'allow' => false,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'projects', 'data'],
+                        'actions' => ['logout', 'projects', 'files'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -200,6 +200,17 @@ class SiteController extends Controller
     {
         $query = Projects::find()->all();
         return $this->render('projects/data', ['Projects' => $query]);
+
+    }
+
+    /**
+    * Displays Projects page
+    * Displays all projects too
+    * @return mixed
+    */
+    public function actionFiles()
+    {
+        return $this->render('projects/files');
 
     }
 
