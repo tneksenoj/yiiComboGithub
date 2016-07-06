@@ -124,22 +124,27 @@ class ProjectsController extends Controller
     {
       if (Yii::$app->user->can('create')) {
           $model = new Projects();
+          error_log("AC1");
           if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
+            error_log("AC2");
               if( $this->createProjectOnOwncloud($model->Name) ) {
+                error_log("AC3");
                 return $this->redirect(['view', 'id' => $model->PID]);
               } else {
+                error_log("AC4");
                 $this->findModel($model->PID)->delete();
                 return $this->render('create', [
                     'model' => $model, ]);
               }
-          }else {
+          } else {
+            error_log("AC5");
             return $this->render('create', [
                 'model' => $model,
             ]);
           }
-      }else {
+      } else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
-          }
+      }
     }
 
     /**

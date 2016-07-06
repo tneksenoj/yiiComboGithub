@@ -32,5 +32,5 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
-# backend/comfig/main - contains passwords
+# backend/config/main - contains passwords
 ./backend/config/main.php
