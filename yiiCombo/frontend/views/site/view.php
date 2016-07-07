@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'options' => ['class' => 'name-display'],
             'attributes' => [
-                'Name',   
+                'Name',
             ],
         ]) ?>
 
@@ -33,11 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'options' => ['class' => 'description-display'],
             'attributes' => [
-                'Description:ntext',   
+                'Description:ntext',
             ],
         ]) ?>
-</div>        
 
 
 
-        
+        <div>
+          <br></br>
+          <p> If you would like to take part in this project please contact use here: </p>
+        </div>
+</div>

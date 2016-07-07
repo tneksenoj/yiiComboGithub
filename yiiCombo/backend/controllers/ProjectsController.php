@@ -8,6 +8,8 @@ use backend\models\ProjectsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
+use yii\base\UserException;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\filters\AccessRule;
@@ -16,6 +18,7 @@ use yii\web\ForbiddenHttpException;
 use yii\httpclient\Client as WebClient;
 use creocoder\flysystem;
 use creocoder\flysystem\fs;
+
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
@@ -119,33 +122,41 @@ class ProjectsController extends Controller
      * Creates a new Projects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     *&& $model->validate()
      */
-    public function actionCreate()
-    {
-      if (Yii::$app->user->can('create')) {
-          $model = new Projects();
-          //error_log("AC1");
-          if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
-            //error_log("AC2");
-              if( $this->createProjectOnOwncloud($model->Name) ) {
-                //error_log("AC3");
-                return $this->redirect(['view', 'id' => $model->PID]);
-              } else {
-                //error_log("AC4");
-                $this->findModel($model->PID)->delete();
-                return $this->render('create', [
-                    'model' => $model, ]);
-              }
+     public function actionCreate()
+     {
+       if (Yii::$app->user->can('create')) {
+         $model = new Projects();
+         if ($model->load(Yii::$app->request->post())) {
+           if (Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $this->$attribute)){
+             throw new UserException('Sorry that name is already in use on the project server.');
+           }
+           if ($model->validate()) {
+             $model->file = UploadedFile::getInstance($model, 'file');
+             $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+             if (!$model->save()) {
+               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
+             }
+             $model->file->saveAs($model->logo);
+
+             if ($this->createProjectOnOwncloud($model->Name)) {
+               return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
+             } else {
+               $this->findModel($model->PID)->delete();
+               return $this->render('create', [
+                 'model' => $model, ]);
+             }
+           }
           } else {
-            //error_log("AC5");
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-          }
-      } else {
-            throw new ForbiddenHttpException('You do not have permission to access this page!');
-      }
-    }
+             return $this->render('create', [
+               'model' => $model,
+             ]);
+           }
+         } else {
+           throw new ForbiddenHttpException('You do not have permission to access this page!');
+         }
+       }
 
     /**
      * Updates an existing Projects model.

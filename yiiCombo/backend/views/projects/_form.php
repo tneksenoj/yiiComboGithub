@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use backend\models\Projects;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Projects */
@@ -10,13 +12,15 @@ use yii\widgets\ActiveForm;
 
 <div class="projects-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->errorSummary($model); ?>
 
     <?= $form->field($model, 'Name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Description')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'file')->fileInput(); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

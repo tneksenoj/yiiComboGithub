@@ -17,6 +17,8 @@ use Yii;
  */
 class Projects extends \yii\db\ActiveRecord
 {
+
+    public $file;
     /**
      * @inheritdoc
      */
@@ -32,7 +34,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return [
             [['Description'], 'string'],
-            [['Name'], 'string', 'max' => 255],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
+            [['Name', 'logo'], 'string', 'max' => 255],
             [['Name'], function ($attribute, $params){
                   if(preg_match('/\s/', $this->$attribute)) {
                     //error_log("EL1");
@@ -60,6 +63,7 @@ class Projects extends \yii\db\ActiveRecord
             'PID' => 'Pid',
             'Name' => 'Name',
             'Description' => 'Description',
+            'file' => 'Logo',
         ];
     }
 
