@@ -132,13 +132,14 @@ class ProjectsController extends Controller
           if (Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
+          
           $model->file = UploadedFile::getInstance($model, 'file');
-          if ($model->validate()) {
+
+          if ($model->file->saveAs($model->logo) && $model->validate()) {
             $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
             if (!$model->save()) {
               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
             }
-            $model->file->saveAs($model->logo);
 
             if ($this->createProjectOnOwncloud($model->Name)) {
               return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
