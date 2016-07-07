@@ -5,8 +5,10 @@ use yii\widgets\LinkPager;
 $this->title = 'Files';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php header('X-Frame-Options: GOFORIT'); ?>
 
+<?php header('Location:https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud'); 
+	  exit();
+?>
 <!--  This page dynamically generates project tiles with a brief description  -->
 
 <div class="site-files">
@@ -16,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--     <iframe src="https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud" width="1140" height="700">
       </iframe> -->
 
-      <object data=https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud width="1140" height="700"> <embed src=https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud width="1140" height="700"> </embed></object>
+      <!--<object data=https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud width="1140" height="700"> <embed src=https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud width="1140" height="700"> </embed></object>-->
+
 
 </div>
