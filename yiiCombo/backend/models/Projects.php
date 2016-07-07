@@ -38,7 +38,7 @@ class Projects extends \yii\db\ActiveRecord
                     //error_log("EL1");
                     $this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');
                   }
-                  if(Projects::find()->where(['Name' => $this->$attribute])->exists()) {
+/*                  if(Projects::find()->where(['Name' => $this->$attribute])->exists()) {
                     //error_log("EL2");
                     $this->addError($this->$attribute, 'Sorry, that project name is already in use.');
                   }
@@ -46,6 +46,7 @@ class Projects extends \yii\db\ActiveRecord
                     //error_log("EL3");
                     $this->addError($this->$attribute, 'Sorry, that name is already in use on the project server.');
                   }
+*/
                 }],
         ];
     }
