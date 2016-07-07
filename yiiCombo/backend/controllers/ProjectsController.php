@@ -134,9 +134,10 @@ class ProjectsController extends Controller
           }
           
           $model->file = UploadedFile::getInstance($model, 'file');
+          $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
 
           if ($model->file->saveAs($model->logo) && $model->validate()) {
-            $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+      
             if (!$model->save()) {
               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
             }
