@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         <?php foreach ($Projects as $Project): ?>
-            <?php echo Yii::getAlias('@web') . "/index.php?r=site%2Fview&id=". $Project->PID . "' class='plink' > <div class= 'project col-md-6'>"; ?>
+            <?php Yii::getAlias('@web') . "/index.php?r=site%2Fview&id=". $Project->PID . "' class='plink' > <div class= 'project col-md-6'>"; ?>
                 <div class="title">
                     <?= Html::encode("{$Project->Name}") ?>:
                 </div>
