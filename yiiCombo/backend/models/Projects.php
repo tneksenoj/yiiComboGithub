@@ -34,8 +34,8 @@ class Projects extends \yii\db\ActiveRecord
     {
         return [
             [['Description'], 'string'],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             [['Name', 'logo'], 'string', 'max' => 255],
-            [['logo'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             [['Name'], function ($attribute, $params){
                   if(preg_match('/\s/', $this->$attribute)) {
                     //error_log("EL1");
