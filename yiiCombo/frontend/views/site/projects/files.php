@@ -16,6 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--     <iframe src="https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud" width="1140" height="700">
       </iframe> -->
 
-      <object data=https://localhost/owncloud width="1140" height="700"> <embed src=https://localhost/owncloud width="1140" height="700"> </embed></object>
+      <object data=https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud width="1140" height="700"> <embed src=https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud width="1140" height="700"> </embed></object>
 
 </div>
