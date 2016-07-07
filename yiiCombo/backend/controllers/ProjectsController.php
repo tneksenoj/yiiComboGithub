@@ -124,39 +124,42 @@ class ProjectsController extends Controller
      * @return mixed
      *&& $model->validate()
      */
-     public function actionCreate()
-     {
-       if (Yii::$app->user->can('create')) {
-         $model = new Projects();
-         if ($model->load(Yii::$app->request->post())) {
-           if (Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $this->$attribute)){
-             throw new UserException('Sorry that name is already in use on the project server.');
-           }
-           if ($model->validate()) {
-             $model->file = UploadedFile::getInstance($model, 'file');
-             $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
-             if (!$model->save()) {
-               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
-             }
-             $model->file->saveAs($model->logo);
+    public function actionCreate()
+    {
+      if (Yii::$app->user->can('create')) {
+        $model = new Projects();
+        if ($model->load(Yii::$app->request->post())) {
+          if (Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)){
+            throw new UserException('Sorry that name is already in use on the project server.');
+          }
+          $model->file = UploadedFile::getInstance($model, 'file');
+          if ($model->validate()) {
+            $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+            if (!$model->save()) {
+              throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
+            }
+            $model->file->saveAs($model->logo);
 
-             if ($this->createProjectOnOwncloud($model->Name)) {
-               return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
-             } else {
-               $this->findModel($model->PID)->delete();
-               return $this->render('create', [
-                 'model' => $model, ]);
-             }
-           }
+            if ($this->createProjectOnOwncloud($model->Name)) {
+              return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
+            } else {
+              $this->findModel($model->PID)->delete();
+              return $this->render('create', [
+                'model' => $model, ]);
+            }
           } else {
-             return $this->render('create', [
-               'model' => $model,
-             ]);
-           }
-         } else {
-           throw new ForbiddenHttpException('You do not have permission to access this page!');
-         }
-       }
+            $error = $model->getErrors();
+            throw new UserException("Error in model validation " . json_encode($error));
+          }
+        } else {
+          return $this->render('create', [
+            'model' => $model,
+            ]);
+        }
+      } else {
+        throw new ForbiddenHttpException('You do not have permission to access this page!');
+      }
+    }
 
     /**
      * Updates an existing Projects model.
