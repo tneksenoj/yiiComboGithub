@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--<a class="btn btn-md btn-primary pull-right proj-btn"> View My Projects </a>
     <a class="btn btn-md btn-primary pull-right proj-btn"> Add Project </a>-->
 
-    <iframe src="http://localhost/owncloud" width="1140" height="700">
+    <iframe src="https://localhost/owncloud/" width="1140" height="700">
       </iframe>
 
 </div>
