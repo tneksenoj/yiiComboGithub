@@ -121,15 +121,18 @@ class ProjectsController extends Controller
 
 
 
-/*    public function createProjectGroupOnOwncloud($groupName) 
+    public function createProjectGroupOnOwncloud($groupName) 
     {
       $client = new WebClient();
       $response = $client->createRequest()
         ->setMethod('post')
-        ->setUrl(Yii::$app->webdavFs->has(Yii::$app->params['OCS']);
-
-
-    }*/
+        ->setUrl(Yii::$app->params['OCS'] . 'groups')
+        ->setData(['groupid' => $groupName])
+        ->setOptions(['timeout' => 5,])
+        ->send();
+        error_log("RESPONSE IS: " . json_encode($response));
+        return true;
+    }
 
     /**
      * Creates a new Projects model.
@@ -158,7 +161,9 @@ class ProjectsController extends Controller
               $error = $model->getErrors();
               throw new UserException("Error saving file " . json_encode($error));
             }
-
+            if (!$this->createProjectGroupOnOwncloud($model->Name)) {
+              throw new UserException("Error creating group.");
+            }
             if ($this->createProjectOnOwncloud($model->Name)) {
               return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
             } else {
