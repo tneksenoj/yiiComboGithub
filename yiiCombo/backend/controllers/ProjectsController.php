@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\web\Application;
 use backend\models\Projects;
 use backend\models\ProjectsSearch;
 use yii\web\Controller;
@@ -118,11 +119,22 @@ class ProjectsController extends Controller
       return false;
     }
 
+
+
+/*    public function createProjectGroupOnOwncloud($groupName) 
+    {
+      $client = new WebClient();
+      $response = $client->createRequest()
+        ->setMethod('post')
+        ->setUrl(Yii::$app->webdavFs->has(Yii::$app->params['OCS']);
+
+
+    }*/
+
     /**
      * Creates a new Projects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     *&& $model->validate()
+     * @return mixed = new WebClient()
      */
     public function actionCreate()
     {
