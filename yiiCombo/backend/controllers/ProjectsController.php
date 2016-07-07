@@ -136,6 +136,8 @@ class ProjectsController extends Controller
           $model->file = UploadedFile::getInstance($model, 'file');
           $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
 
+          error_log( "logo file name: " . $model->logo );
+
           if ($model->file->saveAs($model->logo) && $model->validate()) {
       
             if (!$model->save()) {
