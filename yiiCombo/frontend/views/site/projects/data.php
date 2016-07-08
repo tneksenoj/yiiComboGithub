@@ -9,8 +9,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <!--  This page dynamically generates project tiles with a brief description  -->
-
-
     <h1><?= Html::encode($this->title) ?></h1>
     <!--<a class="btn btn-md btn-primary pull-right proj-btn"> View My Projects </a>
     <a class="btn btn-md btn-primary pull-right proj-btn"> Add Project </a>-->

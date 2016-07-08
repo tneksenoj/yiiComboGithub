@@ -6,9 +6,10 @@ $this->title = 'Files';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php header('Location:http://localhost/owncloud');
+<?php header('Location:https://' . $_SERVER["SERVER_NAME"] . '/owncloud');
 	  exit();
 ?>
+
 <!--https://ec2-54-218-30-182.us-west-2.compute.amazonaws.com/owncloud-->
 <!--  This page dynamically generates project tiles with a brief description  -->
 
