@@ -1,0 +1,12 @@
+<!-- <?php foreach ($Projects as $Project): ?>
+    <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php?r=site%2Fview&id=". $Project->PID . "' class='plink' > <div class= 'project col-md-6'>"; ?>
+        <div class="title">
+            <?= Html::encode("{$Project->Name}") ?>:
+        </div>
+        <div class="description">
+          <!-<?= Html::img( $Project->logo );?> -->
+          <img src='<?php echo $Project->logo; ?>' style="width:">
+         <!--<?= Html::encode("{$Project->logo}") ?>-->
+        </div>
+    </div>
+<?php endforeach; ?> -->
