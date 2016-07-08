@@ -130,9 +130,22 @@ class ProjectsController extends Controller
         ->setData(['groupid' => $groupName])
         ->setOptions(['timeout' => 5,])
         ->send();
-        error_log("RESPONSE IS: " . json_encode($response));
         return true;
     }
+
+
+
+    public function deleteProjectGroupOnOwncloud($groupName) 
+    {
+      $client = new WebClient();
+      $response = $client->createRequest()
+        ->setMethod('delete')
+        ->setUrl(Yii::$app->params['OCS'] . 'groups/' . $groupName)
+        ->setOptions(['timeout' => 5,])
+        ->send();
+        return true;
+    }
+
 
     /**
      * Creates a new Projects model.
@@ -223,6 +236,7 @@ class ProjectsController extends Controller
           error_log("This is the model name... " . $model->Name);
           $model->delete();
           $this->deleteProjectOnOwncloud($model->Name);
+          $this->deleteProjectGroupOnOwncloud($model->Name);
 
           return $this->redirect(['index']);
       }else {

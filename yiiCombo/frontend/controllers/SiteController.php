@@ -22,6 +22,7 @@ use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
+use yii\db\Connection;
 
 /**
  * Site controller
@@ -244,6 +245,42 @@ class SiteController extends Controller
         return $this->render('projects', ['model' => $model]);
     }
 
+
+
+
+    public function createUserOnOwncloud($userId, $password) 
+    {
+        $db_Yii = new yii\db\Connection([
+            'dsn' => Yii::$app->params['OCDB_connect'],
+            'username' => Yii::$app->params['OCDB_username'],
+            'password' => Yii::$app->params['OCDB_password'],
+            'charset' => 'utf8',
+        ]);
+
+        $db_OC = new yii\db\Connection([
+            'dsn' => Yii::$app->params['OCDB_connect'],
+            'username' => Yii::$app->params['OCDB_username'],
+            'password' => Yii::$app->params['OCDB_password'],
+            'charset' => 'utf8',
+        ]);
+
+        $post = Yii::$app->db_OC->createCommand('SELECT * FROM oc_users WHERE uid=:uid')
+                    ->bindValue(':uid', $userId)
+
+
+
+
+
+    /*$client = new WebClient();
+      $response = $client->createRequest()
+        ->setMethod('post')
+        ->setUrl(Yii::$app->params['OCS'] . 'users')
+        ->setData(['userid' => $userId, 'password' => $password])
+        ->setOptions(['timeout' => 5,])
+        ->send();
+        error_log("RESPONSE IS: " . json_encode($response));
+        return true;*/
+    }
 
     /**
      * Signs user up.
