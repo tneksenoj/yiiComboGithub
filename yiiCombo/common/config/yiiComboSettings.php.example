@@ -1,9 +1,9 @@
 <?php
 $yiicfg = [
               'OC_files' => 'owncloud/remote.php/files/Projects/',
-              'OCS' => 'http://USER:PASSWORD@localhost/owncloud/ocs/v1.php/cloud/',
+              'OCS' => 'https://USER:PASSWORD@localhost/owncloud/ocs/v1.php/cloud/',
 
-              'WebDav' => 'http://USER:PASSWORD@localhost/',
+              'WebDav' => 'https://USER:PASSWORD@localhost/',
 
               'DB_connect' => 'mysql:host=localhost;dbname=yiiComboUpdated',
               'DB_username' => 'USER',
