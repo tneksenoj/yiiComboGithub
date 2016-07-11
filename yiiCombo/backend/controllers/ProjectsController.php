@@ -123,27 +123,53 @@ class ProjectsController extends Controller
 
     public function createProjectGroupOnOwncloud($groupName) 
     {
-      $client = new WebClient();
+      $client = new WebClient([
+          'responseConfig' => [
+              'format' => WebClient::FORMAT_JSON
+          ],
+      ]);
       $response = $client->createRequest()
         ->setMethod('post')
         ->setUrl(Yii::$app->params['OCS'] . 'groups')
         ->setData(['groupid' => $groupName])
         ->setOptions(['timeout' => 5,])
         ->send();
-        return true;
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[2]['value'] == "ok") {
+          return true;
+        } else {
+          return false;
+        }
     }
 
 
 
     public function deleteProjectGroupOnOwncloud($groupName) 
     {
-      $client = new WebClient();
+      $client = new WebClient([
+          'responseConfig' => [
+              'format' => WebClient::FORMAT_JSON
+          ],
+      ]);
       $response = $client->createRequest()
         ->setMethod('delete')
         ->setUrl(Yii::$app->params['OCS'] . 'groups/' . $groupName)
         ->setOptions(['timeout' => 5,])
         ->send();
-        return true;
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[2]['value'] == "ok") {
+          return true;
+        } else {
+          return false;
+        }
     }
 
 
@@ -172,15 +198,17 @@ class ProjectsController extends Controller
 
             if (!$model->file->saveAs($model->logo)) {
               $error = $model->getErrors();
+              $model->delete();
               throw new UserException("Error saving file " . json_encode($error));
             }
             if (!$this->createProjectGroupOnOwncloud($model->Name)) {
+              $model->delete();
               throw new UserException("Error creating group.");
             }
             if ($this->createProjectOnOwncloud($model->Name)) {
               return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
             } else {
-              $this->findModel($model->PID)->delete();
+             $model->delete();
               return $this->render('create', [
                 'model' => $model, ]);
             }
@@ -233,11 +261,18 @@ class ProjectsController extends Controller
       if (Yii::$app->user->can('delete'))
       {
           $model = $this->findModel($id);
-          error_log("This is the model name... " . $model->Name);
           $model->delete();
-          $this->deleteProjectOnOwncloud($model->Name);
-          $this->deleteProjectGroupOnOwncloud($model->Name);
 
+          $status = true;
+          if ( !$this->deleteProjectOnOwncloud($model->Name) ) {
+            $status = false;
+          };
+          if ( !$this->deleteProjectGroupOnOwncloud($model->Name) ) {
+            $status = false;
+          };
+          if ( !$status ) {
+            throw new UserException("Project group likely removed from Yii but error removing from OwnCloud.");
+          }
           return $this->redirect(['index']);
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
