@@ -1,0 +1,15 @@
+<?php
+$yiicfg = [
+              'OC_files' => 'owncloud/remote.php/files/Projects/',
+              'OCS' => 'http://USER:PASSWORD@localhost/owncloud/ocs/v1.php/cloud/',
+
+              'WebDav' => 'http://USER:PASSWORD@localhost/',
+
+              'DB_connect' => 'mysql:host=localhost;dbname=yiiComboUpdated',
+              'DB_username' => 'USER',
+              'DB_password' =>'PASSWORD',
+
+              'OCDB_connect' => 'mysql:host=localhost;dbname=owncloud',
+              'OCDB_username' => 'USER',
+              'OCDB_password' => 'PASSWORD',
+           ];
