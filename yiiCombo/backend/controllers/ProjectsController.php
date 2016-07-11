@@ -121,7 +121,7 @@ class ProjectsController extends Controller
 
 
 
-    public function createProjectGroupOnOwncloud($groupName) 
+    public function createProjectGroupOnOwncloud($groupName)
     {
       $client = new WebClient([
           'responseConfig' => [
@@ -148,7 +148,7 @@ class ProjectsController extends Controller
 
 
 
-    public function deleteProjectGroupOnOwncloud($groupName) 
+    public function deleteProjectGroupOnOwncloud($groupName)
     {
       $client = new WebClient([
           'responseConfig' => [
@@ -186,12 +186,12 @@ class ProjectsController extends Controller
           if (Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
-          
+
           $model->file = UploadedFile::getInstance($model, 'file');
           $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
 
           if ( $model->validate() ) {
-      
+
             if (!$model->save()) {
               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
             }
