@@ -3,6 +3,4 @@ return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
-    'OC_files' => 'owncloud/remote.php/files/Projects/',
-    'OCS' => 'http://USER:PASSWORD@localhost/owncloud/ocs/v1.php/cloud/',
 ];
