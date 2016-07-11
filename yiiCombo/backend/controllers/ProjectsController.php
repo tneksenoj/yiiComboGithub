@@ -98,7 +98,7 @@ class ProjectsController extends Controller
      */
     public function createProjectOnOwncloud($projectName)
     {
-      if(Yii::$app->webdavFs->createDir(Yii::$app->params['OC_files'] . $projectName))
+      if(Yii::$app->webdavFs->createDir($yiicfg['OC_files'] . $projectName))
         {
           return true;
         }
@@ -112,7 +112,7 @@ class ProjectsController extends Controller
      */
     public function deleteProjectOnOwncloud($projectName)
     {
-      if(Yii::$app->webdavFs->deleteDir(Yii::$app->params['OC_files'] . $projectName))
+      if(Yii::$app->webdavFs->deleteDir($yiicfg['OC_files'] . $projectName))
         {
           return true;
         }
@@ -130,7 +130,7 @@ class ProjectsController extends Controller
       ]);
       $response = $client->createRequest()
         ->setMethod('post')
-        ->setUrl(Yii::$app->params['OCS'] . 'groups')
+        ->setUrl($yiicfg['OC_files'] . 'groups')
         ->setData(['groupid' => $groupName])
         ->setOptions(['timeout' => 5,])
         ->send();
@@ -157,7 +157,7 @@ class ProjectsController extends Controller
       ]);
       $response = $client->createRequest()
         ->setMethod('delete')
-        ->setUrl(Yii::$app->params['OCS'] . 'groups/' . $groupName)
+        ->setUrl($yiicfg['OC_files'] . 'groups/' . $groupName)
         ->setOptions(['timeout' => 5,])
         ->send();
 
@@ -183,7 +183,7 @@ class ProjectsController extends Controller
       if (Yii::$app->user->can('create')) {
         $model = new Projects();
         if ($model->load(Yii::$app->request->post())) {
-          if (Yii::$app->webdavFs->has(Yii::$app->params['OC_files'] . $model->Name)){
+          if (Yii::$app->webdavFs->has($yiicfg['OC_files'] . $model->Name)){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
 
