@@ -19,14 +19,14 @@ use yii\web\ForbiddenHttpException;
 use yii\httpclient\Client as WebClient;
 use creocoder\flysystem;
 use creocoder\flysystem\fs;
-
+use common\config\yiicfg;
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
  */
 class ProjectsController extends Controller
 {
-    /**
+      /**
      * @inheritdoc
      */
      public function behaviors()
@@ -98,7 +98,7 @@ class ProjectsController extends Controller
      */
     public function createProjectOnOwncloud($projectName)
     {
-      if(Yii::$app->webdavFs->createDir($yiicfg['OC_files'] . $projectName))
+      if(Yii::$app->webdavFs->createDir(yiicfg::OC_files . $projectName))
         {
           return true;
         }
@@ -112,7 +112,7 @@ class ProjectsController extends Controller
      */
     public function deleteProjectOnOwncloud($projectName)
     {
-      if(Yii::$app->webdavFs->deleteDir($yiicfg['OC_files'] . $projectName))
+      if(Yii::$app->webdavFs->deleteDir(yiicfg::OC_files . $projectName))
         {
           return true;
         }
@@ -128,9 +128,10 @@ class ProjectsController extends Controller
               'format' => WebClient::FORMAT_JSON
           ],
       ]);
+      error_log('PROBLEM: ' . yiicfg::OCS . 'groups');
       $response = $client->createRequest()
         ->setMethod('post')
-        ->setUrl($yiicfg['OC_files'] . 'groups')
+        ->setUrl(yiicfg::OCS. 'groups')
         ->setData(['groupid' => $groupName])
         ->setOptions(['timeout' => 5,])
         ->send();
@@ -157,7 +158,7 @@ class ProjectsController extends Controller
       ]);
       $response = $client->createRequest()
         ->setMethod('delete')
-        ->setUrl($yiicfg['OC_files'] . 'groups/' . $groupName)
+        ->setUrl(yiicfg::OCS . 'groups/' . $groupName)
         ->setOptions(['timeout' => 5,])
         ->send();
 
@@ -183,7 +184,7 @@ class ProjectsController extends Controller
       if (Yii::$app->user->can('create')) {
         $model = new Projects();
         if ($model->load(Yii::$app->request->post())) {
-          if (Yii::$app->webdavFs->has($yiicfg['OC_files'] . $model->Name)){
+          if (Yii::$app->webdavFs->has(yiicfg::OCS . $model->Name)){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
 

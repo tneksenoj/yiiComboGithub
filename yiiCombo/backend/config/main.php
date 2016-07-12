@@ -1,4 +1,6 @@
 <?php
+use common\config\yiicfg;
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -40,7 +42,7 @@ return [
         ],
         'webdavFs' => [
             'class' => 'creocoder\flysystem\WebDAVFilesystem',
-            'baseUri' => $yiicfg['WebDav'],
+            'baseUri' => yiicfg::WebDav,
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,

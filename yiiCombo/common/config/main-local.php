@@ -1,11 +1,13 @@
 <?php
+use common\config\yiicfg;
+
 return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => $yiicfg['DB_connect'],
-            'username' => $yiicfg['DB_username'],
-            'password' => $yiicfg['DB_password'],
+            'dsn' => yiicfg::DB_connect,
+            'username' => yiicfg::DB_username,
+            'password' => yiicfg::DB_password,
             'charset' => 'utf8',
         ],
         'mailer' => [
