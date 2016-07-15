@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.2
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 13, 2016 at 01:15 AM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.5.30
+-- Generation Time: Jul 13, 2016 at 01:22 PM
+-- Server version: 5.7.12-0ubuntu1.1
+-- PHP Version: 7.0.4-7ubuntu2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -33,7 +33,14 @@ CREATE TABLE `auth_assignment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- ----------------------------------------------------------
+-- Dumping data for table `auth_assignment`
+--
+
+INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('admin', '14', 1468441215),
+('permission_admin', '14', 1468441217);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `auth_item`
@@ -129,7 +136,6 @@ CREATE TABLE `migration` (
   `apply_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- --------------------------------------------------------
 
 --
@@ -143,7 +149,6 @@ CREATE TABLE `projects` (
   `logo` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
 -- --------------------------------------------------------
 
 --
@@ -175,7 +180,13 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- -----------------------------------------------------------
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
+(14, 'admin', '2BKQyCldR0ZTumAdX4NkOFzTpJ-Fctd3', '$2y$13$YZRFHMD6gHZD1.UJJ67xWuXWmK4DQGWUySjE.ee47h5dxS.jpna9O', NULL, 'admin@admin.com', 10, 1468441205, 1468441205);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -266,7 +277,7 @@ ALTER TABLE `sitedata`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
