@@ -6,7 +6,7 @@ $this->title = 'Files';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php header('Location:http://' . $_SERVER["SERVER_NAME"] . '/owncloud');
+<?php header('Location:https://' . $_SERVER["SERVER_NAME"] . '/owncloud');
 	  exit();
 ?>
 
