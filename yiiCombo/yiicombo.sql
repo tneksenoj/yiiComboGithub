@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 13, 2016 at 01:22 PM
+-- Generation Time: Jul 20, 2016 at 04:13 PM
 -- Server version: 5.7.12-0ubuntu1.1
 -- PHP Version: 7.0.4-7ubuntu2.1
 
@@ -152,6 +152,17 @@ CREATE TABLE `projects` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `username` varchar(256) NOT NULL,
+  `projectname` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sitedata`
 --
 
@@ -244,6 +255,14 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`PID`);
 
 --
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`username`,`projectname`),
+  ADD KEY `username` (`username`),
+  ADD KEY `projectname` (`projectname`);
+
+--
 -- Indexes for table `sitedata`
 --
 ALTER TABLE `sitedata`
@@ -267,7 +286,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sitedata`
 --
@@ -277,7 +296,7 @@ ALTER TABLE `sitedata`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --
