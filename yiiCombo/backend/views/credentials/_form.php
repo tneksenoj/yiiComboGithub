@@ -23,7 +23,7 @@ use backend\models\Projects;
     <?= $form->field($model, 'PID')->dropDownlist(ArrayHelper::map(Projects::find()->all(), 'PID', 'Name'),
         ['prompt' => 'Select Project'])->label('Project Title')?>
 
-    <?= $form->field($model, 'ACL')->textInput() ?>
+    <!-- <?= $form->field($model, 'ACL')->textInput() ?> -->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

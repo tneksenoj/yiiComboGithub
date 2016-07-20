@@ -10,6 +10,13 @@ return [
             'password' => yiicfg::DB_password,
             'charset' => 'utf8',
         ],
+        'ocdb' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => yiicfg::OCDB_connect,
+            'username' => yiicfg::OCDB_username,
+            'password' => yiicfg::OCDB_password,
+            'charset' => 'utf8',
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',

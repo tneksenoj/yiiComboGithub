@@ -37,10 +37,9 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Projects', 'url' => ['/projects/index']],
+        ['label' => 'Requests', 'url' => ['/requests/index']],
         //['label' => 'Data', 'url' => ['/site-data/index']],
-        ['label' => 'Project Association', 'url' => ['/credentials/index']],
         ['label' => 'User', 'url' => ['/user/index']],
-       // ['label' => 'Permissions', 'url' => ['/admin/']],
     ];
     if (Yii::$app->user->can('permission_admin')) {
         $menuItems[] = ['label' => 'Permissions', 'url' => ['/admin/']];

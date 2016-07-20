@@ -48,7 +48,13 @@ return [
             'enablePrettyUrl' => true,
             //'showScriptName' => false,
             'rules' => [
-            ],
+              //'<controller:(Requests)>/<action:(AddToOC)>/<username:\w+>/<projectname\w+>' => '<controller>/<action>',
+              '<controller:(requests)>/<username:\w+>/<projectname:\w+>' => 'requests/addtooc',
+            //'Requests/AddToOC/<username:\w+>/<projectname:\w+>' => 'requests/index',
+            //'requests/<username:\w+>/<projectname:\w+>' => 'requests/AddToOC',
+            //'requests' => 'requests/AddToOC',
+            //'requests/<username:\w+>' => 'requests/AddToOC',
+          ],
         ],
     ],
     /*'as access' => [

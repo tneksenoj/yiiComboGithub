@@ -97,4 +97,10 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Projects::className(), ['PID' => 'PID'])->viaTable('credentials', ['UID' => 'id']);
     }
+
+    public function getOcUsers()
+    {
+        return $this->hasOne(OcUsers::className(), ['uid' => 'username']);
+    }
+
 }
