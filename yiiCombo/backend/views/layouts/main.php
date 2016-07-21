@@ -46,6 +46,7 @@ SiiAsset::register($this);
         ['label' => 'Requests', 'url' => ['/requests/index']],
         //['label' => 'Data', 'url' => ['/site-data/index']],
         ['label' => 'User', 'url' => ['/user/index']],
+        ['label' => 'Frontend', 'url' => ['/site/frontend']],
     ];
     if (Yii::$app->user->can('permission_admin')) {
         $menuItems[] = ['label' => 'Permissions', 'url' => ['/admin/']];

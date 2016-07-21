@@ -8,6 +8,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use yii\filters\AccessControl;
+use yii\filters\AccessRule;
 use frontend\assets\AppAsset;
 use frontend\assets\W3schoolsAsset;
 use frontend\assets\SiiAsset;
@@ -56,6 +58,9 @@ SiiAsset::register($this);
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
+    if (Yii::$app->user->can('admin')) {
+        $menuItems[] = ['label' => 'Backend', 'url' => ['backend']];
+    }
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

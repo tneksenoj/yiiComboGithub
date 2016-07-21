@@ -21,7 +21,34 @@ body {
     padding-top: 20px;
     color: white;
 }
+.spacer {
+  width: 100%;
+  height: 100px;
+  text-align: center!important
+}
+/*.CEFB_title_wrap {
+  text-align: center!important
+}
+.CEFB_title {
+  width: 750px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+.CEFB_title:after, .spacer:after {
+  content: "";
+  display:table;
+  clear: both;
+}
 
+.jumbotron_img {
+  min-height: 1em;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}*/
 .jumbotron {
     text-align: center;
     background-color: transparent;

@@ -247,6 +247,13 @@ class SiteController extends Controller
       ]);
     }
 
+
+    public function actionBackend()
+    {
+        return $this->render('backend');
+
+    }
+
     /**
     * Displays Projects page
     * Displays all projects too

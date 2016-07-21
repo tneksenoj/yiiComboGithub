@@ -1,4 +1,10 @@
-.sii-filename-elips { 
+/**
+ * @author Center of Excellence for Bioinformatics Research
+ * This is the yii2-sii-file-mgr css
+ * Which displays our projects in a nice tile format.
+ */
+
+.sii-filename-elips {
 	width:auto;
     white-space:nowrap;
     overflow:hidden;
