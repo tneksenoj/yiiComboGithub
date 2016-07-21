@@ -12,7 +12,7 @@ use backend\models\Requests;
 
 <div class="w3-col s12 m4 l3 w3-margin-bottom">
     <div class="w3-card-8 w3-center" >
-      <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/site/view?id=". $model->PID . "' >" ; ?>
+      <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/projects/view?id=". $model->PID . "' >" ; ?>
         <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
         </div>
         <div class="w3-container w3-center" >

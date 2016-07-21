@@ -219,7 +219,7 @@ class SiteController extends Controller
         ],
       ]);
 
-      return $this->render('projects/projects', [
+      return $this->render('projects/index', [
           'dataProvider' => $dataProvider,
       ]);
     }
@@ -242,7 +242,7 @@ class SiteController extends Controller
         ],
       ]);
 
-      return $this->render('projects/projects', [
+      return $this->render('projects/index', [
           'dataProvider' => $dataProvider,
       ]);
     }
