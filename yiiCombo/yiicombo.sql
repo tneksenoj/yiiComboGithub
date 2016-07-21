@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2016 at 04:13 PM
+-- Generation Time: Jul 21, 2016 at 12:58 PM
 -- Server version: 5.7.12-0ubuntu1.1
 -- PHP Version: 7.0.4-7ubuntu2.1
 
@@ -37,7 +37,7 @@ CREATE TABLE `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('admin', '14', 1468441215),
+('admin', '14', 1469130973),
 ('permission_admin', '14', 1468441217);
 
 -- --------------------------------------------------------
@@ -61,7 +61,8 @@ CREATE TABLE `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('admin', 1, 'can update/view/delete/create', NULL, NULL, 1467152615, 1467152615),
+('admin', 1, 'can update/view/delete/create/approve', NULL, NULL, 1467152615, 1469130489),
+('approve', 2, 'can approve user to project', NULL, NULL, 1469130388, 1469130388),
 ('create', 2, 'can create', NULL, NULL, 1467152628, 1467152628),
 ('delete', 2, 'can delete', NULL, NULL, 1467152661, 1467152661),
 ('permission_admin', 1, 'can view and update persmissions', NULL, NULL, 1467150592, 1467150592),
@@ -84,6 +85,7 @@ CREATE TABLE `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('admin', 'approve'),
 ('admin', 'create'),
 ('admin', 'delete'),
 ('admin', 'read'),
@@ -286,7 +288,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `sitedata`
 --
@@ -296,7 +298,7 @@ ALTER TABLE `sitedata`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- Constraints for dumped tables
 --
