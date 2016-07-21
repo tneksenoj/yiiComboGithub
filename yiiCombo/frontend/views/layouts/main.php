@@ -50,6 +50,7 @@ SiiAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Projects', 'url' => ['/site/projects']],
         ['label' => 'Files', 'url' => ['/site/files/']],
+        //['label' => 'Requests', 'url' => ['/requests/index']],
         //['label' => 'Data', 'url' => ['/site/data']],
         //['label' => 'CreateProjects', 'url' => ['/site/createProject']],
         ['label' => 'About', 'url' => ['/site/about']],

@@ -23,6 +23,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\db\Connection;
+use yii\data\ActiveDataProvider;
+use backend\models\Requests;
+use yii\base\UserException;
 
 /**
  * Site controller
@@ -197,11 +200,51 @@ class SiteController extends Controller
     * Displays all projects too
     * @return mixed
     */
-    public function actionProjects()
+    public function actionProjectsold()
     {
         $query = Projects::find()->all();
         return $this->render('projects/data', ['Projects' => $query]);
 
+    }
+
+    public function actionProjects()
+    {
+      //$searchModel = new ProjectsSearch();
+      //$searchModel->search(Yii::$app->request->queryParams);
+
+      $dataProvider = new ActiveDataProvider([
+        'query' => Projects::find(),
+        'pagination' => [
+          'pageSize' => 10,
+        ],
+      ]);
+
+      return $this->render('projects/projects', [
+          'dataProvider' => $dataProvider,
+      ]);
+    }
+
+    public function actionRequestooc($username, $projectname) {
+      $model = new Requests();
+      $model->username = $username;
+      $model->projectname = $projectname;
+      if( ! Requests::find()->where(['username' => $username])->andWhere(['projectname' => $projectname])->exists()) {
+        $model->save();
+        Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.');
+      }else {
+          Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');
+      }
+
+      $dataProvider = new ActiveDataProvider([
+        'query' => Projects::find(),
+        'pagination' => [
+          'pageSize' => 10,
+        ],
+      ]);
+
+      return $this->render('projects/projects', [
+          'dataProvider' => $dataProvider,
+      ]);
     }
 
     /**
@@ -248,7 +291,7 @@ class SiteController extends Controller
 
 
 
-    // public function createUserOnOwncloud($userId, $password) 
+    // public function createUserOnOwncloud($userId, $password)
     // {
     //     $db_Yii = new yii\db\Connection([
     //         'dsn' => Yii::$app->params['OCDB_connect'],
