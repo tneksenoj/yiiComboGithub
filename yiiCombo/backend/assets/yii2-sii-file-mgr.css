@@ -1,0 +1,13 @@
+.sii-filename-elips { 
+	width:auto;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.sii-fileimage-icon {
+	height:10em;
+	background-size:cover;
+	background-position:center;
+	background-repeat:no-repeat;
+}
