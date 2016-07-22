@@ -173,6 +173,34 @@ class ProjectsController extends Controller
         }
     }
 
+    public function shareFolderOnOwncloud($groupName) {
+      $client = new WebClient(
+      [
+          'responseConfig' => [
+              'format' => WebClient::FORMAT_JSON
+          ],
+      ]
+    );
+    //curl -X POST /shares -d path="/Projects/Land" -d shareType=1 -d shareWith="Land"
+
+      $response = $client->createRequest()
+        ->setMethod('post')
+        ->setUrl(yiicfg::OCS_SHARE . 'shares')
+        ->setData(['path' => '/Projects/'.$groupName, 'shareType' => 1, 'shareWith' => $groupName])
+        ->setOptions(['timeout' => 5,])
+        ->send();
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[$index['STATUS'][0]]['value'] == "ok") {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
 
     /**
      * Creates a new Projects model.
@@ -206,13 +234,16 @@ class ProjectsController extends Controller
               $model->delete();
               throw new UserException("Error creating group.");
             }
-            if ($this->createProjectOnOwncloud($model->Name)) {
-              return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
-            } else {
-             $model->delete();
-              return $this->render('create', [
-                'model' => $model, ]);
+            if (!$this->createProjectOnOwncloud($model->Name)) {
+              $model->delete();
+              throw new UserException("Error creating group.");
             }
+            if (!$this->shareFolderOnOwncloud($model->Name)) {
+              $model->delete();
+              throw new UserException("Error creating group.");
+            }
+
+            return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
           } else {
             $error = $model->getErrors();
             throw new UserException("Error in model validation " . json_encode($error));

@@ -51,7 +51,7 @@ SiiAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Projects', 'url' => ['/site/projects']],
-        ['label' => 'Files', 'url' => ['/site/files/']],
+        //['label' => 'Files', 'url' => ['/site/files/']],
         //['label' => 'Requests', 'url' => ['/requests/index']],
         //['label' => 'Data', 'url' => ['/site/data']],
         //['label' => 'CreateProjects', 'url' => ['/site/createProject']],
