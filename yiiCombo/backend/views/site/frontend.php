@@ -6,7 +6,7 @@ $this->title = 'Frontend';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php header('Location:https://' . $_SERVER["SERVER_NAME"] . '/yii/yiiCombo/frontend/web/');
+<?php header('Location:Https://' . $_SERVER["SERVER_NAME"] . Yii::getAlias('@web') . '/../../frontend/web');
 	  exit();
 ?>
 
