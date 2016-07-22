@@ -1,12 +1,13 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'Backend';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php header('Location:https://' . $_SERVER["SERVER_NAME"] . '/yii/yiiCombo/backend/web/');
+<?php header('Location:Https://' . $_SERVER["SERVER_NAME"] . Yii::getAlias('@web') . '/../../backend/web');
 	  exit();
 ?>
 
