@@ -26,6 +26,7 @@ use yii\db\Connection;
 use yii\data\ActiveDataProvider;
 use backend\models\Requests;
 use yii\base\UserException;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Site controller
@@ -224,27 +225,60 @@ class SiteController extends Controller
       ]);
     }
 
-    public function actionRequestooc($username, $projectname) {
-      $model = new Requests();
-      $model->username = $username;
-      $model->projectname = $projectname;
-      if( ! Requests::find()->where(['username' => $username])->andWhere(['projectname' => $projectname])->exists()) {
-        $model->save();
-        Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.');
-      }else {
-          Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');
+    public function actionDelereqtooc($username, $projectname) {
+
+      $logged_in_user = Yii::$app->user->identity->username;
+      if ( $logged_in_user == $username ) {
+        if( Requests::findOne(['username' => $username, 'projectname' => $projectname])->delete() ) {
+          Yii::$app->getSession()->setFlash('success', 'Your request has been removed.');
+        }else {
+            Yii::$app->getSession()->setFlash('error', 'Error removing your request. Maybe it has already been removed?');
+        }
+
+        $dataProvider = new ActiveDataProvider([
+          'query' => Projects::find(),
+          'pagination' => [
+            'pageSize' => 10,
+          ],
+        ]);
+
+        return $this->render('projects/index', [
+            'dataProvider' => $dataProvider,
+        ]);
+      } else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
       }
+    }
 
-      $dataProvider = new ActiveDataProvider([
-        'query' => Projects::find(),
-        'pagination' => [
-          'pageSize' => 10,
-        ],
-      ]);
 
-      return $this->render('projects/index', [
-          'dataProvider' => $dataProvider,
-      ]);
+    public function actionRequestooc($username, $projectname) {
+
+    
+      $logged_in_user = Yii::$app->user->identity->username;
+      if ( $logged_in_user == $username ) {  
+        $model = new Requests();
+        $model->username = $username;
+        $model->projectname = $projectname;
+        if( ! Requests::find()->where(['username' => $username])->andWhere(['projectname' => $projectname])->exists()) {
+          $model->save();
+          Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.');
+        }else {
+            Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');
+        }
+
+        $dataProvider = new ActiveDataProvider([
+          'query' => Projects::find(),
+          'pagination' => [
+            'pageSize' => 10,
+          ],
+        ]);
+
+        return $this->render('projects/index', [
+            'dataProvider' => $dataProvider,
+        ]);
+      } else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+      }
     }
 
     /**
@@ -252,9 +286,9 @@ class SiteController extends Controller
     * Displays all projects too
     * @return mixed
     */
-    public function actionFiles()
+    public function actionFiles( $projectname )
     {
-        return $this->render('projects/files');
+        return $this->render('projects/files', array('projectname' => $projectname));
 
     }
 

@@ -96,6 +96,32 @@ class Requests extends \yii\db\ActiveRecord
       }
     }
 
+    public static function deleteUserFromGroup($username, $groupName)
+    {
+      $client = new WebClient([
+          'responseConfig' => [
+              'format' => WebClient::FORMAT_JSON
+          ],
+      ]);
+
+      $response = $client->createRequest()
+        ->setMethod('delete')
+        ->setUrl(yiicfg::OCS. '/users/' . $username .  '/groups')
+        ->setData(['groupid' => $groupName])
+        ->setOptions(['timeout' => 5,])
+        ->send();
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[2]['value'] == "ok") {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
     public static function addUserToGroup($username, $groupName)
     {
       Requests::createOwncloudUser($username);

@@ -3,6 +3,12 @@
 namespace backend\models;
 
 use Yii;
+use backend\controllers\ProjectsController;
+use yii\httpclient\Client as WebClient;
+use backend\models\OcUsers;
+use backend\models\OcPreferences;
+use backend\models\User;
+use common\config\yiicfg;
 
 /**
  * This is the model class for table "user".
@@ -101,6 +107,59 @@ class User extends \yii\db\ActiveRecord
     public function getOcUsers()
     {
         return $this->hasOne(OcUsers::className(), ['uid' => 'username']);
+    }
+
+    public static function deleteOwncloudUser($username)
+    {
+
+      $client = new WebClient([
+          'responseConfig' => [
+              'format' => WebClient::FORMAT_JSON
+          ],
+      ]);
+
+      $response = $client->createRequest()
+        ->setMethod('delete')
+        ->setUrl(yiicfg::OCS. '/users/' . $username .  '/groups')
+        ->setOptions(['timeout' => 5,])
+        ->send();
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[2]['value'] == "ok") {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+    public static function getOwncloudGroups($username)
+    {
+
+      $client = new WebClient([
+          'responseConfig' => [
+              'format' => WebClient::FORMAT_JSON
+          ],
+      ]);
+
+      $response = $client->createRequest()
+        ->setMethod('get')
+        ->setUrl(yiicfg::OCS. '/users/' . $username .  '/groups')
+        ->setOptions(['timeout' => 5,])
+        ->send();
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[2]['value'] == "ok") {
+          $groups = array_map( function($el) use ($vals) { return $vals[$el]["value"]; }, $index["ELEMENT"] ); 
+          return $groups;
+        } else {
+          return [];
+        }
     }
 
 }

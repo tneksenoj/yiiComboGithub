@@ -137,7 +137,6 @@ class RequestsController extends Controller
       if (Yii::$app->user->can('update'))
       {
           $model = $this->findModel($username, $projectname);
-
           if ($model->load(Yii::$app->request->post()) && $model->save()) {
               return $this->redirect(['view', 'username' => $model->username, 'projectname' => $model->projectname]);
           } else {
@@ -162,6 +161,9 @@ class RequestsController extends Controller
       if (Yii::$app->user->can('delete'))
       {
           $this->findModel($username, $projectname)->delete();
+
+          Requests::deleteUserFromGroup($username, $projectname);
+          
           return $this->redirect(['index']);
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');

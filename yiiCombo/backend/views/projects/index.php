@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ListView;
 
-$this->title = 'Browse Projects';
+$this->title = 'Existing Projects';
 $this->params['breadcrumbs'][] = $this->title;
 
 /* @var $this yii\web\View */
@@ -19,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--<a class="btn btn-md btn-primary pull-right proj-btn"> View My Projects </a>
     <a class="btn btn-md btn-primary pull-right proj-btn"> Add Project </a>-->
 
+<p>
+          <?= Html::a('Create a Project', ['create'], ['class' => 'btn btn-success']) ?>
+</p>
 
 <h1><?= Html::encode($this->title) ?></h1>
     <div class="projects-index">

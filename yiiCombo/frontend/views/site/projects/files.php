@@ -2,11 +2,11 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
-$this->title = 'Files';
+$this->title = $projectname;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php header('Location:https://' . $_SERVER["SERVER_NAME"] . '/owncloud');
+<?php header('Location:https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/files/?dir=%2FProjects%2F' . $projectname );
 	  exit();
 ?>
 
