@@ -56,7 +56,13 @@ return [
             //'requests/<username:\w+>' => 'requests/AddToOC',
           ],
         ],
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'forceCopy' => true,          
+        ],
     ],
+
+
     /*'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
