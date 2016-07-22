@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2016 at 12:58 PM
+-- Generation Time: Jul 22, 2016 at 01:42 PM
 -- Server version: 5.7.12-0ubuntu1.1
 -- PHP Version: 7.0.4-7ubuntu2.1
 
@@ -134,7 +134,7 @@ CREATE TABLE `credentials` (
 --
 
 CREATE TABLE `migration` (
-  `version` varchar(180) NOT NULL,
+  `version` varchar(180) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `apply_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -146,9 +146,9 @@ CREATE TABLE `migration` (
 
 CREATE TABLE `projects` (
   `PID` int(11) NOT NULL,
-  `Name` varchar(255) DEFAULT NULL,
-  `Description` mediumtext,
-  `logo` varchar(256) NOT NULL
+  `Name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Description` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `logo` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -158,8 +158,8 @@ CREATE TABLE `projects` (
 --
 
 CREATE TABLE `requests` (
-  `username` varchar(256) NOT NULL,
-  `projectname` varchar(256) NOT NULL
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `projectname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -171,7 +171,7 @@ CREATE TABLE `requests` (
 CREATE TABLE `sitedata` (
   `DID` int(11) NOT NULL,
   `PID` int(11) NOT NULL,
-  `Location` varchar(255) DEFAULT NULL
+  `Location` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -254,7 +254,8 @@ ALTER TABLE `migration`
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
-  ADD PRIMARY KEY (`PID`);
+  ADD PRIMARY KEY (`PID`,`Name`),
+  ADD KEY `Name` (`Name`);
 
 --
 -- Indexes for table `requests`
@@ -275,7 +276,7 @@ ALTER TABLE `sitedata`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id`,`username`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);
@@ -288,7 +289,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `sitedata`
 --
@@ -298,7 +299,7 @@ ALTER TABLE `sitedata`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Constraints for dumped tables
 --
@@ -336,6 +337,13 @@ ALTER TABLE `credentials`
   ADD CONSTRAINT `credentials_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `credentials_ibfk_2` FOREIGN KEY (`PID`) REFERENCES `projects` (`PID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk-credentials-PID` FOREIGN KEY (`PID`) REFERENCES `projects` (`PID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `requests`
+--
+ALTER TABLE `requests`
+  ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`projectname`) REFERENCES `projects` (`Name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `requests_ibfk_3` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sitedata`

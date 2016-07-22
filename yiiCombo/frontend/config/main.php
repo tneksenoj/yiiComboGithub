@@ -16,6 +16,19 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+        /*'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'your-host-domain e.g. smtp.gmail.com',
+                'username' => 'your-email-or-username',
+                'password' => 'your-password',
+                'port' => '587',
+                'encryption' => 'tls',
+              ],
+        ],*/
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
