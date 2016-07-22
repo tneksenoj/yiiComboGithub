@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProjectsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 ?>
 
 <!--  This page dynamically generates project tiles with a brief description  -->
@@ -26,12 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
     <div class="projects-index">
       <div class='w3-container w3-center'>
-          <div class='w3-row-padding' style = "max-height:10em">
               <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
               <?= ListView::widget([
                   'dataProvider' => $dataProvider,
                   // 'filterModel' => $searchModel,
-
                   'layout' => "{summary}\n{items}\n{pager}",
                   'itemView' => function($model, $key, $index, $column) {
                       return $this->render('_project_tile', ['model' => $model]);
@@ -47,6 +46,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
               ]); ?>
 
-            </div>
         </div>
     </div>

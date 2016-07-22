@@ -154,8 +154,8 @@ class User extends \yii\db\ActiveRecord
         xml_parse_into_struct($p, $response->content, $vals, $index);
         xml_parser_free($p);
 
-        if ( $vals[2]['value'] == "ok") {
-          $groups = array_map( function($el) use ($vals) { return $vals[$el]["value"]; }, $index["ELEMENT"] ); 
+        if ( $vals[2]['value'] == "ok" && array_key_exists("ELEMENT", $index) > 0 ) {
+          $groups = array_map( function($el) use ($vals) { return $vals[$el]["value"]; }, $index["ELEMENT"] );
           return $groups;
         } else {
           return [];
