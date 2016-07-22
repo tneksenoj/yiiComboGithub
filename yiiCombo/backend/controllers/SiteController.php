@@ -25,11 +25,11 @@ class SiteController extends Controller
                  'class' => AccessControl::className(),
                  'rules' => [
                      [
-                         'actions' => ['login', 'error'],
+                         'actions' => ['login', 'error', 'frontend'],
                          'allow' => true,
                      ],
                      [
-                         'actions' => ['logout', 'index', 'create', 'view', 'update', 'delete'],
+                         'actions' => ['logout', 'index', 'create', 'view', 'update', 'delete', 'frontend'],
                          'allow' => true,
                          'roles' => ['@'],
                      ],
@@ -54,6 +54,13 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    public function actionFrontend()
+    {
+      error_log("MADE IT TO FRONTEND CONTROLLER!");
+        return $this->render('frontend');
+
     }
 
     public function actionIndex()

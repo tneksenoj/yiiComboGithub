@@ -10,8 +10,9 @@ namespace backend\assets;
 use yii\web\AssetBundle;
 
 /**
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * @author Center of Excellence for Bioinformatics Research
+ * This is an AssetBundle that is specific to the the yii2-sii-file-mgr
+ * Which displays our projects in a nice tile format.
  */
 class SiiAsset extends AssetBundle
 {

@@ -10,8 +10,8 @@ namespace backend\assets;
 use yii\web\AssetBundle;
 
 /**
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * @author Center of Excellence for Bioinformatics Research
+ * This is an AssetBundle that sets up the W3 CSS
  */
 class W3schoolsAsset extends AssetBundle
 {
