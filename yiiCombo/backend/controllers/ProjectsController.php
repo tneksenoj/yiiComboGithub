@@ -128,7 +128,7 @@ class ProjectsController extends Controller
               'format' => WebClient::FORMAT_JSON
           ],
       ]);
-      error_log('PROBLEM: ' . yiicfg::OCS . 'groups');
+
       $response = $client->createRequest()
         ->setMethod('post')
         ->setUrl(yiicfg::OCS. 'groups')
