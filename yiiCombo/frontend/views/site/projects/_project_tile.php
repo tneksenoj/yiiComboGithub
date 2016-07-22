@@ -17,7 +17,7 @@ $status_approved = in_array( $projectname, $groups );
 
 ?>
 
-<div class="w3-col s12 m4 l3 w3-margin-bottom">
+<div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
     <div class="w3-card-8 w3-center" >
       <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/site/view?id=". $model->PID . "' >" ; ?>
         <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
