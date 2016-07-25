@@ -33,7 +33,7 @@ class Projects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Description'], 'string'],
+            [['Description', 'System'], 'string'],
             [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             [['Name', 'logo'], 'string', 'max' => 255],
             [['Name'], function ($attribute, $params){
@@ -64,6 +64,7 @@ class Projects extends \yii\db\ActiveRecord
             'Name' => 'Name',
             'Description' => 'Description',
             'file' => 'Logo',
+            'System' => 'System',
         ];
     }
 
