@@ -141,7 +141,9 @@ class UserController extends Controller
     {
       if (Yii::$app->user->can('delete'))
       {
-          $this->findModel($id)->delete();
+          $model = $this->findModel($id);
+          $model->deleteOwncloudUser($model->username);
+          $model->delete();
 
           return $this->redirect(['index']);
       }else {

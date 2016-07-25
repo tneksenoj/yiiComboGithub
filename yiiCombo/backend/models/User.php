@@ -120,7 +120,7 @@ class User extends \yii\db\ActiveRecord
 
       $response = $client->createRequest()
         ->setMethod('delete')
-        ->setUrl(yiicfg::OCS. '/users/' . $username .  '/groups')
+        ->setUrl(yiicfg::OCS. '/users/' . $username )
         ->setOptions(['timeout' => 5,])
         ->send();
 
