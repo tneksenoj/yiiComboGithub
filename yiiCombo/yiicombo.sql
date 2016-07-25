@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2016 at 01:33 PM
+-- Generation Time: Jul 25, 2016 at 03:21 PM
 -- Server version: 5.7.12-0ubuntu1.1
 -- PHP Version: 7.0.4-7ubuntu2.1
 
@@ -147,6 +147,7 @@ CREATE TABLE `migration` (
 CREATE TABLE `projects` (
   `PID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
+  `System` varchar(255) NOT NULL,
   `Description` mediumtext,
   `logo` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
