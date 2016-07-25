@@ -5,9 +5,37 @@
     text-overflow:ellipsis;
 }
 
-.sii-fileimage-icon {
-	height:10em;
-	background-size:cover;
-	background-position:center;
-	background-repeat:no-repeat;
+img#sii-splash-image {
+	max-width: 100%;
+	min-width: 437 px;
+	height: auto;
+}
+
+h4#sii-dynam {
+    padding-bottom: 30px;
+    color: white;
+}
+
+#sii-sciencebg {
+    background-image: url("http://www.publicdomainpictures.net/pictures/40000/velka/--1359709322C31.jpg");
+    /*
+      https://ichemepresident.files.wordpress.com/2014/10/zebrafish.jpg
+      https://images.unsplash.com/uploads/14114005966624c90b007/60cc31c4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=ccd60e2befc85b88cae88af2a1355ff7
+      http://watchdog.wpengine.netdna-cdn.com/wp-content/blogs.dir/1/files/2013/11/shutterstock_61775431.jpg
+      http://www.publicdomainpictures.net/pictures/40000/velka/--1359709322C31.jpg
+    */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+
 }

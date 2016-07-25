@@ -5,29 +5,22 @@
 $this->title = 'Center of Excellence for Bioinformatics Research';
 ?>
 <!-- This is the main index (Home) page that everything lands on -->
-<div class="container"
-  <div class="site-index" id="sciencebg">
-    <div class="spacer">
+
+<div class="site-index" id="sii-sciencebg">
+  <div class="w3-row">
+    <div class="w3-full spacer"> 
     </div>
-
-
-    <div class="container">
-      <img class=".img-responsive" src="<?php echo Yii::getAlias('@web') . '/images/white.png'; ?>" min-width="2" min-height="2">
-    </div>
-
-
-    <!-- <div class="CEFB_title_wrap"> -->
-
-      <!-- <div class=".img-responsive" style="background-image:url(<?php echo Yii::getAlias('@web') . '/images/white.png'; ?>)">
-      </div> -->
-
-
-    <!-- </div> -->
-      <!--<div class="jumbotron">
-          <p class="lead" id="dynam">This is a dynamic inter-collegiate biology research sharing platform.</p>
+    <div class="w3-row">
+      <div class="w3-full w3-center"> 
+        <div class="w3-container">
+          <img id="sii-splash-image" src="<?php echo Yii::getAlias('@web') . '/images/white.png'; ?>" width="622" height="131">
+        </div>
+      </div> 
+      <div class="w3-full w3-center">
+          <h4 id="sii-dynam">This is a dynamic inter-collegiate biology research sharing platform.</h4>
           <p><a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php?r=site%2Fabout"; ?>>Learn More</a>
           <a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/signup?r=site%2Fsignup"; ?>>Request Access</a></p>
-      </div> -->
-
+      </div>
+    </div>
   </div>
 </div>
