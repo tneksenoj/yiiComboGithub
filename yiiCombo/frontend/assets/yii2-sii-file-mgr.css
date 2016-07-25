@@ -52,3 +52,9 @@ h4#sii-dynam {
     left: 0;
 
 }
+
+
+a.glyphicon {
+  height: 2em;
+  vertical-align: middle;
+}

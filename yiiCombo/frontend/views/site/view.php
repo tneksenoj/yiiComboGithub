@@ -36,11 +36,4 @@ $this->params['breadcrumbs'][] = $this->title;
                 'Description:ntext',
             ],
         ]) ?>
-
-
-
-        <div>
-          <br></br>
-          <p> If you would like to take part in this project please contact use here: </p>
-        </div>
 </div>

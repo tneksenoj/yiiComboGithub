@@ -17,7 +17,7 @@ use backend\models\Requests;
         </div>
         <div class="w3-container w3-center" >
             <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div> </b></h4>
-            <?php echo Html::a('', ['delete', 'id' => $model->PID], [
+            <?php echo Html::a('&nbsp;Delete&nbsp;Project', ['delete', 'id' => $model->PID], [
             'class' => 'glyphicon glyphicon-trash',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',

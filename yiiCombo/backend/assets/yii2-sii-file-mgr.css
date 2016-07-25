@@ -17,3 +17,10 @@
 	background-position:center;
 	background-repeat:no-repeat;
 }
+
+
+a.glyphicon {
+  height: 2em;
+  vertical-align: middle;
+  word-spacing: 0px;
+}
