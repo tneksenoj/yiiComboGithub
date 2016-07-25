@@ -16,8 +16,14 @@ h4#sii-dynam {
     color: white;
 }
 
+.spacer {
+  width: 100%;
+  height: 100px;
+  text-align: center!important
+}
+
 #sii-sciencebg {
-    background-image: url("http://www.publicdomainpictures.net/pictures/40000/velka/--1359709322C31.jpg");
+    background-image: url("../../../../common/images/web_background.jpg");
     /*
       https://ichemepresident.files.wordpress.com/2014/10/zebrafish.jpg
       https://images.unsplash.com/uploads/14114005966624c90b007/60cc31c4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=ccd60e2befc85b88cae88af2a1355ff7

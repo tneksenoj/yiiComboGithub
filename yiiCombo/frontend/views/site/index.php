@@ -1,8 +1,15 @@
 <?php
+use yii\helpers\Html;
+use yii\widgets\LinkPager;
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 
 $this->title = 'Center of Excellence for Bioinformatics Research';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- This is the main index (Home) page that everything lands on -->
 

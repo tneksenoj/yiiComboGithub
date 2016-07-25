@@ -16,53 +16,19 @@ body {
 
 .footer {
     height: 60px;
-    background-color: #333c36;
+    background-color: #f5f5f5;
     border-top: 1px solid #ddd;
     padding-top: 20px;
-    color: white;
-}
-.spacer {
-  width: 100%;
-  height: 100px;
-  text-align: center!important
-}
-/*.CEFB_title_wrap {
-  text-align: center!important
-}
-.CEFB_title {
-  width: 750px;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: auto;
-}
-.CEFB_title:after, .spacer:after {
-  content: "";
-  display:table;
-  clear: both;
 }
 
-.jumbotron_img {
-  min-height: 1em;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}*/
 .jumbotron {
     text-align: center;
     background-color: transparent;
-    padding-bottom: 100%;
 }
 
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
-    border-radius: 0px;
-}
-
-.btn {
-     border-radius: 0px;
 }
 
 .not-set {
@@ -83,11 +49,11 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    content: "\e151";
+    content: /*"\e113"*/ "\e151";
 }
 
 a.desc:after {
-    content: "\e152";
+    content: /*"\e114"*/ "\e152";
 }
 
 .sort-numerical a.asc:after {
@@ -134,142 +100,12 @@ a.desc:after {
     padding: 8px;
 }
 
+@media(max-width:768px) {
+	.nav li > form {
+	    padding: 3px;
+	}
+}
+
 .nav > li > form > button:hover {
     text-decoration: none;
-}
-.navbar {
-    background-color: #333c36;
-    height: 51px;
-}
-
-.breadcrumb {
-    background-color: #e3e4db;
-}
-
-.active > li {
-    background-color: white;
-}
- /*
-.btn-danger {
-    background-color: #93ACB5;
-    outline-color: #789099;
-    outline-width: 2px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(78, 90, 99, .15), 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 0 rgba(78, 90, 99, .15), 0 1px 1px rgba(0, 0, 0, .075);
-
-} */
-
-.btn-danger.active{
-    background-color: #333c36;
-}
-
-.subhead {
-    padding-bottom: 100px;
-    padding-top: -100px;
-
-}
-
-#dynam {
-    padding-bottom: 30px;
-    margin-top: -100px;
-    color:white;
-}
-
-#sciencebg {
-    background-image: url("http://www.publicdomainpictures.net/pictures/40000/velka/--1359709322C31.jpg");
-    /*
-      https://ichemepresident.files.wordpress.com/2014/10/zebrafish.jpg
-      https://images.unsplash.com/uploads/14114005966624c90b007/60cc31c4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=ccd60e2befc85b88cae88af2a1355ff7
-      http://watchdog.wpengine.netdna-cdn.com/wp-content/blogs.dir/1/files/2013/11/shutterstock_61775431.jpg
-      http://www.publicdomainpictures.net/pictures/40000/velka/--1359709322C31.jpg
-    */
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    min-width: 1024px;
-    position: fixed;
-    top:0;
-    left: 0;
-
-}
-
-#logo {
-    margin-top: -20px ;
-
-}
-/* deafault bootstrap */
-.btn-primary {
-  color: #fff;
-  background-color: #333c36;
-  border-color: #2b332d;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #434941;
-    border-color: #2b332d;
-}
-.btn-primary:active, .btn-primary.active {
-    background: #66756b;
-    box-shadow: none;
-    border-color: #2b332d;
-}
-
-h4 {
-    font-family: helvetica;
-    font-weight: 100;
-    line-height: 200%;
-}
-
-.project {
-    height: 200px;
-    width: 300px;
-    background-color: #e3e4db;
-    padding:10px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 0px;
-    position: relative;
-}
-
-.plink {
-    color: #000 !important;
-}
-
-.project .title {
-    font-family: helvetica;
-    font-weight: 600;
-    font-size: 17;
-    margin-bottom: 5px;
-}
-
-.project .description {
-    font-family: helvetica;
-    font-weight: 100;
-}
-
-.project .owner {
-    font-weight: 500;
-    font-size: 12px;
-    position: absolute;
-    bottom: 10px;
-}
-.proj-btn {
-   margin-left: 5px;
-   margin-top: -32px;
-}
-
-.name-display {
-    font-size: 30px;
-}
-
-.description-display {
-    font-size: 18px;
-    font-weight: 200;
 }
