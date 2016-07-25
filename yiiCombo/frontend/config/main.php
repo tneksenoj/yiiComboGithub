@@ -15,6 +15,14 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'identityCookie' => [
+              'name' => '_frontendUser',
+              'path' => '/frontend/web',
+            ],
+        ],
+        'session' => [
+            'name' => '_frontendSessionId',
+            'savePath' => __DIR__ . '/../runtime',
         ],
         /*'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -53,7 +61,7 @@ return [
         ],
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
-            'forceCopy' => true,          
+            'forceCopy' => true,
         ],
     ],
     'params' => $params,

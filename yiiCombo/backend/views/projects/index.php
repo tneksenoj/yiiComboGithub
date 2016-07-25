@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <a class="btn btn-md btn-primary pull-right proj-btn"> Add Project </a>-->
 
 <p>
-          <?= Html::a('Create a Project', ['create'], ['class' => 'btn btn-success']) ?>
+          <?= Html::a('Create a Project', ['create'], ['class' => 'btn btn-primary']) ?>
 </p>
 
 <h1><?= Html::encode($this->title) ?></h1>

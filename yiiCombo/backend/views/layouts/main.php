@@ -45,7 +45,7 @@ SiiAsset::register($this);
         ['label' => 'Projects', 'url' => ['/projects/index']],
         ['label' => 'Requests', 'url' => ['/requests/index']],
         //['label' => 'Data', 'url' => ['/site-data/index']],
-        ['label' => 'User', 'url' => ['/user/index']],
+        ['label' => 'Users', 'url' => ['/user/index']],
         ['label' => 'Frontend', 'url' => ['/site/frontend']],
     ];
     if (Yii::$app->user->can('permission_admin')) {

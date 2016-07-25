@@ -24,7 +24,7 @@ use backend\models\Projects;
         ['prompt' => 'Select Project'])->label('Project')?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

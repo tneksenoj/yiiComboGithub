@@ -23,7 +23,7 @@ use backend\models\Projects;
     <?= $form->field($model, 'file')->fileInput(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

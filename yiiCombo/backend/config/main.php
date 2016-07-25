@@ -23,6 +23,14 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'identityCookie' => [
+              'name' => '_backendUser',
+              'path' => '/backend/web',
+            ],
+        ],
+        'session' => [
+            'name' => '_backendSessionId',
+            'savePath' => __DIR__ . '/../runtime',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -58,7 +66,7 @@ return [
         ],
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
-            'forceCopy' => true,          
+            'forceCopy' => true,
         ],
     ],
 
