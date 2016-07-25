@@ -18,6 +18,8 @@ use backend\models\Projects;
 
     <?= $form->field($model, 'Name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'System')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'Description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'file')->fileInput(); ?>

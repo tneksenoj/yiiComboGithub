@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Name') ?>
 
+    <?= $form->field($model, 'System') ?>
+
     <?= $form->field($model, 'Description') ?>
 
     <div class="form-group">

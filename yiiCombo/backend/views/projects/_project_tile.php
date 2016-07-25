@@ -17,6 +17,7 @@ use backend\models\Requests;
         </div>
         <div class="w3-container w3-center" >
             <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div> </b></h4>
+            <h6><b><div class="sii-filename-elips"><?php echo $model->System; ?></div> </b></h6>
             <?php echo Html::a('&nbsp;Delete&nbsp;Project', ['delete', 'id' => $model->PID], [
             'class' => 'glyphicon glyphicon-trash',
             'data' => [

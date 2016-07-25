@@ -24,26 +24,27 @@ $status_approved = in_array( $projectname, $groups );
         </div>
         <div class="w3-container w3-center" >
             <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div> </b></h4>
-            <?php 
+            <h6><b><div class="sii-filename-elips"><?php echo $model->System; ?></div> </b></h6>
+            <?php
                 if ($status_approved) {
-                    echo Html::a(' Access Files', 
+                    echo Html::a(' Access Files',
                                  ['/site/files',
                                   'projectname' => $projectname],
-                                 ['class' => 'glyphicon glyphicon-folder-open' ]);    
+                                 ['class' => 'glyphicon glyphicon-folder-open' ]);
                 } else if ($status_requested) {
-                    echo Html::a(' Access Requested', 
+                    echo Html::a(' Access Requested',
                                  ['site/delereqtooc',
                                   'username' => $username,
                                   'projectname' => $model->Name],
-                                 ['class' => 'glyphicon glyphicon-check' ]);    
+                                 ['class' => 'glyphicon glyphicon-check' ]);
                 } else {
-                    echo Html::a(' Request Access', 
+                    echo Html::a(' Request Access',
                                  ['site/requestooc',
                                   'username' => $username,
                                   'projectname' => $model->Name],
                                  ['class' => 'glyphicon glyphicon-unchecked']);
                 }
-              if ($status) {            
+              if ($status) {
               } else {
 
               }
