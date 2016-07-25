@@ -51,6 +51,10 @@ return [
             'rules' => [
             ],
         ],
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'forceCopy' => true,          
+        ],
     ],
     'params' => $params,
 ];
