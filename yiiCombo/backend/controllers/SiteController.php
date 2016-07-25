@@ -58,14 +58,13 @@ class SiteController extends Controller
 
     public function actionFrontend()
     {
-      error_log("MADE IT TO FRONTEND CONTROLLER!");
         return $this->render('frontend');
-
     }
+
 
     public function actionIndex()
     {
-        return $this->render('index');
+      return $this->render('index');
     }
 
     public function actionLogin()
@@ -76,7 +75,12 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if (Yii::$app->user->can('admin'))
+            {
+              return $this->goBack();
+            }else {
+                  return $this->render('frontend');
+                }
         } else {
             return $this->render('login', [
                 'model' => $model,
