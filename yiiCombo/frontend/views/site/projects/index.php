@@ -34,10 +34,10 @@ $groups = User::getOwncloudGroups($username);
                   'dataProvider' => $dataProvider,
                   // 'filterModel' => $searchModel,
 
-                  'layout' => "{summary}\n{items}\n{pager}",
+                  'layout' => "{sorter}\n{summary}\n{items}\n{pager}",
                   'itemView' => function($model, $key, $index, $column) use ($username, $groups) {
-                      return $this->render('_project_tile', ['model' => $model, 
-                                                             'username' => $username, 
+                      return $this->render('_project_tile', ['model' => $model,
+                                                             'username' => $username,
                                                              'groups' => $groups
                                                             ]);
                   },
@@ -48,7 +48,7 @@ $groups = User::getOwncloudGroups($username);
                     'prevPageLabel' => 'previous',
                     'maxButtonCount' => 3,
                   ],
-  
+
 
               ]); ?>
 

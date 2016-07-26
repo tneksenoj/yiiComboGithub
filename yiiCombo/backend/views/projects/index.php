@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <?= ListView::widget([
                   'dataProvider' => $dataProvider,
                   // 'filterModel' => $searchModel,
-                  'layout' => "{summary}\n{items}\n{pager}",
+                  'layout' => "{sorter}\n{summary}\n{items}\n{pager}",
                   'itemView' => function($model, $key, $index, $column) {
                       return $this->render('_project_tile', ['model' => $model]);
                   },

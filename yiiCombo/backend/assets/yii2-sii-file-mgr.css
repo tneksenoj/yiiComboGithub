@@ -24,3 +24,37 @@ a.glyphicon {
   vertical-align: middle;
   word-spacing: 0px;
 }
+
+div#w0.list-view ul.sorter {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #eee;
+}
+
+div#w0.list-view ul.sorter li {
+    float: left;
+    border-right:1px solid #eee;
+}
+
+div#w0.list-view ul.sorter li:last-child {
+    border-right: none;
+}
+
+div#w0.list-view ul.sorter li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+div#w0.list-view ul.sorter li a:hover:not(.active) {
+    background-color: #111;
+		color: white;
+}
+
+div#w0.list-view ul.sorters .active {
+    background-color: #4CAF50;
+}
