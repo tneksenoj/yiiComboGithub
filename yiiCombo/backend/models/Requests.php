@@ -109,8 +109,8 @@ class Requests extends \yii\db\ActiveRecord
       $response = $client->createRequest()
         ->setMethod('post')
         ->setUrl(yiicfg::OCS_SHARE . 'shares')
-        ->setData(['path' => '/Projects/'.$projectname, 'shareType' => 1, 'shareWith' => $username,
-                    'permissions' => 1, /* Default to least permission */ 
+        ->setData(['path' => '/Projects/' . $projectname, 'shareType' => 0, 'shareWith' => $username,
+                    'permissions' => 1, /* Default to least permission */
                   ])
         ->setOptions(['timeout' => 5,])
         ->send();
@@ -180,7 +180,7 @@ class Requests extends \yii\db\ActiveRecord
         } else {
           return false;
         }
-        
+
 
     }
     */

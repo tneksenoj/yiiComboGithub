@@ -8,13 +8,28 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<?php
+    $p = $model->permissions;
+    for($i = 0; $i < 5; $i = $i+1) {
+        if ($p%2) {
+            $model->permlist[$i] = pow(2, $i);
+        }else {
+          $model->permlist[$i] = 0;
+        }
+        $p = intdiv( $p, 2 );
+      }
+  ?>
+
+
 <div class="oc-share-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'file_target')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'share_with')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'permissions')->textInput() ?>
+    <!-- <?= $form->field($model, 'permissions')->textInput(['maxlength' => true]) ?> -->
+
+    <?= $form->field($model, 'permlist')->checkboxList([1 => 'Read', 2 => 'Update', 4 => 'Create', 8 => 'Delete', 16 => 'Share'], []) ?>
 
 
 

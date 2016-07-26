@@ -27,6 +27,7 @@ use Yii;
  */
 class OcShare extends \yii\db\ActiveRecord
 {
+    public $permlist;
     /**
      * @inheritdoc
      */
@@ -50,6 +51,7 @@ class OcShare extends \yii\db\ActiveRecord
     {
         return [
             [['share_type', 'parent', 'file_source', 'permissions', 'stime', 'accepted', 'mail_send'], 'integer'],
+            [['permlist'], 'each', 'rule' => ['integer'] ],
             [['expiration'], 'safe'],
             [['share_with', 'item_source', 'item_target'], 'string', 'max' => 255],
             [['uid_owner', 'uid_initiator', 'item_type'], 'string', 'max' => 64],

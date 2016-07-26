@@ -83,8 +83,19 @@ class OcShareController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          $woo = Yii::$app->request->post();
+          error_log("WOO: " . json_encode($woo));
+          error_log("POST: " . json_encode($model));
+          $model->permissions = array_sum($model->permlist);
+
+        }else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+        if ($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

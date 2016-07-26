@@ -14,6 +14,7 @@ use yii\filters\AccessRule;
 use backend\models\User;
 use backend\models\OcUsers;
 use yii\web\ForbiddenHttpException;
+use yii\base\UserException;
 /**
  * RequestsController implements the CRUD actions for Requests model.
  */
@@ -91,8 +92,9 @@ class RequestsController extends Controller
     {
       if (Yii::$app->user->can('approve'))
       {
+          Requests::createOwncloudUser($username);
           if(!Requests::shareOCFolderWithUser($username, $projectname) ) {
-            throw new UserException('Sorry there was an error creating user on OwnCloud.');
+            throw new UserException('Sorry there was an error sharing folder.');
           }else {
               $this->findModel($username, $projectname)->delete();
               return $this->redirect(['index']);
@@ -101,6 +103,7 @@ class RequestsController extends Controller
             throw new ForbiddenHttpException('You do not have permission to access this page!');
           }
     }
+
 
     /**
      * Creates a new Requests model.
@@ -163,7 +166,7 @@ class RequestsController extends Controller
           $this->findModel($username, $projectname)->delete();
 
           Requests::deleteUserFromGroup($username, $projectname);
-          
+
           return $this->redirect(['index']);
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
