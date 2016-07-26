@@ -16,7 +16,7 @@ use backend\models\Projects;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'Name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Name')->textInput(['maxlength' => true])->hint('No Spaces in project names please!')->Label('Name (Please no spaces in the project name!)') ?>
 
     <?= $form->field($model, 'System')->textInput(['maxlength' => true]) ?>
 
