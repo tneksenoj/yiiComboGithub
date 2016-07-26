@@ -165,8 +165,6 @@ class RequestsController extends Controller
       {
           $this->findModel($username, $projectname)->delete();
 
-          Requests::deleteUserFromGroup($username, $projectname);
-
           return $this->redirect(['index']);
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
