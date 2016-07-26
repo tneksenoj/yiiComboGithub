@@ -17,14 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!--  This page dynamically generates project tiles with a brief description  -->
 
-    <!--<a class="btn btn-md btn-primary pull-right proj-btn"> View My Projects </a>
-    <a class="btn btn-md btn-primary pull-right proj-btn"> Add Project </a>-->
-
-<p>
-          <?= Html::a('Create a Project', ['create'], ['class' => 'btn btn-primary']) ?>
-</p>
-
 <h1><?= Html::encode($this->title) ?></h1>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<?= Html::a('Create a Project', ['create'], ['class' => 'btn btn-primary']) ?></p>
+
     <div class="projects-index">
       <div class='w3-container w3-center'>
               <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

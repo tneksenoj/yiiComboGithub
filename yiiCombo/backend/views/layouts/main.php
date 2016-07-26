@@ -42,7 +42,7 @@ SiiAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Projects', 'url' => ['/projects/index']],
         ['label' => 'Requests', 'url' => ['/requests/index']],
-        //['label' => 'Data', 'url' => ['/site-data/index']],
+        ['label' => 'Project Permissions', 'url' => ['/oc-share/index']],
         ['label' => 'Users', 'url' => ['/user/index']],
         ['label' => 'Frontend', 'url' => ['/site/frontend']],
     ];
