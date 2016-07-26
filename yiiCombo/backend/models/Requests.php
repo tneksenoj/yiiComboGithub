@@ -96,6 +96,37 @@ class Requests extends \yii\db\ActiveRecord
       }
     }
 
+    public function shareOCFolderWithUser($username, $projectname) {
+      $client = new WebClient(
+        [
+            'responseConfig' => [
+                'format' => WebClient::FORMAT_JSON
+            ],
+        ]
+      );
+      //curl -X POST /shares -d path="/Projects/Land" -d shareType=1 -d shareWith="Land"
+
+      $response = $client->createRequest()
+        ->setMethod('post')
+        ->setUrl(yiicfg::OCS_SHARE . 'shares')
+        ->setData(['path' => '/Projects/'.$projectname, 'shareType' => 1, 'shareWith' => $username,
+                    'permissions' => 1, /* Default to least permission */ 
+                  ])
+        ->setOptions(['timeout' => 5,])
+        ->send();
+
+        $p = xml_parser_create();
+        xml_parse_into_struct($p, $response->content, $vals, $index);
+        xml_parser_free($p);
+
+        if ( $vals[$index['STATUS'][0]]['value'] == "ok") {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+/*
     public static function deleteUserFromGroup($username, $groupName)
     {
       $client = new WebClient([
@@ -121,6 +152,7 @@ class Requests extends \yii\db\ActiveRecord
           return false;
         }
     }
+
 
     public static function addUserToGroup($username, $groupName)
     {
@@ -151,4 +183,5 @@ class Requests extends \yii\db\ActiveRecord
         
 
     }
+    */
 }

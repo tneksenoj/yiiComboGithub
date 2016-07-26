@@ -119,7 +119,7 @@ class ProjectsController extends Controller
       return false;
     }
 
-
+/*
 
     public function createProjectGroupOnOwncloud($groupName)
     {
@@ -148,7 +148,6 @@ class ProjectsController extends Controller
     }
 
 
-
     public function deleteProjectGroupOnOwncloud($groupName)
     {
       $client = new WebClient([
@@ -172,6 +171,7 @@ class ProjectsController extends Controller
           return false;
         }
     }
+    */
 
     public function shareFolderOnOwncloud($groupName) {
       $client = new WebClient(
@@ -232,17 +232,10 @@ class ProjectsController extends Controller
               $model->delete();
               throw new UserException("Error saving file " . json_encode($error));
             }
-            if (!$this->createProjectGroupOnOwncloud($model->Name)) {
-              $model->delete();
-              throw new UserException("Error creating project group.");
-            }
+
             if (!$this->createProjectOnOwncloud($model->Name)) {
               $model->delete();
               throw new UserException("Error creating project.");
-            }
-            if (!$this->shareFolderOnOwncloud($model->Name)) {
-              $model->delete();
-              throw new UserException("Error creating folder.");
             }
 
             return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
@@ -267,7 +260,7 @@ class ProjectsController extends Controller
      * @return mixed
      */
      public function actionUpdate($id)
-     {
+     { /*
        if (Yii::$app->user->can('update')) {
          $model = $this->findModel($id);
          if ($model->load(Yii::$app->request->post())) {
@@ -291,17 +284,10 @@ class ProjectsController extends Controller
                $model->delete();
                throw new UserException("Error saving file " . json_encode($error));
              }
-             if (!$this->createProjectGroupOnOwncloud($model->Name)) {
-               $model->delete();
-               throw new UserException("Error creating project group.");
-             }
-             if (!$this->createProjectOnOwncloud($model->Name)) {
+
+             if (!$this->updateProjectOnOwncloud($model->Name)) {
                $model->delete();
                throw new UserException("Error creating project.");
-             }
-             if (!$this->shareFolderOnOwncloud($model->Name)) {
-               $model->delete();
-               throw new UserException("Error creating folder.");
              }
 
              return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
@@ -316,10 +302,10 @@ class ProjectsController extends Controller
          }
        } else {
          throw new ForbiddenHttpException('You do not have permission to access this page!');
-       }
+       }*/
      }
 
-
+/*
     public function actionUpdateold($id)
     {
       if (Yii::$app->user->can('update'))
@@ -336,7 +322,8 @@ class ProjectsController extends Controller
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
           }
-    }
+    } 
+    */
 
     /**
      * Deletes an existing Projects model.
@@ -353,9 +340,6 @@ class ProjectsController extends Controller
 
           $status = true;
           if ( !$this->deleteProjectOnOwncloud($model->Name) ) {
-            $status = false;
-          };
-          if ( !$this->deleteProjectGroupOnOwncloud($model->Name) ) {
             $status = false;
           };
           if ( !$status ) {

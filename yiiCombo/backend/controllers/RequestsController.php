@@ -91,7 +91,7 @@ class RequestsController extends Controller
     {
       if (Yii::$app->user->can('approve'))
       {
-          if(!Requests::addUserToGroup($username, $projectname)) {
+          if(!Requests::shareOCFolderWithUser($username, $projectname) ) {
             throw new UserException('Sorry there was an error creating user on OwnCloud.');
           }else {
               $this->findModel($username, $projectname)->delete();
