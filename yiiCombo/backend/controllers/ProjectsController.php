@@ -212,35 +212,37 @@ class ProjectsController extends Controller
       if (Yii::$app->user->can('create')) {
         $model = new Projects();
         if ($model->load(Yii::$app->request->post())) {
-          if (Yii::$app->webdavFs->has(yiicfg::OCS . $model->Name)){
+          $exists = Yii::$app->webdavFs->has(yiicfg::OC_files . $model->Name);
+          if ($exists){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
 
-          $model->file = UploadedFile::getInstance($model, 'file');
-          $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
-
           if ( $model->validate() ) {
 
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if($model->file) {
+              $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+            }
             if (!$model->save()) {
               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
             }
 
-            if (!$model->file->saveAs($model->logo)) {
+            if ($model->file && !$model->file->saveAs($model->logo)) {
               $error = $model->getErrors();
               $model->delete();
               throw new UserException("Error saving file " . json_encode($error));
             }
             if (!$this->createProjectGroupOnOwncloud($model->Name)) {
               $model->delete();
-              throw new UserException("Error creating group.");
+              throw new UserException("Error creating project group.");
             }
             if (!$this->createProjectOnOwncloud($model->Name)) {
               $model->delete();
-              throw new UserException("Error creating group.");
+              throw new UserException("Error creating project.");
             }
             if (!$this->shareFolderOnOwncloud($model->Name)) {
               $model->delete();
-              throw new UserException("Error creating group.");
+              throw new UserException("Error creating folder.");
             }
 
             return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
@@ -264,7 +266,61 @@ class ProjectsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+     public function actionUpdate($id)
+     {
+       if (Yii::$app->user->can('update')) {
+         $model = $this->findModel($id);
+         if ($model->load(Yii::$app->request->post())) {
+           $exists = Yii::$app->webdavFs->has(yiicfg::OC_files . $model->Name);
+           if ($exists){
+             throw new UserException('Sorry that name is already in use on the project server.');
+           }
+
+           if ( $model->validate() ) {
+
+             $model->file = UploadedFile::getInstance($model, 'file');
+             if($model->file) {
+               $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+             }
+             if (!$model->save()) {
+               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
+             }
+
+             if ($model->file && !$model->file->saveAs($model->logo)) {
+               $error = $model->getErrors();
+               $model->delete();
+               throw new UserException("Error saving file " . json_encode($error));
+             }
+             if (!$this->createProjectGroupOnOwncloud($model->Name)) {
+               $model->delete();
+               throw new UserException("Error creating project group.");
+             }
+             if (!$this->createProjectOnOwncloud($model->Name)) {
+               $model->delete();
+               throw new UserException("Error creating project.");
+             }
+             if (!$this->shareFolderOnOwncloud($model->Name)) {
+               $model->delete();
+               throw new UserException("Error creating folder.");
+             }
+
+             return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
+           } else {
+             $error = $model->getErrors();
+             throw new UserException("Error in model validation " . json_encode($error));
+           }
+         } else {
+           return $this->render('create', [
+             'model' => $model,
+             ]);
+         }
+       } else {
+         throw new ForbiddenHttpException('You do not have permission to access this page!');
+       }
+     }
+
+
+    public function actionUpdateold($id)
     {
       if (Yii::$app->user->can('update'))
       {

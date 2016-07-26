@@ -13,7 +13,7 @@ use backend\models\SiteData;
 //This page dynamically updates each project tile making it 'clickable' and will brings it to it's own landing page.
 
 $this->title = $model->Name;
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['site/projects']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="projects-view">
