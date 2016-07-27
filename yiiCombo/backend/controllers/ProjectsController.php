@@ -260,16 +260,19 @@ class ProjectsController extends Controller
      * @return mixed
      */
      public function actionUpdate($id)
-     { /*
+     {
        if (Yii::$app->user->can('update')) {
          $model = $this->findModel($id);
+
+         $oldmodel = clone $model;
          if ($model->load(Yii::$app->request->post())) {
-           $exists = Yii::$app->webdavFs->has(yiicfg::OC_files . $model->Name);
-           if ($exists){
-             throw new UserException('Sorry that name is already in use on the project server.');
-           }
 
            if ( $model->validate() ) {
+             $exists = Yii::$app->webdavFs->has(yiicfg::OC_files . $oldmodel->Name);
+             if (!$exists){
+               throw new UserException('Sorry that project does not exist on OwnCloud.');
+             }
+             $ret = Yii::$app->webdavFs->rename(yiicfg::OC_files . $oldmodel->Name, yiicfg::OC_files . $model->Name);
 
              $model->file = UploadedFile::getInstance($model, 'file');
              if($model->file) {
@@ -285,11 +288,6 @@ class ProjectsController extends Controller
                throw new UserException("Error saving file " . json_encode($error));
              }
 
-             if (!$this->updateProjectOnOwncloud($model->Name)) {
-               $model->delete();
-               throw new UserException("Error creating project.");
-             }
-
              return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
            } else {
              $error = $model->getErrors();
@@ -302,7 +300,7 @@ class ProjectsController extends Controller
          }
        } else {
          throw new ForbiddenHttpException('You do not have permission to access this page!');
-       }*/
+       }
      }
 
 /*
@@ -322,7 +320,7 @@ class ProjectsController extends Controller
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
           }
-    } 
+    }
     */
 
     /**

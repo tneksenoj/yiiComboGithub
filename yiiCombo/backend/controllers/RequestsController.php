@@ -15,6 +15,7 @@ use backend\models\User;
 use backend\models\OcUsers;
 use yii\web\ForbiddenHttpException;
 use yii\base\UserException;
+use backend\models\OcShare;
 /**
  * RequestsController implements the CRUD actions for Requests model.
  */
@@ -93,12 +94,16 @@ class RequestsController extends Controller
       if (Yii::$app->user->can('approve'))
       {
           Requests::createOwncloudUser($username);
+
           if(!Requests::shareOCFolderWithUser($username, $projectname) ) {
             throw new UserException('Sorry there was an error sharing folder.');
           }else {
               $this->findModel($username, $projectname)->delete();
-              return $this->redirect(['index']);
-          }
+              $ocmodel = OcShare::findOne(['share_type' => 0, 'share_with' => $username, 'file_target' => '/'.$projectname]);
+              error_log("OCMODEL: ". json_encode($ocmodel));
+              return $this->redirect(['/oc-share/setperms', 'id' => $ocmodel->id, 'returnPage' => '/requests/index']);
+            }
+
       } else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
           }

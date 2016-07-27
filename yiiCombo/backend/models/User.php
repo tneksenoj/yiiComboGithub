@@ -135,7 +135,7 @@ class User extends \yii\db\ActiveRecord
         }
     }
 
-    public static function getOwncloudGroups($username)
+    public static function getOwncloudShares($username)
     {
 
       $client = new WebClient([

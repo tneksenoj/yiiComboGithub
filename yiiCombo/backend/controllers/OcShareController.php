@@ -8,6 +8,7 @@ use backend\models\OcShareSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\UserException;
 
 /**
  * OcShareController implements the CRUD actions for OcShare model.
@@ -80,23 +81,48 @@ class OcShareController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionSetperms($id, $returnPage)
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
 
-          $woo = Yii::$app->request->post();
-          error_log("WOO: " . json_encode($woo));
-          error_log("POST: " . json_encode($model));
-          $model->permissions = array_sum($model->permlist);
-
+          if(!empty($model->permlist)) {
+            $model->permissions = array_sum($model->permlist);
+          } else {
+            throw new UserException("Must have at least read ablity!");
+          }
         }else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
         if ($model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if( $returnPage == '/requests/index' ) {
+              return $this->redirect([$returnPage]);
+            }
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+          if(!empty($model->permlist)) {
+            $model->permissions = array_sum($model->permlist);
+          } else {
+            throw new UserException("Must have at least read ablity!");
+          }
+        }else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+        if ($model->save()) {
+              return $this->redirect([ 'index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

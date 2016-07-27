@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\OcShare */
 
-$this->title = 'Update Oc Share: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Oc Shares', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Update Project Permissions: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Project Permissions', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Update Project Permissions';
 ?>
 <div class="oc-share-update">
 

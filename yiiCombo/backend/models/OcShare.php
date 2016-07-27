@@ -95,4 +95,10 @@ class OcShare extends \yii\db\ActiveRecord
     {
         return new OcQuery(get_called_class());
     }
+
+    public function findByUsernameAndProject($username, $projectname)
+    {
+      $ocshare = OcShare::findOne(['share_with' => $username, 'file_target' => '/'.$projectname]);
+      return $ocshare;
+    }
 }

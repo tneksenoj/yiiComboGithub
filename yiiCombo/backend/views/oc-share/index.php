@@ -9,7 +9,7 @@ use yii\widgets\ListView;
 /* @var $searchModel backend\models\OcShareSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Oc Shares';
+$this->title = 'Project Permissions';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   $model->permlist = Array();
 
                   $labels = ['Read', 'Update', 'Create', 'Delete', 'Share'];
-
+                  $ret = 'Read Access Denied';
                   $p = $model->permissions;
                   for($i = 0; $i < 5; $i = $i+1) {
                       if ($p%2) {

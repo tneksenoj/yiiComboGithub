@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 /* retrieve the username and the groups for this user*/
 $username = Yii::$app->user->identity->username;
-$groups = User::getOwncloudGroups($username);
 ?>
 
 <!--  This page dynamically generates project tiles with a brief description  -->
@@ -35,10 +34,9 @@ $groups = User::getOwncloudGroups($username);
                   // 'filterModel' => $searchModel,
 
                   'layout' => "{sorter}\n{summary}\n{items}\n{pager}",
-                  'itemView' => function($model, $key, $index, $column) use ($username, $groups) {
+                  'itemView' => function($model, $key, $index, $column) use ($username) {
                       return $this->render('_project_tile', ['model' => $model,
                                                              'username' => $username,
-                                                             'groups' => $groups
                                                             ]);
                   },
                   'pager' => [

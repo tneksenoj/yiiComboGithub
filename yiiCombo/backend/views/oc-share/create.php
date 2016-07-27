@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\OcShare */
 
-$this->title = 'Create Oc Share';
+$this->title = 'Assign Project Permissions';
 $this->params['breadcrumbs'][] = ['label' => 'Oc Shares', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

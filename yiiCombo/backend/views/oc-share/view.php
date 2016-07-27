@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\OcShare */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Oc Shares', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Project Permissions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="oc-share-view">
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
           // 'expiration',
           // 'token',
           // 'mail_send',
-          
+
         ],
     ]) ?>
 
