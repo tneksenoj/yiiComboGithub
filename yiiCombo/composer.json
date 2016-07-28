@@ -12,7 +12,15 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+
+    "repositories": [
+      {
+            "url": "https://github.com/marnold22/flysystem-webdav.git",
+            "type": "git"
+      }
+    ],
+
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6",
@@ -24,7 +32,7 @@
         "sabre/dav": "2.0.0",
         "creocoder/yii2-flysystem": "^0.8.1",
         "yiisoft/yii2-httpclient": "^2.0@dev",
-        "league/flysystem-webdav": "*"
+        "marnold22/flysystem-webdav": "*@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -44,4 +52,5 @@
     "scripts": {
         "post-install-cmd": "php init --env=Development --overwrite=n"
     }
+
 }
