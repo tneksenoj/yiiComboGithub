@@ -45,7 +45,6 @@ SiiAsset::register($this);
         ['label' => 'Project Permissions', 'url' => ['/oc-share/index']],
         ['label' => 'Users', 'url' => ['/user/index']],
         ['label' => 'Frontend', 'url' => ['/site/frontend']],
-        ['label' => 'Curl', 'url' => ['/our-dav/get']],
     ];
     if (Yii::$app->user->can('permission_admin')) {
         $menuItems[] = ['label' => 'Permissions', 'url' => ['/admin/']];
