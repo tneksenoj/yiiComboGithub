@@ -5,6 +5,8 @@ htuser='www-data'
 htgroup='www-data'
 rootuser='root'
 
+chmod 600 ${yiipath}/common/config/yiicfg.php
+
 printf "Creating possible missing Directories\n"
 mkdir -p $ocpath/data
 mkdir -p $ocpath/assets
