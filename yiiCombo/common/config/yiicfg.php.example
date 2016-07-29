@@ -4,18 +4,23 @@ namespace common\config;
 
 /*********************************************************************
  * This is an example password configuration file. NOTE: It is important
- * that apache be locked down to redirect HTTP to HTTPS and that no 
- * HTTP traffic is allowed on the server(s) that are running owncloud 
- * or the yiicombo project.  The reason for this is that passwords 
- * are sent by GET and POST between the yiicombo site and the owncloud 
- * server. 
+ * that apache be locked down to redirect HTTP to HTTPS and that no
+ * HTTP traffic is allowed on the server(s) that are running owncloud
+ * or the yiicombo project.  The reason for this is that passwords
+ * are sent by GET and POST between the yiicombo site and the owncloud
+ * server.
  ***********************************************************************/
 
 class yiicfg {
-    const OC_files = 'owncloud/remote.php/files/Projects/';
-    const OCS = 'https://USER:PASSWORD@COMPLETE_URL/owncloud/ocs/v1.php/cloud/';
 
-    const WebDav = 'https://USER:PASSWORD@COMPLETE_URL/';
+    const Baseurl = 'https://USERNAME:PASSWORD@OWNCLOUD-HOST-NAME/owncloud/';
+
+    const OC_files = 'owncloud/remote.php/files/Projects/';
+    const OCS = yiicfg::BaseUrl . 'ocs/v1.php/cloud/';
+    const OCS_SHARE = yiicfg::BaseUrl . 'ocs/v1.php/apps/files_sharing/api/v1/';
+
+    const WebDav = yiicfg::BaseUrl . 'remote.php/files/Projects/';
+    const HOST = 'Yiicombo Host Name';
 
     const DB_connect = 'mysql:host=localhost;dbname=yiicombo';
     const DB_username = 'YIICOMBO USER';

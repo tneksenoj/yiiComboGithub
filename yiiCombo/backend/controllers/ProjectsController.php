@@ -17,9 +17,8 @@ use yii\filters\AccessRule;
 use yii\helpers\BaseUrl;
 use yii\web\ForbiddenHttpException;
 use yii\httpclient\Client as WebClient;
-use creocoder\flysystem;
-use creocoder\flysystem\fs;
 use common\config\yiicfg;
+use marnold22\yii2\curl;
 
 /**
  * ProjectsController implements the CRUD actions for Projects model.
@@ -98,7 +97,10 @@ class ProjectsController extends Controller
      */
     public function createProjectOnOwncloud($projectName)
     {
-      if(Yii::$app->webdavFs->createDir(yiicfg::OC_files . $projectName))
+      //Init curl
+      $curl = new curl\Curl();
+
+      if($curl->mkcol(yiicfg::WebDav . $projectName))
         {
           return true;
         }
@@ -112,7 +114,10 @@ class ProjectsController extends Controller
      */
     public function deleteProjectOnOwncloud($projectName)
     {
-      if(Yii::$app->webdavFs->deleteDir(yiicfg::OC_files . $projectName))
+      //Init curl
+      $curl = new curl\Curl();
+
+      if($curl->delete(yiicfg::WebDav . $projectName))
         {
           return true;
         }
@@ -202,6 +207,8 @@ class ProjectsController extends Controller
     }
 
 
+
+
     /**
      * Creates a new Projects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -209,10 +216,13 @@ class ProjectsController extends Controller
      */
     public function actionCreate()
     {
+      //Init curl
+      $curl = new curl\Curl();
+
       if (Yii::$app->user->can('create')) {
         $model = new Projects();
         if ($model->load(Yii::$app->request->post())) {
-          $exists = Yii::$app->webdavFs->has(yiicfg::OC_files . $model->Name);
+          $exists = $curl->has(yiicfg::WebDav . $model->Name);
           if ($exists){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
@@ -261,6 +271,10 @@ class ProjectsController extends Controller
      */
      public function actionUpdate($id)
      {
+
+       //Init curl
+       $curl = new curl\Curl();
+
        if (Yii::$app->user->can('update')) {
          $model = $this->findModel($id);
 
@@ -268,11 +282,10 @@ class ProjectsController extends Controller
          if ($model->load(Yii::$app->request->post())) {
 
            if ( $model->validate() ) {
-             $exists = Yii::$app->webdavFs->has(yiicfg::OC_files . $oldmodel->Name);
-             if (!$exists){
+             if (!$curl->has(yiicfg::WebDav . $oldmodel->Name)){
                throw new UserException('Sorry that project does not exist on OwnCloud.');
              }
-             $ret = Yii::$app->webdavFs->rename(yiicfg::OC_files . $oldmodel->Name, yiicfg::OC_files . $model->Name);
+             $ret = $curl->rename(yiicfg::WebDav . $oldmodel->Name, yiicfg::OC_files . $model->Name, yiicfg::HOST);
 
              $model->file = UploadedFile::getInstance($model, 'file');
              if($model->file) {
