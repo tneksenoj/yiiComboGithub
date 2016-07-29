@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\base\UserException;
+use yii\filters\AccessControl;
+use yii\filters\AccessRule;
+use yii\web\ForbiddenHttpException;
 
 /**
  * OcShareController implements the CRUD actions for OcShare model.
@@ -18,17 +21,31 @@ class OcShareController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+     public function behaviors()
+     {
+         return [
+             'access' => [
+                 'class' => AccessControl::className(),
+                 'rules' => [
+                     [
+                         'actions' => ['login', 'error'],
+                         'allow' => true,
+                     ],
+                     [
+                         'actions' => ['logout', 'index', 'create', 'view', 'update', 'delete', 'setperms'],
+                         'allow' => true,
+                         'roles' => ['@'],
+                     ],
+                 ],
+             ],
+             'verbs' => [
+                 'class' => VerbFilter::className(),
+                 'actions' => [
+                     'delete' => ['POST'],
+                 ],
+             ],
+         ];
+     }
 
     /**
      * Lists all OcShare models.
@@ -36,13 +53,18 @@ class OcShareController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new OcShareSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      if (Yii::$app->user->can('read'))
+      {
+          $searchModel = new OcShareSearch();
+          $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+          return $this->render('index', [
+              'searchModel' => $searchModel,
+              'dataProvider' => $dataProvider,
+          ]);
+      }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -52,9 +74,14 @@ class OcShareController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+      if (Yii::$app->user->can('read'))
+      {
+          return $this->render('view', [
+              'model' => $this->findModel($id),
+          ]);
+       }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -64,15 +91,20 @@ class OcShareController extends Controller
      */
     public function actionCreate()
     {
-        $model = new OcShare();
+      if (Yii::$app->user->can('create'))
+      {
+          $model = new OcShare();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+          if ($model->load(Yii::$app->request->post()) && $model->save()) {
+              return $this->redirect(['view', 'id' => $model->id]);
+          } else {
+              return $this->render('create', [
+                  'model' => $model,
+              ]);
+          }
+       }else {
+            throw new ForbiddenHttpException('You do not have permission to access this page!');
+          }
     }
 
     /**
@@ -83,51 +115,61 @@ class OcShareController extends Controller
      */
     public function actionSetperms($id, $returnPage)
     {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
+      if (Yii::$app->user->can('approve'))
+      {
+          $model = $this->findModel($id);
+          if ($model->load(Yii::$app->request->post())) {
 
-          if(!empty($model->permlist)) {
-            $model->permissions = array_sum($model->permlist);
-          } else {
-            throw new UserException("Must have at least read ablity!");
-          }
-        }else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-        if ($model->save()) {
-            if( $returnPage == '/requests/index' ) {
-              return $this->redirect([$returnPage]);
+            if(!empty($model->permlist)) {
+              $model->permissions = array_sum($model->permlist);
+            } else {
+              throw new UserException("Must have at least read ablity!");
             }
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+          }else {
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+          }
+          if ($model->save()) {
+              if( $returnPage == '/requests/index' ) {
+                return $this->redirect([$returnPage]);
+              }
+          } else {
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+          }
+      }else {
+           throw new ForbiddenHttpException('You do not have permission to access this page!');
+         }
     }
 
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
-          if(!empty($model->permlist)) {
-            $model->permissions = array_sum($model->permlist);
-          } else {
-            throw new UserException("Must have at least read ablity!");
+      if (Yii::$app->user->can('update'))
+      {
+          $model = $this->findModel($id);
+          if ($model->load(Yii::$app->request->post())) {
+            if(!empty($model->permlist)) {
+              $model->permissions = array_sum($model->permlist);
+            } else {
+              throw new UserException("Must have at least read ablity!");
+            }
+          }else {
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
           }
-        }else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-        if ($model->save()) {
-              return $this->redirect([ 'index', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+          if ($model->save()) {
+                return $this->redirect([ 'index', 'id' => $model->id]);
+          } else {
+              return $this->render('update', [
+                  'model' => $model,
+              ]);
+          }
+      }else {
+           throw new ForbiddenHttpException('You do not have permission to access this page!');
+         }
     }
 
     /**
@@ -138,9 +180,14 @@ class OcShareController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+      if (Yii::$app->user->can('delete'))
+      {
+          $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+          return $this->redirect(['index']);
+      }else {
+           throw new ForbiddenHttpException('You do not have permission to access this page!');
+         }
     }
 
     /**
