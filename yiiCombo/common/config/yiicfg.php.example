@@ -16,10 +16,10 @@ class yiicfg {
     const Baseurl = 'https://USERNAME:PASSWORD@OWNCLOUD-HOST-NAME/owncloud/';
 
     const OC_files = 'owncloud/remote.php/files/Projects/';
-    const OCS = yiicfg::BaseUrl . 'ocs/v1.php/cloud/';
-    const OCS_SHARE = yiicfg::BaseUrl . 'ocs/v1.php/apps/files_sharing/api/v1/';
+    const OCS = yiicfg::Baseurl . 'ocs/v1.php/cloud/';
+    const OCS_SHARE = yiicfg::Baseurl . 'ocs/v1.php/apps/files_sharing/api/v1/';
 
-    const WebDav = yiicfg::BaseUrl . 'remote.php/files/Projects/';
+    const WebDav = yiicfg::Baseurl . 'remote.php/files/Projects/';
     const HOST = 'Yiicombo Host Name';
 
     const DB_connect = 'mysql:host=localhost;dbname=yiicombo';
