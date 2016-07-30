@@ -426,7 +426,6 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-          User::changeUserPasswordOnOwncloud()
             Yii::$app->session->setFlash('success', 'New password was saved.');
 
             return $this->goHome();
