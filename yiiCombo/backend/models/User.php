@@ -163,15 +163,14 @@ class User extends \yii\db\ActiveRecord
     }
 
 
-    public function changeUserPasswordOnOwncloud($username)
+    public static function changeUserPasswordOnOwncloud($username)
     {
         // Get Information about user from Yiicombo
         //$user = User::find()->where(['username' => $username])->one();
         $user = User::findOne(['username' => $username]);
         $ocuser = OcUsers::findOne(['uid' => $user->username]);
 
-        if( $user && $ocuser )
-        {
+        if( $user && $ocuser ) {
           $ocuser->password = '1|'. $user->password_hash;
           if(!$ocuser->save())
           {
