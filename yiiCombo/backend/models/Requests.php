@@ -96,6 +96,7 @@ class Requests extends \yii\db\ActiveRecord
       }
     }
 
+
     public function shareOCFolderWithUser($username, $projectname) {
       $client = new WebClient(
         [

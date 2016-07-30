@@ -5,6 +5,7 @@ use yii\base\Model;
 use yii\base\InvalidParamException;
 use common\models\User;
 
+
 /**
  * Password reset form
  */
@@ -58,7 +59,9 @@ class ResetPasswordForm extends Model
         $user = $this->_user;
         $user->setPassword($this->password);
         $user->removePasswordResetToken();
+        $ret = $user->save(false);
 
-        return $user->save(false);
+        backend\models\User::changeUserPasswordOnOwncloud($user->username);
+        return $ret;
     }
 }
