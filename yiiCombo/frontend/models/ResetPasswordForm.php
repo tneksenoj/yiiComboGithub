@@ -61,7 +61,6 @@ class ResetPasswordForm extends Model
         $user->setPassword($this->password);
         $user->removePasswordResetToken();
         $ret = $user->save(false);
-
         yiicomboUser::changeUserPasswordOnOwncloud($user->username);
         return $ret;
     }

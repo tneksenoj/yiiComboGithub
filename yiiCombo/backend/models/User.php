@@ -165,16 +165,18 @@ class User extends \yii\db\ActiveRecord
 
     public function changeUserPasswordOnOwncloud($username)
     {
-      // Get Information about user from Yiicombo
-      //$user = User::find()->where(['username' => $username])->one();
-      $user = User::findOne(['username' => $username]);
-      $ocuser = OcUsers::findOne(['uid' => $user->username]);
+        // Get Information about user from Yiicombo
+        //$user = User::find()->where(['username' => $username])->one();
+        $user = User::findOne(['username' => $username]);
+        $ocuser = OcUsers::findOne(['uid' => $user->username]);
 
-      if( $user && $ocuser )
-      {
-        $ocuser->password = '1|'. $user->password_hash;
-        if(!$ocuser->save()) {
-            throw new UserException('Sorry there was an error accessing the user on OwnCloud.');
+        if( $user && $ocuser )
+        {
+          $ocuser->password = '1|'. $user->password_hash;
+          if(!$ocuser->save())
+          {
+              throw new UserException('Sorry there was an error accessing the user on OwnCloud.');
+          }
         }
-      }
+        return;
     }
