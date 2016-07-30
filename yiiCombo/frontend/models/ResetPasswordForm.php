@@ -4,6 +4,7 @@ namespace frontend\models;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use common\models\User;
+use backend\models\User as yiicomboUser;
 
 
 /**
@@ -61,7 +62,7 @@ class ResetPasswordForm extends Model
         $user->removePasswordResetToken();
         $ret = $user->save(false);
 
-        backend\models\User::changeUserPasswordOnOwncloud($user->username);
+        yiicomboUser::changeUserPasswordOnOwncloud($user->username);
         return $ret;
     }
 }
