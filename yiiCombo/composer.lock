@@ -550,7 +550,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/marnold22/Yii2-Curl.git",
-                "reference": "e1bae7220e89fa5c37b47f0b1f9941e48c24bd90"
+                "reference": "455e17a013dcf09aedf971b40c9cc7217e223f6c"
             },
             "require": {
                 "ext-curl": "*",
@@ -578,7 +578,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-07-29 17:44:13"
+            "time": "2016-07-29 20:44:19"
         },
         {
             "name": "mdmsoft/yii2-admin",
