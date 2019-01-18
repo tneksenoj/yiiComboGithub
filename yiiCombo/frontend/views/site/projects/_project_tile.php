@@ -45,10 +45,6 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
                                   'projectname' => $model->Name],
                                  ['class' => 'glyphicon glyphicon-unchecked']);
                 }
-              if ($status) {
-              } else {
-
-              }
             ?>
         </div>
       <div id="id_<?php echo $model->Name?>" class="w3-modal">
