@@ -43,6 +43,12 @@ class Projects extends \yii\db\ActiveRecord
                     $this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');
                   }
                 }],
+                [['logo'], function ($attribute, $params){
+                    if(preg_match('/\s/', $this->$attribute)) {
+                      //
+                      $this->addError($this->$attribute, 'Sorry, spaces are not allowed in file names.');
+                    }
+                  }],
         ];
     }
 

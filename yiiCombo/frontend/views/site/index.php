@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="w3-full w3-center">
           <h4 id="sii-dynam">This is a dynamic inter-collegiate biology research sharing platform.</h4>
           <p><a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/site/about"; ?>>Learn More</a>
-          <a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/site/signup"; ?>>Request Access</a></p>
+          <a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/site/projects"; ?>>Request Access</a></p><!--Changed button link from signup/ to projects/-->
       </div>
     </div>
   </div>
