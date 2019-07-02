@@ -109,3 +109,28 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+.summary{
+    margin-top: .5em;
+    margin-bottom: 1em;
+    color: rgb(104, 104, 104);
+}
+
+#text {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+}
+
+h4 {
+    line-height: normal;
+}
+
+h6 .sii-filename-elips {
+    color: rgb(90, 90, 90);
+    font-size: .95em;
+    margin-top: -.7em;
+    line-height: normal;
+}
+
+div .w3-container {
+    line-height: normal;
+}

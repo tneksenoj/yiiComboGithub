@@ -8,6 +8,8 @@ use yii\widgets\ListView;
 use backend\models\Projects;
 use backend\models\User;
 use backend\models\Requests;
+use kartik\icons\Icon;
+Icon::map($this);
 ?>
 
 <div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
@@ -16,15 +18,18 @@ use backend\models\Requests;
         <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
         </div>
         <div class="w3-container w3-center" >
-            <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div> </b></h4>
-            <h6><b><div class="sii-filename-elips"><?php echo $model->System; ?></div> </b></h6>
-            <?php echo Html::a('&nbsp;Delete&nbsp;Project', ['delete', 'id' => $model->PID], [
-            'class' => 'glyphicon glyphicon-trash',
+            <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div></b></h4>
+            <h6><div class="sii-filename-elips remove-underline"><?php echo $model->System; ?></div></h6>            
+            <div class="trashicon">
+           <?php echo Html::a(Icon::show('trash'), ['delete', 'id' => $model->PID], [
+            'class' => 'trashicon',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
-            ]]); ?>
-          </div>
+            ],
+        ]);
+          ?>
         </a>
+        </div>
     </div>
 </div>

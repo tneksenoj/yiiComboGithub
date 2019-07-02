@@ -11,6 +11,10 @@
     text-overflow:ellipsis;
 }
 
+.remove-underline:hover, :active {
+    text-decoration: none;
+}
+
 .sii-fileimage-icon {
 	height: 10em;
 	background-size: cover;
@@ -18,11 +22,12 @@
 	background-repeat:no-repeat;
 }
 
-
-a.glyphicon {
-  height: 2em;
-  vertical-align: middle;
-  word-spacing: 0px;
+.trashicon {
+    cursor: pointer;
+    display: flex;
+    align-content: left;
+    margin-bottom: .35em;
+    font-size: 1.15em;
 }
 
 div#w0.list-view ul.sorter {

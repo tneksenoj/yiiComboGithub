@@ -9,14 +9,14 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
+use backend\assets\FontAsset;
 use backend\assets\W3schoolsAsset;
 use backend\assets\SiiAsset;
 
 AppAsset::register($this);
 W3schoolsAsset::register($this);
 SiiAsset::register($this);
-
+FontAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
