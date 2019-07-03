@@ -20,16 +20,19 @@ Icon::map($this);
         <div class="w3-container w3-center" >
             <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div></b></h4>
             <h6><div class="sii-filename-elips"><?php echo $model->System; ?></div></h6>            
-            <div class="trashicon"> <!-- Changed trashcan icon to use Font Awesome svg, shifted left -->
+            <!-- Changed trashcan icon to use Font Awesome svg, shifted left -->
            <?php echo Html::a(Icon::show('trash'), ['delete', 'id' => $model->PID], [
-            'class' => 'trashicon',
+            'class' => 'trashicon', 'data-toggle' => 'Delete', 
             'data' => [
+                'title' => 'Delete Project',
                 'confirm' => 'Are you sure you want to delete project ' . $model->Name . '?', /* Shows which project */
+                'class' => 'btn-danger',
                 'method' => 'post',
             ],
-        ]);
-          ?>
-        </a>
+        ]);?>
+          <?php echo Html::a(Icon::show('pen'), ['update', 'id' => $model->PID], [
+            'class' => 'updateicon', 'data-toggle' => 'Update',
+        ]);?>
         </div>
     </div>
 </div>

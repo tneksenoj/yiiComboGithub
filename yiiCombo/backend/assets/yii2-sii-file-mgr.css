@@ -22,14 +22,6 @@
 	background-repeat:no-repeat;
 }
 
-.trashicon {
-    cursor: pointer;
-    display: flex;
-    align-content: left;
-    margin-bottom: .35em;
-    font-size: 1.15em;
-}
-
 div#w0.list-view ul.sorter {
     list-style-type: none;
     margin: 0;
@@ -80,7 +72,7 @@ div#w0.list-view ul.sorters .active {
     font-weight: 600;
     border: none;
     padding: .5em 1.3em;
-    border-radius: 8px;
+    border-radius: 6px;
     min-width: 6em;
 }
 
@@ -88,15 +80,25 @@ div#w0.list-view ul.sorters .active {
     background-color: rgb(211, 211, 211);
 }
 
+.bootbox-accept,
+.bootbox-accept:focus,
+.bootbox-accept:active
+{
+    background-color: rgb(197, 33, 33);
+}
+
 .bootbox-cancel:focus, 
-.bootbox-accept:focus {
+.bootbox-accept:focus { /* Gets rid of bootstrap box shadow */
     box-shadow:none !important;
     outline:0px !important;
 }
 
-.bootbox-accept:hover,
-.bootbox-cancel:hover{
-    filter: brightness(0.70) contrast(130%);
+.bootbox-accept:hover{ /* Button Hover effect */
+    background-color: rgb(126, 16, 16);
+}
+
+.bootbox-cancel:hover{ /* Button Hover effect */
+    background-color: rgb(128, 128, 128);
 }
 
 .modal-content{
@@ -105,32 +107,71 @@ div#w0.list-view ul.sorters .active {
     outline:0px; 
 }
 
-.bootbox-body{
+.bootbox-body{ /* Positions alert text */
     margin-top: .75em;
     margin-left: 1em;
     margin-right: 1em;
 }
 
-.bootbox-close-button{
-    margin-top: -.5em;
-    margin-right: -.3em;
+.bootbox-close-button{ /* Moves Close(x) button upper right */
+    margin-top: -.48em;
+    margin-right: -.2em;
 }
 
-div .modal-footer{
-    padding-right: 1.7em;
+.close{
+    font-size: 2em;
 }
 
+/* Prevents modal from shifting the page */
 body.modal-open {
     overflow: visible;
     position: inherit;
 }
 
-/* Prevents modal from shifting the page */
 .modal-open[style] { 
     padding-right: 0px !important;
-    }
+}
 
-.navbar-nav>li {
-    float: none;
+svg {
+    width:.875em;
+    color:rgb(160, 160, 160);
+}
+
+.updateicon > svg:hover  /*> path:hover */{
+    transform: scale(1.3,1.3);
+    transform-origin: center;
+    color:#084f79;
+}
+
+.trashicon > svg:hover /* > path:hover */{
+    transform: scale(1.3,1.3);
+    transform-origin: center;
+    color:#850c0c;
+}
+
+.modal-dialog{
+    margin-top:15em;
+}
+
+.footer{
+    border-top-color: #ffffff;
+    background-color: #ffffff;
+}
+
+
+div > .trashicon,
+div > .updateicon{
+    display:flex;
+    align-content: flex-start;
+    flex-direction: row; 
+}
+
+.trashicon,
+.updateicon {
+    cursor: pointer;
+    /*text-align: left;
+    justify-content: left;*/
+    margin-bottom: .75em;
+    font-size: 1.15em;
     display: inline-block;
 }
