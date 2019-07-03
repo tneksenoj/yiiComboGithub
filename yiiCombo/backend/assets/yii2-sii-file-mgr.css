@@ -63,3 +63,74 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
 div#w0.list-view ul.sorters .active {
     background-color: #4CAF50;
 }
+
+/*  Upper Left Sharebio Logo Styling                        
+=======================================================*/
+.navbar-brand > img { 
+    height: 2em;
+    margin-left: -2em;
+    margin-top: -.35em;
+    opacity: 0.85;
+}
+
+/*  Styles Dialog Boxes & Alerts using Bootbox.js                    
+=======================================================*/
+.bootbox-cancel, 
+.bootbox-accept {
+    font-weight: 600;
+    border: none;
+    padding: .5em 1.3em;
+    border-radius: 8px;
+    min-width: 6em;
+}
+
+.bootbox-cancel{
+    background-color: rgb(211, 211, 211);
+}
+
+.bootbox-cancel:focus, 
+.bootbox-accept:focus {
+    box-shadow:none !important;
+    outline:0px !important;
+}
+
+.bootbox-accept:hover,
+.bootbox-cancel:hover{
+    filter: brightness(0.70) contrast(130%);
+}
+
+.modal-content{
+    font-family: 'IBM Plex Sans', sans-serif;   
+    box-shadow: none;
+    outline:0px; 
+}
+
+.bootbox-body{
+    margin-top: .75em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.bootbox-close-button{
+    margin-top: -.5em;
+    margin-right: -.3em;
+}
+
+div .modal-footer{
+    padding-right: 1.7em;
+}
+
+body.modal-open {
+    overflow: visible;
+    position: inherit;
+}
+
+/* Prevents modal from shifting the page */
+.modal-open[style] { 
+    padding-right: 0px !important;
+    }
+
+.navbar-nav>li {
+    float: none;
+    display: inline-block;
+}

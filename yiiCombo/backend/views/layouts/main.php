@@ -34,6 +34,8 @@ FontAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
+        /*'brandLabel' => Html::img('@web/images/sharebio_logo.gif'), //Sharebio logo on left navbar
+        'brandOptions' => ['class' => 'pull-left', 'brand-icon'],*/
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
