@@ -17,12 +17,12 @@ Icon::map($this);
       <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/projects/view?id=". $model->PID . "' >" ; ?>
         <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
         </div>
-        <div class="w3-container w3-center" >
-            <h4><b><div class="sii-filename-elips"><?php echo $model->Name; ?></div></b></h4>
-            <h6><div class="sii-filename-elips"><?php echo $model->System; ?></div></h6>            
+        <div class="w3-container w3-center" id="adiv" >
+            <h4><b><div id="projectTitle" class="sii-filename-elips"><?php echo $model->Name; ?></div></b></h4>
+            <h6><div id="projectSystem" class="sii-filename-elips"><?php echo $model->System; ?></div></h6>            
             <!-- Changed trashcan icon to use Font Awesome svg, shifted left -->
            <?php echo Html::a(Icon::show('trash'), ['delete', 'id' => $model->PID], [
-            'class' => 'trashicon', 'data-toggle' => 'Delete', 
+            'class' => 'svgicon', 'data-toggle' => 'tooltip', 'title' => 'Delete', 'id' => 'delete', 
             'data' => [
                 'title' => 'Delete Project',
                 'confirm' => 'Are you sure you want to delete project ' . $model->Name . '?', /* Shows which project */
@@ -31,8 +31,13 @@ Icon::map($this);
             ],
         ]);?>
           <?php echo Html::a(Icon::show('pen'), ['update', 'id' => $model->PID], [
-            'class' => 'updateicon', 'data-toggle' => 'Update',
-        ]);?>
+            'class' => 'svgicon', 'data-toggle' => 'tooltip', 'title'=>'Update', 'id'=>'update',
+          ]);?>
+
+          <div id="projectId" data-toggle="tooltip" title=<?php /* Adds project ID number to tiles*/ 
+          $projId = sprintf('%04d', $model->PID); echo 'ID#' . $projId;?>> 
+          <?php $projId = sprintf('%04d', $model->PID); echo '#' . $projId;?>
+          </div>
         </div>
     </div>
 </div>
