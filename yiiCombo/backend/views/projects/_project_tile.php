@@ -15,7 +15,8 @@ Icon::map($this);
 <div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
     <div class="w3-card-8 w3-center" >
       <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/projects/view?id=". $model->PID . "' >" ; ?>
-        <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
+        <div class="w3-container sii-fileimage-icon"  data-toggle="tooltip" title= <?php echo $model->Name?> 
+        style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
         </div>
         <div class="w3-container w3-center" id="adiv" >
             <h4><b><div id="projectTitle" class="sii-filename-elips"><?php echo $model->Name; ?></div></b></h4>

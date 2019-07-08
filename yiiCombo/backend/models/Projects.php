@@ -58,7 +58,7 @@ class Projects extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'PID' => 'Pid',
+            'PID' => 'ID', //Changed from "Pid" to "Id"; More users will understand this
             'Name' => 'Name',
             'Description' => 'Description',
             'file' => 'Logo',

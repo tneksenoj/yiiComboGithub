@@ -4,6 +4,23 @@
  * Which displays our projects in a nice tile format.
  */
 
+body {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;   
+}
+
+.btn {
+    font-family: 'IBM Plex Sans', sans;   
+}
+
+.pagination {
+    font-family: 'IBM Plex Sans', sans;   
+}
+
+h1 {
+    font-family: 'IBM Plex Sans', sans;     
+    font-weight: 500;
+}
+
 div#w0.list-view ul.sorter {
     list-style-type: none;
     margin: 0;
@@ -63,9 +80,7 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
     background-repeat:no-repeat;
 }
 
-
-
-/*  Upper Left Sharebio Logo Styling                        
+/*  Upper Left Sharebio Logo Styling (added 7/3/19)                           
 =================================================================*/
 .navbar-brand > img { 
     height: 2em;
@@ -74,7 +89,7 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
     opacity: 0.85;
 }
 
-/*  Styles Dialog Boxes & Alerts using Bootbox.js                    
+/*  Styles Dialog Boxes & Alerts using Bootbox.js (added 7/3/19)                     
 =================================================================*/
 .bootbox-cancel, 
 .bootbox-accept {
@@ -102,11 +117,11 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
     outline:0px !important;
 }
 
-.bootbox-accept:hover{ /* Button Hover effect */
+.bootbox-accept:hover{ /* Delete Button Hover effect */
     background-color: rgb(126, 16, 16);
 }
 
-.bootbox-cancel:hover{ /* Button Hover effect */
+.bootbox-cancel:hover{ /* Update Button Hover effect */
     background-color: rgb(128, 128, 128);
 }
 
@@ -122,7 +137,7 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
     margin-right: 1em;
 }
 
-.bootbox-close-button{ /* Moves Close(x) button upper right */
+.bootbox-close-button{ /* Positions Close(x) button */
     margin-top: -.48em;
     margin-right: -.2em;
 }
@@ -131,7 +146,8 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
     font-size: 2em;
 }
 
-/* Prevents modal from shifting the page */
+/* Prevents modal from shifting the page (added 7/3/19) 
+=================================================================*/
 body.modal-open {
     overflow: visible;
     position: inherit;
@@ -150,7 +166,7 @@ body.modal-open {
     background-color: #ffffff;
 }
 
-/*  SVG Icons for Project Tiles                 
+/*  SVG Icons for Project Tiles (added 7/2/19)                 
 =================================================================*/
 svg { 
     width:.875em;

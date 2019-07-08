@@ -17,6 +17,20 @@ AppAsset::register($this);
 W3schoolsAsset::register($this);
 SiiAsset::register($this);
 FontAsset::register($this);
+
+$js = <<<SCRIPT
+/* To initialize BS3 tooltips set this below */
+$(function () { 
+    $("[data-toggle='tooltip']").tooltip(); 
+});;
+/* To initialize BS3 popovers set this below */
+$(function () { 
+    $("[data-toggle='popover']").popover(); 
+});
+SCRIPT;
+// Register tooltip/popover initialization javascript
+$this->registerJs($js);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
