@@ -226,9 +226,7 @@ class ProjectsController extends Controller
           if ($exists){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
-
           if ( $model->validate() ) {
-
             $model->file = UploadedFile::getInstance($model, 'file');
             if($model->file) {
               $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
@@ -277,24 +275,30 @@ class ProjectsController extends Controller
 
        if (Yii::$app->user->can('update')) {
          $model = $this->findModel($id);
-
          $oldmodel = clone $model;
-         if ($model->load(Yii::$app->request->post())) {
+
+        if ($model->load(Yii::$app->request->post())) { 
 
            if ( $model->validate() ) {
              if (!$curl->has(yiicfg::WebDav . $oldmodel->Name)){
-               throw new UserException('Sorry that project does not exist on OwnCloud.');
-             }
-             $ret = $curl->rename(yiicfg::WebDav . $oldmodel->Name, yiicfg::OC_files . $model->Name, yiicfg::HOST);
-
-             $model->file = UploadedFile::getInstance($model, 'file');
+               throw new UserException('Sorry that project does not exist on OwnCloud.'); /* This error thrown */
+             }             
+             $ret = $curl->rename(yiicfg::WebDav . $oldmodel->Name, yiicfg::OC_files . $model->Name, yiicfg::HOST); /* Returns false */
+             //Yii::error("\r\n" . '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++' . "\r\n" . "\r\n" . json_encode($ret));
+             $model->file = UploadedFile::getInstance($model, 'file'); 
+             // Yii::error(yiicfg::WebDav . $oldmodel->Name . ' | ' . yiicfg::OC_files . $model->Name . ' | ' .yiicfg::HOST);
+             /* This check is not implemented because if a user hits update without changing anything, Owncloud will return "forbidden" 
+             because we are trying to rename a project to itself.
+             if(!$ret){
+               throw new UserException('Error in Curl during rename of owncloud folder- ProjectsController.php Function actionUpdate');
+             }*/
+             
              if($model->file) {
                $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
              }
              if (!$model->save()) {
-               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
+               throw new UserException('Sorry, an error occured in the function actionUpdate of ProjectsController. Please contact the administrator.');
              }
-
              if ($model->file && !$model->file->saveAs($model->logo)) {
                $error = $model->getErrors();
                $model->delete();
@@ -304,12 +308,11 @@ class ProjectsController extends Controller
              return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
            } else {
              $error = $model->getErrors();
-
              throw new UserException("Error in model validation " . json_encode($error));
            }
          } else {
            return $this->render('create', [
-             'model' => $model,
+          'model' => $model,
              ]);
          }
        } else {
