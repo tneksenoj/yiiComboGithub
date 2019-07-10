@@ -4,25 +4,22 @@
  * Which displays our projects in a nice tile format.
  */
 
-.sii-filename-elips {
-	width:auto;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+ body {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;   
 }
 
-.sii-fileimage-icon {
-	height: 10em;
-	background-size: cover;
-	background-position:center;
-	background-repeat:no-repeat;
+.btn {
+    font-family: 'IBM Plex Sans', sans;   
+    border: none;
 }
 
+.pagination {
+    font-family: 'IBM Plex Sans', sans;   
+}
 
-a.glyphicon {
-  height: 2em;
-  vertical-align: middle;
-  word-spacing: 0px;
+h1 {
+    font-family: 'IBM Plex Sans', sans;     
+    font-weight: 500;
 }
 
 div#w0.list-view ul.sorter {
@@ -48,13 +45,174 @@ div#w0.list-view ul.sorter li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    width:8.5em;
+    font-weight: 500;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;   
 }
 
 div#w0.list-view ul.sorter li a:hover:not(.active) {
     background-color: #111;
-		color: white;
+	color: white;
 }
 
-div#w0.list-view ul.sorters .active {
-    background-color: #4CAF50;
+/* Title and icon image */
+.sii-filename-elips {
+	width:auto;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-family: 'IBM Plex Sans', sans-serif;   
+}
+
+#adiv > a {
+    color: rgb(32, 32, 32);
+}
+
+#adiv > a:hover, 
+#adiv > a:active {
+    text-decoration: none;
+    color: rgb(16, 100, 148);
+}
+
+.sii-fileimage-icon {
+	height: 10em;
+	background-size: cover;
+	background-position:center;
+    background-repeat:no-repeat;
+}
+
+/*  Upper Left Sharebio Logo Styling (added 7/3/19)                           
+=================================================================*/
+.navbar-brand > img { 
+    height: 2em;
+    margin-left: -2em;
+    margin-top: -.35em;
+    opacity: 0.85;
+}
+
+/*  Styles Dialog Boxes & Alerts using Bootbox.js (added 7/3/19)                     
+=================================================================*/
+.bootbox-cancel, 
+.bootbox-accept {
+    font-weight: 600;
+    border: none;
+    padding: .5em 1.3em;
+    border-radius: 6px;
+    min-width: 6em;
+}
+
+.bootbox-cancel{
+    background-color: rgb(211, 211, 211);
+}
+
+.bootbox-accept,
+.bootbox-accept:focus,
+.bootbox-accept:active
+{
+    background-color: rgb(197, 33, 33);
+}
+
+.bootbox-cancel:focus, 
+.bootbox-accept:focus { /* Gets rid of bootstrap box shadow */
+    box-shadow:none !important;
+    outline:0px !important;
+}
+
+.bootbox-accept:hover{ /* Delete Button Hover effect */
+    background-color: rgb(126, 16, 16);
+}
+
+.bootbox-cancel:hover{ /* Update Button Hover effect */
+    background-color: rgb(128, 128, 128);
+}
+
+.modal-content{
+    font-family: 'IBM Plex Sans', sans-serif;   
+    box-shadow: none;
+    outline:0px; 
+}
+
+.bootbox-body{ /* Positions alert text */
+    margin-top: .75em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.bootbox-close-button{ /* Positions Close(x) button */
+    margin-top: -.48em;
+    margin-right: -.2em;
+}
+
+.close{
+    font-size: 2em;
+}
+
+/* Prevents modal from shifting the page (added 7/3/19) 
+=================================================================*/
+body.modal-open {
+    overflow: visible;
+    position: inherit;
+}
+
+.modal-open[style] { 
+    padding-right: 0px !important;
+}
+
+.modal-dialog{
+    margin-top:15em;
+}
+
+.footer{
+    border-top-color: #ffffff;
+    background-color: #ffffff;
+}
+
+/*  SVG Icons for Project Tiles (added 7/2/19)                 
+=================================================================*/
+svg { 
+    width:.875em;
+    color:rgb(207, 206, 206);
+}
+
+#update > svg:hover{  /* Update icon turns blue and expands on hover*/
+    transform: scale(1.3,1.3);
+    transform-origin: center;
+    color:#084f79;
+}
+
+#delete > svg:hover{ /* Delete icon turns red and expands on hover*/
+    transform: scale(1.3,1.3);
+    transform-origin: center;
+    color:#850c0c;
+}
+
+.svgicon {
+    cursor: pointer;
+    float: left;
+    margin-bottom: .75em;
+    font-size: 1.15em;
+}
+
+#adiv > .svgicon{
+    display:flex;
+    justify-content: flex-start;
+    flex-direction: row; 
+}
+
+.svgicon:nth-last-of-type(1) {
+    margin-left: .75em;
+  }
+
+  #projectId{
+    font-size: 1.15em;
+    color:rgb(143, 143, 143);
+    float:right;
+    cursor: default;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+  }
+
+  /*  Flash Messages (added 7/9/19)                 
+=================================================================*/
+.alertMsg > .close {
+    margin-top: -.2em;
 }
