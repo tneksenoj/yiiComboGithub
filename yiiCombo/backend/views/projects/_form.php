@@ -22,10 +22,10 @@ use backend\models\Projects;
 
     <?= $form->field($model, 'Description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'file')->fileInput(); ?>
+    <?= $form->field($model, 'file')->fileInput()->hint('No Spaces in file names please!')->Label('Logo (No spaces in file name please!)') ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-danger']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

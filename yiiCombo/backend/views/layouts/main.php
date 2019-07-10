@@ -9,13 +9,27 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
+use backend\assets\FontAsset;
 use backend\assets\W3schoolsAsset;
 use backend\assets\SiiAsset;
 
 AppAsset::register($this);
 W3schoolsAsset::register($this);
 SiiAsset::register($this);
+FontAsset::register($this);
+
+$js = <<<SCRIPT
+/* To initialize BS3 tooltips set this below */
+$(function () { 
+    $("[data-toggle='tooltip']").tooltip(); 
+});;
+/* To initialize BS3 popovers set this below */
+$(function () { 
+    $("[data-toggle='popover']").popover(); 
+});
+SCRIPT;
+// Register tooltip/popover initialization javascript
+$this->registerJs($js);
 
 ?>
 <?php $this->beginPage() ?>
@@ -34,6 +48,8 @@ SiiAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
+        /*'brandLabel' => Html::img('@web/images/sharebio_logo.gif'), //Sharebio logo on left navbar
+        'brandOptions' => ['class' => 'pull-left', 'brand-icon'],*/
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],

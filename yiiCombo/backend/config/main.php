@@ -85,5 +85,7 @@ return [
             // otherwise you may not even take a first step.
         ]
     ],*/
-    'params' => $params,
+    'params' => [
+        'icon-framework' => 'fa',  // Font Awesome Icon framework
+    ],
 ];
