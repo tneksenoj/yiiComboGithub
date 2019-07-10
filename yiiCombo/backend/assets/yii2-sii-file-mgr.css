@@ -10,6 +10,7 @@ body {
 
 .btn {
     font-family: 'IBM Plex Sans', sans;   
+    border: none;
 }
 
 .pagination {
@@ -209,3 +210,9 @@ svg {
     cursor: default;
     font-family: 'IBM Plex Sans Condensed', sans-serif;
   }
+
+  /*  Flash Messages (added 7/9/19)                 
+=================================================================*/
+.alertMsg > .close {
+    margin-top: -.2em;
+}

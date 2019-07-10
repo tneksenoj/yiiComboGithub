@@ -109,25 +109,38 @@ class RequestsController extends Controller
           }
     }
 
-
-    /**
-     * Creates a new Requests model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-      if (Yii::$app->user->can('create'))
-      {
+    /** 
+    * Creates a new request, then checks to see if request already exists or if user 
+    * already has access to project. If request already exists, sends user back to form with error message.
+    * If it does not, creates a new request and redirects to 'view' page if successful.   
+    * @return mixed
+    */
+    public function actionCreate() {
+      if (Yii::$app->user->can('create')) { //Checks for user permissions
           $model = new Requests();
 
-          if ($model->load(Yii::$app->request->post()) && $model->save()) {
-              return $this->redirect(['view', 'username' => $model->username, 'projectname' => $model->projectname]);
-          } else {
-              return $this->render('create', [
-                  'model' => $model,
-              ]);
-          }
+          if ($model->load(Yii::$app->request->post())) {
+            $user = $model->username;
+            $project = $model->projectname;
+            $exists = Requests::find()->where(['username' => $user])->andWhere(['projectname' => $project])->exists();
+            
+            if ($exists) { 
+              Yii::$app->getSession()->setFlash('error', $user . ' has already requested access to ' . $project); //Unapproved request already made
+              return $this->render('create', ['model' => $model]); //Brings user back to request form
+            }else {
+                $access = OcShare::find()->where(['share_type' => 0])->andWhere(['share_with' => $user])->andWhere(['file_target' => '/'.$project])->exists();
+                
+                if ($access){
+                    Yii::$app->getSession()->setFlash('error', $user . ' already has access to ' . $project); //Access already approved
+                    return $this->render('create', ['model' => $model]); //Brings user back to request form
+                }else {
+                $model->save();
+                Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.'); //Flash error message
+                return $this->redirect(['view', 'username' => $model->username, 'projectname' => $model->projectname]);}}
+            }else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);}
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
           }
@@ -169,7 +182,6 @@ class RequestsController extends Controller
       if (Yii::$app->user->can('delete'))
       {
           $this->findModel($username, $projectname)->delete();
-
           return $this->redirect(['index']);
       }else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
@@ -193,3 +205,4 @@ class RequestsController extends Controller
         }
     }
 }
+
