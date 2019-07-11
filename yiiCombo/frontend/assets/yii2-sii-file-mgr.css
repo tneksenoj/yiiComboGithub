@@ -50,9 +50,19 @@ h4#sii-dynam {
     position: fixed;
     top:0;
     left: 0;
-
+   
 }
 
+.gradientBg{
+    background: rgb(0,0,0);
+    background: radial-gradient(at top, rgba(0,0,0,.6) 2%, rgba(252,70,107,0) 60%);
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+}
 
 a.glyphicon {
   height: 2em;

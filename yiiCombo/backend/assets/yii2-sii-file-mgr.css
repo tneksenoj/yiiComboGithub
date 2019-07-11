@@ -130,6 +130,13 @@ div#w0.list-view ul.sorter li a:hover:not(.active) {
     font-family: 'IBM Plex Sans', sans-serif;   
     box-shadow: none;
     outline:0px; 
+    border: none;
+}
+
+.modal-title{
+    font-size: 1.65em;
+    font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;   
 }
 
 .bootbox-body{ /* Positions alert text */
@@ -216,3 +223,4 @@ svg {
 .alertMsg > .close {
     margin-top: -.2em;
 }
+

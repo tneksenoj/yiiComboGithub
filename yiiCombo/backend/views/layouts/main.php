@@ -78,7 +78,7 @@ $this->registerJs($js);
             . '</li>';
     }
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-right nav-pills'],
         'items' => $menuItems,
     ]);
     NavBar::end();
@@ -95,7 +95,7 @@ $this->registerJs($js);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Whitworth University <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

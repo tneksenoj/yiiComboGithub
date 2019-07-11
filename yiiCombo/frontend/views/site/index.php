@@ -8,13 +8,14 @@ use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Center of Excellence for Bioinformatics Research';
+$this->title = 'Sharebio | Center of Excellence for Bioinformatics Research';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <!-- This is the main index (Home) page that everything lands on -->
 
 <div class="site-index" id="sii-sciencebg">
-  <div class="w3-row">
+<div class="gradientBg">  
+<div class="w3-row">
     <div class="w3-full spacer">
     </div>
     <div class="w3-row">
@@ -24,10 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
       </div>
       <div class="w3-full w3-center">
-          <h4 id="sii-dynam">This is a dynamic inter-collegiate biology research sharing platform.</h4>
+          <h4 id="sii-dynam">A dynamic inter-collegiate biology research sharing platform</h4>
           <p><a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/site/about"; ?>>Learn More</a>
           <a class="btn btn-primary btn-lg" href=<?php echo Yii::getAlias('@web') . "/index.php/site/signup"; ?>>Request Access</a></p>
       </div>
     </div>
   </div>
+</div>
 </div>

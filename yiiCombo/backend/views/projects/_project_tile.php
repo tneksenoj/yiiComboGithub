@@ -25,6 +25,7 @@ Icon::map($this);
            <?php echo Html::a(Icon::show('trash'), ['delete', 'id' => $model->PID], [
             'class' => 'svgicon', 'data-toggle' => 'tooltip', 'title' => 'Delete', 'id' => 'delete', 
             'data' => [
+                'title' => 'Delete Project',
                 'confirm' => 'Are you sure you want to delete project ' . $model->Name . '?', /* Shows which project */
                 'class' => 'btn-danger',
                 'method' => 'post',
