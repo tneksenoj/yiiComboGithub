@@ -1,3 +1,5 @@
+/* Projects page stylesheet */
+
 html,
 body {
     height: 100%;
@@ -37,6 +39,7 @@ body {
 }
 
 /* add sorting icons to gridview sort links */
+
 a.asc:after, a.desc:after {
     position: relative;
     top: 1px;
@@ -49,11 +52,11 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    content: /*"\e113"*/ "\e151";
+    content:"\e093";
 }
 
 a.desc:after {
-    content: /*"\e114"*/ "\e152";
+    content:"\e094";
 }
 
 .sort-numerical a.asc:after {
@@ -106,6 +109,39 @@ a.desc:after {
 	}
 }
 
-.nav > li > form > button:hover {
-    text-decoration: none;
+.summary{
+    margin-top: .5em;
+    margin-bottom: 1em;
+    color: rgb(104, 104, 104);
+
 }
+
+#text {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+}
+
+h4 {
+    line-height: normal;
+}
+
+#projectSystem {
+    color: rgb(90, 90, 90);
+    font-size: .95em;
+    margin-top: -.7em;
+    line-height: normal;
+    font-family: 'IBM Plex Sans', sans-serif;   
+    padding-bottom: .6em;
+}
+
+div .w3-container {
+    line-height: normal;
+}
+
+.icon-view{
+    width: 25em;
+    height: 15em;
+	background-size: cover;
+	background-position:center;
+    background-repeat:no-repeat;
+}
+

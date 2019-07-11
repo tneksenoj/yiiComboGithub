@@ -226,16 +226,14 @@ class ProjectsController extends Controller
           if ($exists){
             throw new UserException('Sorry that name is already in use on the project server.');
           }
-
           if ( $model->validate() ) {
-
             $model->file = UploadedFile::getInstance($model, 'file');
             if($model->file) {
               $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
             }
             if (!$model->save()) {
-              throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
-            }
+              throw new UserException("Check to ensure no spaces exist in your logo filename. \nSorry, an error occured in your action \"create\" of the project controller. Please contact an administrator.");
+            } //Edited to include message about spaces in logo filename.
 
             if ($model->file && !$model->file->saveAs($model->logo)) {
               $error = $model->getErrors();
@@ -271,47 +269,54 @@ class ProjectsController extends Controller
      */
      public function actionUpdate($id)
      {
-
-       //Init curl
-       $curl = new curl\Curl();
+       $curl = new curl\Curl(); //Init curl
 
        if (Yii::$app->user->can('update')) {
          $model = $this->findModel($id);
-
          $oldmodel = clone $model;
-         if ($model->load(Yii::$app->request->post())) {
 
-           if ( $model->validate() ) {
+        if ($model->load(Yii::$app->request->post())) { 
+
+           if ($model->validate()) {
+
              if (!$curl->has(yiicfg::WebDav . $oldmodel->Name)){
-               throw new UserException('Sorry that project does not exist on OwnCloud.');
-             }
+               throw new UserException('Sorry that project does not exist on OwnCloud.'); 
+             }             
              $ret = $curl->rename(yiicfg::WebDav . $oldmodel->Name, yiicfg::OC_files . $model->Name, yiicfg::HOST);
-
-             $model->file = UploadedFile::getInstance($model, 'file');
+             //Yii::error("\r\n" . '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++' . "\r\n" . "\r\n" . json_encode($ret));
+             $model->file = UploadedFile::getInstance($model, 'file'); 
+             // Yii::error(yiicfg::WebDav . $oldmodel->Name . ' | ' . yiicfg::OC_files . $model->Name . ' | ' .yiicfg::HOST);
+             /* 
+             // The check below is not implemented because if a user hits update without changing anything, owncloud 
+             // will return "forbidden" because we would be trying to rename a project to itself, which always fails.
+             if(!$ret){
+               throw new UserException('Error in Curl during rename of owncloud folder- ProjectsController.php Function actionUpdate');
+             }*/
              if($model->file) {
                $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
              }
+
              if (!$model->save()) {
-               throw new UserException('Sorry an error occured in your action create of the project controller. Please contact the administrator.');
+               throw new UserException('An error occured in the "actionUpdate" function of 
+               backend/controllers/ProjectsController.php. Please contact an administrator.');
              }
 
              if ($model->file && !$model->file->saveAs($model->logo)) {
                $error = $model->getErrors();
                $model->delete();
-               throw new UserException("Error saving file " . json_encode($error));
+               throw new UserException("Error saving logo file " . json_encode($error));
              }
-
              return $this->redirect(['view', 'id' => $model->PID, 'logo' => $model->logo]);
-           } else {
+           }else {
              $error = $model->getErrors();
              throw new UserException("Error in model validation " . json_encode($error));
            }
-         } else {
-           return $this->render('create', [
-             'model' => $model,
+         }else {
+           return $this->render('update', [
+          'model' => $model,
              ]);
          }
-       } else {
+       }else {
          throw new ForbiddenHttpException('You do not have permission to access this page!');
        }
      }
@@ -352,6 +357,7 @@ class ProjectsController extends Controller
           $status = true;
           if ( !$this->deleteProjectOnOwncloud($model->Name) ) {
             $status = false;
+            throw new UserException("Project group likely removed from Yii but error removing from OwnCloud.");
           };
           if ( !$status ) {
             throw new UserException("Project group likely removed from Yii but error removing from OwnCloud.");
@@ -378,3 +384,4 @@ class ProjectsController extends Controller
             }
     }
 }
+  
