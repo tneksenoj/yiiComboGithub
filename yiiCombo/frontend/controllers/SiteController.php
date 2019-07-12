@@ -216,7 +216,7 @@ class SiteController extends Controller
       $dataProvider = new ActiveDataProvider([
         'query' => Projects::find(),
         'pagination' => [
-          'pageSize' => 10,
+          'pageSize' => 20,
         ],
       ]);
 
@@ -238,7 +238,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
           'query' => Projects::find(),
           'pagination' => [
-            'pageSize' => 10,
+            'pageSize' => 20,
           ],
         ]);
 
@@ -269,7 +269,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
           'query' => Projects::find(),
           'pagination' => [
-            'pageSize' => 10,
+            'pageSize' => 20,
           ],
         ]);
 

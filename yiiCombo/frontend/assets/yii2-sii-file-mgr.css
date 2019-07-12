@@ -1,17 +1,28 @@
-.sii-filename-elips {
-	width:auto;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+/**
+ * @author Center of Excellence for Bioinformatics Research
+ * This is the yii2-sii-file-mgr css
+ * Styles Frontend
+ */
+
+body {
+    font-family: 'IBM Plex Sans Condensed', sans-serif;   
+}
+.btn {
+    font-family: 'IBM Plex Sans', sans;   
+    border: none;
 }
 
-.sii-fileimage-icon {
-    height: 10em;
-    background-size: cover;
-    background-position:center;
-    background-repeat:no-repeat;
+.pagination {
+    font-family: 'IBM Plex Sans', sans;   
 }
 
+h1 {
+    font-family: 'IBM Plex Sans', sans;     
+    font-weight: 500;
+}
+
+/* HOMEPAGE               
+=================================================================*/
 img#sii-splash-image {
 	max-width: 100%;
 	min-width: 437 px;
@@ -24,9 +35,9 @@ h4#sii-dynam {
 }
 
 .spacer {
-  width: 100%;
-  height: 100px;
-  text-align: center!important
+    width: 100%;
+    height: 100px;
+    text-align: center!important
 }
 
 #sii-sciencebg {
@@ -50,7 +61,6 @@ h4#sii-dynam {
     position: fixed;
     top:0;
     left: 0;
-   
 }
 
 .gradientBg{
@@ -64,11 +74,34 @@ h4#sii-dynam {
     left: 0;
 }
 
-a.glyphicon {
-  height: 2em;
-  vertical-align: middle;
+.sii-filename-elips {
+	width:auto;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-family: 'IBM Plex Sans', sans-serif;   
 }
 
+.sii-fileimage-icon {
+    height: 10em;
+    background-size: cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    cursor: pointer;
+}
+
+a.glyphicon { /* Access Files & Request Access tile icons */
+  height: 2em;
+  vertical-align: middle;  
+  float: left;
+}
+
+
+/* PROJECTS TAB               
+=================================================================*/
+
+/*  Project Sorter                 
+-----------------------------------------------------------------*/
 div#w0.list-view ul.sorter {
     list-style-type: none;
     margin: 0;
@@ -92,13 +125,62 @@ div#w0.list-view ul.sorter li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    width:8.5em;
+    font-weight: 500;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;   
 }
 
 div#w0.list-view ul.sorter li a:hover:not(.active) {
     background-color: #111;
-		color: white;
+    color: white;
 }
 
 div#w0.list-view ul.sorters .active {
     background-color: #4CAF50;
+}
+
+#projectId{
+    font-size: 1.15em;
+    color:rgb(143, 143, 143);
+    float:right;
+    cursor: default;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+}
+
+#projectSystem {
+    color: rgb(90, 90, 90);
+    font-size: .95em;
+    margin-top: -.7em;
+    line-height: normal;
+    font-weight: 400;
+    font-family: 'IBM Plex Sans', sans-serif;   
+    padding-bottom: .6em;
+}
+
+.modalBox{
+    min-height: 20em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalBody{
+    flex: 1 0 auto;
+}
+
+.modalFooter{
+    min-height: 2em; 
+    flex-shrink: 0;
+    padding: .2em;
+}
+
+.svgicon{
+    text-decoration: none;
+    float: left;
+    margin-bottom: .75em;
+    color: rgb(156, 156, 156);
+}
+
+.svgicon:hover, .svgicon:active, .svgicon:focus, .svgicon:visited {
+    text-decoration: none;
 }

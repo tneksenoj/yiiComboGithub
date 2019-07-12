@@ -13,10 +13,23 @@ use yii\filters\AccessRule;
 use frontend\assets\AppAsset;
 use frontend\assets\W3schoolsAsset;
 use frontend\assets\SiiAsset;
+use frontend\assets\FontAsset;
 
+FontAsset::register($this);
 AppAsset::register($this);
 W3schoolsAsset::register($this);
 SiiAsset::register($this);
+
+$js = <<<SCRIPT
+/* To initialize BS3 tooltips set this below */
+$(function () { 
+    $("[data-toggle='tooltip']").tooltip(); 
+});;
+/* To initialize BS3 popovers set this below */
+$(function () { 
+    $("[data-toggle='popover']").popover(); 
+});
+SCRIPT;
 
 ?>
 <?php $this->beginPage() ?>
