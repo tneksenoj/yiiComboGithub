@@ -112,7 +112,7 @@ class RequestsController extends Controller
     /** 
     * Creates a new request, then checks to see if request already exists or if user 
     * already has access to project. If request already exists, sends user back to form with error message.
-    * If it does not, creates a new request and redirects to 'view' page if successful.   
+    * If successful, creates a new request and redirects to 'view' page if successful.   
     * @return mixed
     */
     public function actionCreate() {

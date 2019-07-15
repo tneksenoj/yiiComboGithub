@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\OcShare */
 
-$this->title = 'Update Project Permissions: ' . $model->id;
+$this->title = 'Update Project Permissions: ' . $model->file_target;
 $this->params['breadcrumbs'][] = ['label' => 'Project Permissions', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update Project Permissions';

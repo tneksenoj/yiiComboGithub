@@ -123,7 +123,8 @@ class OcShareController extends Controller
             if(!empty($model->permlist)) {
               $model->permissions = array_sum($model->permlist);
             } else {
-              throw new UserException("Must have at least read ablity!");
+              Yii::$app->getSession()->setFlash('error', 'User must be assigned at least read ability.'); //Prevents the creation of share with no permissions
+              return $this->render('create', ['model' => $model]);
             }
           }else {
               return $this->render('update', [

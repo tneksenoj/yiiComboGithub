@@ -5,8 +5,8 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\OcShare */
-
-$this->title = $model->id;
+//What does this view even do??
+$this->title = $model->file_target;
 $this->params['breadcrumbs'][] = ['label' => 'Project Permissions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
