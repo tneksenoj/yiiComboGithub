@@ -48,28 +48,15 @@ a.asc:after, a.desc:after {
     padding-left: 5px;
 }
 
+/*content: "\e093"; Up arrow*/
+/* content: "\e094"; Down arrow*/
+
 a.asc:after {
-    content: /*"\e113"*/ "\e151";
+    content:"\e093";
 }
 
 a.desc:after {
-    content: /*"\e114"*/ "\e152";
-}
-
-.sort-numerical a.asc:after {
-    content: "\e153";
-}
-
-.sort-numerical a.desc:after {
-    content: "\e154";
-}
-
-.sort-ordinal a.asc:after {
-    content: "\e155";
-}
-
-.sort-ordinal a.desc:after {
-    content: "\e156";
+    content:"\e094";
 }
 
 .grid-view td {

@@ -17,12 +17,19 @@ $status_approved = OcShare::find()->where(['share_type' => 0, 'share_with' => $u
 $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/files/?dir=%2F' . $projectname;
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<style>
+  .activeModal{
+    display: block;
+}
+.activeModal2{
+    display: block;
+}
+  </style>
 
 <div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
     <div class="w3-card-8 w3-center" >
       <!-- <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/site/view?id=". $model->PID . "' >" ; ?> -->
-        <div onclick="document.getElementById('id_<?php echo $model->Name?>').style.display='block';">
+      <div onclick="document.getElementById('id_<?php echo $model->Name?>').classList.add('activeModal');">
           <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
           </div>
         </div>
@@ -31,8 +38,8 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
             <h6><b><div id="projectSystem" class="sii-filename-elips"><?php echo $model->System; ?></div> </b></h6>
             <?php             
                 if ($status_approved) {
-                  echo '<a href="' . Url::to($cloudurl, true) . '" class="svgicon" target="_blank" title="Access Files" data-toggle="tooltip">' . 
-                  Icon::show('folder-open') . '&nbsp;Open </a>'; 
+                  echo '<a href="' . Url::to($cloudurl, true) . '" class="svgicon" target="_blank" title="Open Files" data-toggle="tooltip">' . 
+                  Icon::show('external-link-alt') . '&nbsp;Open </a>'; 
                 
                 }else if ($status_requested) {
                 echo Html::a(Icon::show('check-square').'&nbsp;Pending', ['site/delereqtooc', 'username' => $username, 'projectname'=>$model->Name], [
@@ -47,20 +54,63 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
           <?php $projId = sprintf('%04d', $model->PID); echo '#' . $projId;?>
         </div>
         </div>
-        
-      <div id="id_<?php echo $model->Name?>" class="w3-modal">
+
+      <div id="id_<?php echo $model->Name?>" class="w3-modal modal">
         <div class="w3-modal-content w3-animate-top w3-card-8 modalBox">
-          <header class="w3-container" style="background-color:#0086b3; color:white">
-            <span onclick="document.getElementById('id_<?php echo $model->Name?>').style.display='none';" class="w3-closebtn">&times;</span>
+        <span onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal');" class="w3-closebtn closeX">&times;</span>  
+        <?php echo Html::img('@web/' . $model->logo, ['alt'=>$model->Name . ' icon', 'class'=>'modalImg']) ?>
+          <header class="w3-container modalHeader">
             <h2>Project: <?php echo $model->Name ?></h2>
+            <h3>System: <?php echo $model->System ?></h3>
           </header>
           <div class="w3-container modalBody">
-            <p><?php echo $model->Description; ?></p>
+          <hr>  
+          <p><?php echo $model->Description; ?></p>
           </div>
-          <footer class="w3-container modalFooter" style="background-color:#0086b3; color:white">
-            <p>System: <?php echo $model->System ?></p>
-          </footer>
+          <div class="modalFooter">  <?php             
+                if ($status_approved) {
+                  echo '<a href="' . Url::to($cloudurl, true) . '" class="modalIcon" target="_blank" title="Open Files" data-toggle="tooltip">' . 
+                  Icon::show('external-link-alt') . '&nbsp;Open in ownCloud </a>'; 
+                
+                }else if ($status_requested) {
+                echo Html::tag('div', Icon::show('check-square').'&nbsp;Status: Pending Approval &nbsp;&nbsp;', [
+                  'class' => 'modalStatus', 'title' => 'Pending Approval', 'data-toggle' => 'tooltip']); 
+                  echo Html::a(Icon::show('times-circle').'&nbsp;Cancel Request', ['site/delereqtooc', 'username' => $username, 'projectname'=>$model->Name], [
+                    'class' => 'modalIcon', 'title' => 'Cancel Request', 'data-toggle' => 'tooltip']); 
+                }else {
+                echo Html::a(Icon::show('square').'&nbsp;Request Access', ['site/requestooc', 'username' => $username, 'projectname'=>$model->Name], [
+                  'class' => 'modalIcon', 'title' => 'Request Access', 'data-toggle' => 'tooltip']);}     
+            ?> 
+            </div>
+          
         </div>
       </div>
     </div>
 </div>
+<?php 
+$this->registerJs( <<< EOT_JS_CODE
+$(document).keydown(
+  /* data-key is great-grandfather of activemodal element. Find element by classname, remove class, find great-grandfather, 
+  go to next/previous sibling, last child, last child */
+    function(e)
+    {    
+        if (e.keyCode == 39) {      
+        document.getElementsByClassName("activeModal").parent
+        .parent
+        .parent
+        .nextSibling
+        .lastChild.lastChild.classList.add('activeModal2');
+        document.getElementsByClassName("activeModal").classList.remove('activeModal');
+        document.getElementsByClassName("activeModal2").classList.add('activeModal');
+        document.getElementsByClassName("activeModal2").classList.remove('activeModal2');
+        }
+        if (e.keyCode == 37) {      
+        document.getElementsByClassName("activeModal").parent.parent.parent.previousSibling.lastChild.lastChild.classList.add('activeModal2');
+        document.getElementsByClassName("activeModal").classList.remove('activeModal');
+        document.getElementsByClassName("activeModal2").classList.add('activeModal');
+        document.getElementsByClassName("activeModal2").classList.remove('activeModal2');
+        }
+    }
+  );
+EOT_JS_CODE
+);?>

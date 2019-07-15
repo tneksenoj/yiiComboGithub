@@ -139,6 +139,8 @@ div#w0.list-view ul.sorters .active {
     background-color: #4CAF50;
 }
 
+/* Project Tile                
+-----------------------------------------------------------------*/
 #projectId{
     font-size: 1.15em;
     color:rgb(143, 143, 143);
@@ -157,22 +159,102 @@ div#w0.list-view ul.sorters .active {
     padding-bottom: .6em;
 }
 
+/* Description Modal                
+-----------------------------------------------------------------*/
+
 .modalBox{
     min-height: 20em;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: auto 1.5fr;
+    grid-template-rows: .35fr 2fr auto;
+    padding: 1.5em 1em;
+}
+
+/* Modal Project Name */
+.modalHeader > h2{
+    margin-bottom: -.20em;
+    font-family: 'IBM Plex Sans', sans;     
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+/* Modal System */
+.modalHeader > h3{
+    margin-bottom: -.15em;
+    font-family: 'IBM Plex Sans Condensed', sans;     
+    font-weight: 600;
+    font-size: 1.3em;
+    color: rgb(44, 72, 117);
+}
+
+hr {
+    font-weight: 800;
+    border-color:rgb(156, 156, 156);
+    border-width: 3px;
+}
+
+.modalHeader{
+    grid-column: 2;
+    grid-row: 1 / span 1;
+    font-family: 'IBM Plex Sans', sans;     
+    font-weight: 500;
+}
+
+.modalImg{
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: center;
+    max-width: 100%;
 }
 
 .modalBody{
-    flex: 1 0 auto;
+    grid-column: 2;
+    grid-row: 2 / span 1;
+    text-align: left;
+    padding: 0 3em;
+    font-family: 'IBM Plex Sans', sans;   
+    min-width: 200px;
+    font-size: 1.12em;
 }
 
+@media only screen and (max-width:1000px) {
+    /* For mobile phones: */
+    .modalHeader, .modalImg, .modalBody, .closeX{
+      width:100%;
+    }
+    .modalImg{
+        max-width: 75%;
+    }
+    .closeX{
+        position: relative !important;
+        top: 0 !important;
+        right: -6.5em !important;
+    }
+    .modalBox{
+        display: block;
+        padding-top: .5em !important;
+        margin-top: 1em;
+    }
+}
+
+.closeX{
+    right: .65em;
+    font-size: 2.15em;
+    position: absolute;
+}
+
+.closeX:hover{
+    color: rgb(168, 18, 18);
+}
+/*
 .modalFooter{
     min-height: 2em; 
     flex-shrink: 0;
     padding: .2em;
-}
+    border-radius: 0px 0px 25px 25px;
+    background-color: #eee;
+}*/
 
 .svgicon{
     text-decoration: none;
@@ -181,6 +263,73 @@ div#w0.list-view ul.sorters .active {
     color: rgb(156, 156, 156);
 }
 
-.svgicon:hover, .svgicon:active, .svgicon:focus, .svgicon:visited {
+.svgicon:active, .svgicon:focus, .svgicon:visited {
     text-decoration: none;
+    color: rgb(156, 156, 156);
 }
+
+.svgicon:hover{
+    text-decoration: none;
+    color: rgb(14, 87, 170);
+}
+
+.activeModal{
+    display: block;
+}
+
+/* Icon and link that appears on project tile modal */
+.modalIcon{
+    color: rgb(116, 116, 116);
+    text-decoration: none;
+    align-self: flex-start;
+    padding: .5em;
+    border: 1px solid rgba(8, 105, 216, 0);
+    
+}
+
+.modalIcon:hover, 
+.modalIcon:active, 
+.modalIcon:focus, 
+.modalIcon:visited{
+    color: rgb(116, 116, 116);
+} 
+
+.modalIcon:hover{
+    text-decoration: none;
+    color: rgb(8, 105, 216);
+    animation: fadein .75s;
+    border: 1px solid rgb(8, 105, 216);
+    border-radius: 15px;
+}
+
+@keyframes fadein {
+    0% { border: 1px solid rgba(8, 105, 216, 0); }
+    30%   {  border: 1px solid rgba(8, 105, 216, 0.301); }
+    40%   {  border: 1px solid rgba(8, 105, 216, 0.459); }
+    60%   {  border: 1px solid rgba(8, 105, 216, 0.705); }
+    70%   {  border: 1px solid rgba(8, 105, 216, 0.829); }
+    100%   {  border: 1px solid rgb(8, 105, 216); }
+}
+
+.modalStatus{
+    color: rgb(116, 116, 116);
+    text-decoration: none;
+    padding: .5em;
+    align-self: flex-start;
+}
+
+.modalFooter {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border: none;
+    grid-row: 3 / span 1;
+    padding: 1em 3.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: -1em;
+}
+

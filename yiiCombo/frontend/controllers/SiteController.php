@@ -27,6 +27,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Requests;
 use yii\base\UserException;
 use yii\web\ForbiddenHttpException;
+use yii\helpers\Html;
 
 /**
  * Site controller
@@ -229,10 +230,25 @@ class SiteController extends Controller
 
       $logged_in_user = Yii::$app->user->identity->username;
       if ( $logged_in_user == $username ) {
-        if( Requests::findOne(['username' => $username, 'projectname' => $projectname])->delete() ) {
-          Yii::$app->getSession()->setFlash('success', 'Your request has been removed.');
-        }else {
+        if (Requests::findOne(['username' => $username, 'projectname' => $projectname]) == null){ 
+            /* If a user deletes their request and refreshes the page, this function will try to delete a nonexistent request and
+            throw an exception. Appended this 'if' statement to catch this and redirect user to the projects page.*/
+            $dataProvider = new ActiveDataProvider([
+                'query' => Projects::find(),
+                'pagination' => [
+                  'pageSize' => 20,
+                ],
+              ]);
+      
+              return $this->render('projects/index', [
+                  'dataProvider' => $dataProvider,
+              ]);
+        }  
+        else if(!Requests::findOne(['username' => $username, 'projectname' => $projectname])->delete() ) {
             Yii::$app->getSession()->setFlash('error', 'Error removing your request. Maybe it has already been removed?');
+        }else {
+            Yii::$app->getSession()->setFlash('success', 'Your request to access ' . Html::beginTag('b') . 
+          $projectname . Html::endTag('b') .' has been removed.');
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -261,9 +277,11 @@ class SiteController extends Controller
         $model->projectname = $projectname;
         if( ! Requests::find()->where(['username' => $username])->andWhere(['projectname' => $projectname])->exists()) {
           $model->save();
-          Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.');
+          Yii::$app->getSession()->setFlash('success', 'Your request to access ' . Html::beginTag('b') . 
+          $projectname . Html::endTag('b') .' has been noted and is pending approval.');
         }else {
-            Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');
+            /*Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');*/
+            // Commented out because error message keeps appearing after page is refreshed- including when project sort is used
         }
 
         $dataProvider = new ActiveDataProvider([
