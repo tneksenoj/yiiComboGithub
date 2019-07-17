@@ -162,6 +162,7 @@ class OcShareController extends Controller
               ]);
           }
           if ($model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Successfully updated permissions');
                 return $this->redirect([ 'index', 'id' => $model->id]);
           } else {
               return $this->render('update', [
