@@ -145,13 +145,16 @@ class OcShareController extends Controller
          }
     }
 
+    /* 
+    * Updates project permissions
+    */
     public function actionUpdate($id)
     {
       if (Yii::$app->user->can('update'))
       {
           $model = $this->findModel($id);
           if ($model->load(Yii::$app->request->post())) {
-            if(!empty($model->permlist)) {
+            if(!empty($model->permlist)) { //If Permlist is not empty, save
               $model->permissions = array_sum($model->permlist);
             } else {
               throw new UserException("Must have at least read ablity!");

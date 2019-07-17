@@ -117,8 +117,8 @@ class Requests extends \yii\db\ActiveRecord
         ->setMethod('POST')
         ->setUrl(yiicfg::OCS_SHARE . 'shares')
         ->setData(['path' => '/Projects/' . $projectname, 'shareType' => 0, 'shareWith' => $username,
-                  'permissions' => 1,]) //Identitifies which project to share, the user it is being 
-        ->setOptions(['timeout' => 5,]) //shared to and the permission level(least by default)
+                  'permissions' => 1,]) // Identitifies which project to share, the user it is being 
+        ->setOptions(['timeout' => 5,]) // shared to and the permission level(least by default)
         ->send();
         $p = xml_parser_create();
         xml_parse_into_struct($p, $response->content, $vals, $index);
