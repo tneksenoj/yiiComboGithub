@@ -69,9 +69,13 @@ class Requests extends \yii\db\ActiveRecord
     //   return ( $data != null );
     // }
 
-    public static function createOwncloudUser($username) //Creates oc user if there is none, shares folders
-    { // Gets username and password from yiicombo DB to setup user account
-      // for the owncloud server and database. 
+
+    /*
+    * Function createOwncloudUser takes in a username, 
+    * Uses it to find the user and creates ownCloud account for them
+    */
+    public static function createOwncloudUser($username) 
+    { // Gets username and password from yiicombo DB to setup user account for the owncloud server and database. 
       $user = User::findOne(['username' => $username]); // Finds user based on username
       //NOTE: Create user with CURL on owncloud user provisioning API THEN check if share permissions works correctly 
       if( ! OcUsers::find()->where(['uid' => $user->username])->exists() ) //Create new user if they don't already exist 
