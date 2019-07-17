@@ -232,8 +232,8 @@ class ProjectsController extends Controller
               $model->logo = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
             }
             if (!$model->save()) {
-              throw new UserException("Check to ensure no spaces exist in your logo filename. \nSorry, an error occured in your action \"create\" of the project controller. Please contact an administrator.");
-            } //Edited to include message about spaces in logo filename.
+              throw new UserException("Sorry, an error occured in your action \"create\" of the project controller. Please contact an administrator.");
+            }
 
             if ($model->file && !$model->file->saveAs($model->logo)) {
               $error = $model->getErrors();

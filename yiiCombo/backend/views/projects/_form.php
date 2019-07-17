@@ -16,13 +16,13 @@ use backend\models\Projects;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'Name')->textInput(['maxlength' => true])->hint('No Spaces in project names please!')->Label('Name (Please no spaces in the project name!)') ?>
+    <?= $form->field($model, 'Name')->textInput(['maxlength' => true])->hint('Spaces will be replaced with "_"') ?>
 
     <?= $form->field($model, 'System')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'file')->fileInput()->hint('No Spaces in file names please!')->Label('Logo (No spaces in file name please!)') ?>
+    <?= $form->field($model, 'file')->fileInput()->hint('Spaces will be replaced with "_"')?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>

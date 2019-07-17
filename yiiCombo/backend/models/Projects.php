@@ -40,13 +40,15 @@ class Projects extends \yii\db\ActiveRecord
             [['Name'], function ($attribute, $params){
                   if(preg_match('/\s/', $this->$attribute)) {
                     //error_log("EL1");
-                    $this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');
+                    $this->$attribute = preg_replace('/\s+/','_', $this->$attribute);
+                    /*
+                    $this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');*/
                   }
                 }],
                 [['logo'], function ($attribute, $params){
                     if(preg_match('/\s/', $this->$attribute)) {
-                      //
-                      $this->addError($this->$attribute, 'Sorry, spaces are not allowed in file names.');
+                    $this->$attribute = preg_replace('/\s+/','_', $this->$attribute);
+                    /*  $this->addError($this->$attribute, 'Sorry, spaces are not allowed in file names.');*/
                     }
                   }],
         ];
