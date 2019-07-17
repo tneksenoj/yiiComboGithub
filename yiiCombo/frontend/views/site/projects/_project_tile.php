@@ -17,21 +17,17 @@ $status_approved = OcShare::find()->where(['share_type' => 0, 'share_with' => $u
 $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/files/?dir=%2F' . $projectname;
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  .activeModal{
-    display: block;
-}
-.activeModal2{
-    display: block;
-}
-  </style>
+
 
 <div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
     <div class="w3-card-8 w3-center" >
       <!-- <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/site/view?id=". $model->PID . "' >" ; ?> -->
-      <div onclick="document.getElementById('id_<?php echo $model->Name?>').classList.add('activeModal');">
+      <div onclick="document.getElementById('id_<?php echo $model->Name?>').classList.add('activeModal'); 
+      document.getElementById('modal_<?php echo $model->Name?>').classList.add('openModal');"> 
+
           <div class="w3-container sii-fileimage-icon" style="background-image:url(<?php echo Yii::getAlias('@web') . "/" . $model->logo ?>);">
           </div>
+
         </div>
         <div class="w3-container w3-center" >
             <h4><b><div id="projectTitle" class="sii-filename-elips"><?php echo $model->Name; ?></div> </b></h4>
@@ -55,9 +51,12 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
         </div>
         </div>
 
-      <div id="id_<?php echo $model->Name?>" class="w3-modal modal">
-        <div class="w3-modal-content w3-animate-top w3-card-8 modalBox">
-        <span onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal');" class="w3-closebtn closeX">&times;</span>  
+      <div id="id_<?php echo $model->Name?>" class="w3-modal modal" onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal'); 
+        document.getElementById('modal_<?php echo $model->Name?>').classList.remove('openModal');">
+        <div id="modal_<?php echo $model->Name?>"class="w3-modal-content w3-animate-top w3-card-8 modalBox"> 
+        <span onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal');
+        document.getElementById('modal_<?php echo $model->Name?>').classList.remove('openModal');" class="w3-closebtn closeX">&times;</span>  
+        
         <?php echo Html::img('@web/' . $model->logo, ['alt'=>$model->Name . ' icon', 'class'=>'modalImg']) ?>
           <header class="w3-container modalHeader">
             <h2>Project: <?php echo $model->Name ?></h2>
@@ -77,40 +76,14 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
                   'class' => 'modalStatus', 'title' => 'Pending Approval', 'data-toggle' => 'tooltip']); 
                   echo Html::a(Icon::show('times-circle').'&nbsp;Cancel Request', ['site/delereqtooc', 'username' => $username, 'projectname'=>$model->Name], [
                     'class' => 'modalIcon', 'title' => 'Cancel Request', 'data-toggle' => 'tooltip']); 
-                }else {
+                
+                  }else {
                 echo Html::a(Icon::show('square').'&nbsp;Request Access', ['site/requestooc', 'username' => $username, 'projectname'=>$model->Name], [
                   'class' => 'modalIcon', 'title' => 'Request Access', 'data-toggle' => 'tooltip']);}     
             ?> 
             </div>
-          
         </div>
       </div>
     </div>
 </div>
-<?php 
-$this->registerJs( <<< EOT_JS_CODE
-$(document).keydown(
-  /* data-key is great-grandfather of activemodal element. Find element by classname, remove class, find great-grandfather, 
-  go to next/previous sibling, last child, last child */
-    function(e)
-    {    
-        if (e.keyCode == 39) {      
-        document.getElementsByClassName("activeModal").parent
-        .parent
-        .parent
-        .nextSibling
-        .lastChild.lastChild.classList.add('activeModal2');
-        document.getElementsByClassName("activeModal").classList.remove('activeModal');
-        document.getElementsByClassName("activeModal2").classList.add('activeModal');
-        document.getElementsByClassName("activeModal2").classList.remove('activeModal2');
-        }
-        if (e.keyCode == 37) {      
-        document.getElementsByClassName("activeModal").parent.parent.parent.previousSibling.lastChild.lastChild.classList.add('activeModal2');
-        document.getElementsByClassName("activeModal").classList.remove('activeModal');
-        document.getElementsByClassName("activeModal2").classList.add('activeModal');
-        document.getElementsByClassName("activeModal2").classList.remove('activeModal2');
-        }
-    }
-  );
-EOT_JS_CODE
-);?>
+

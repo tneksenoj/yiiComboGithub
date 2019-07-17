@@ -2,7 +2,20 @@
  * @author Center of Excellence for Bioinformatics Research
  * This is the yii2-sii-file-mgr css
  * Styles Frontend
- */
+*/
+
+/*------------------------------------------------------------------
+[Table of contents]
+
+1. General
+    a. Body / body
+    b. Buttons / .btn
+    c. Pagination / .pagination
+    d. Header 1 / h1
+2. Homepage
+    a. 
+    
+-------------------------------------------------------------------*/
 
 body {
     font-family: 'IBM Plex Sans Condensed', sans-serif;   
@@ -166,9 +179,9 @@ div#w0.list-view ul.sorters .active {
     min-height: 20em;
     border-radius: 15px;
     display: grid;
-    grid-template-columns: auto 1.5fr;
-    grid-template-rows: .35fr 2fr auto;
-    padding: 1.5em 1em;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    padding: 1.5em 1.5em;
 }
 
 /* Modal Project Name */
@@ -212,10 +225,13 @@ hr {
     grid-column: 2;
     grid-row: 2 / span 1;
     text-align: left;
-    padding: 0 3em;
     font-family: 'IBM Plex Sans', sans;   
     min-width: 200px;
     font-size: 1.12em;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    padding: 0 1.5em;
+    text-indent: 2em;
 }
 
 @media only screen and (max-width:1000px) {
@@ -319,17 +335,17 @@ hr {
 }
 
 .modalFooter {
-    left: 0;
-    bottom: 0;
     width: 100%;
     text-align: center;
     background-color: white;
-    border: none;
     grid-row: 3 / span 1;
-    padding: 1em 3.3em;
+    padding: 1em 1em;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     margin-bottom: -1em;
 }
 
+.activeModal{
+    display: block;
+}
