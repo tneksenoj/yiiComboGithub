@@ -233,16 +233,7 @@ class SiteController extends Controller
         if (Requests::findOne(['username' => $username, 'projectname' => $projectname]) == null){ 
             /* If a user deletes their request and refreshes the page, this function will try to delete a nonexistent request and
             throw an exception. Appended this 'if' statement to catch this and redirect user to the projects page.*/
-            $dataProvider = new ActiveDataProvider([
-                'query' => Projects::find(),
-                'pagination' => [
-                  'pageSize' => 20,
-                ],
-              ]);
-      
-              return $this->render('projects/index', [
-                  'dataProvider' => $dataProvider,
-              ]);
+              return $this->redirect(['site/projects']);
         }  
         else if(!Requests::findOne(['username' => $username, 'projectname' => $projectname])->delete() ) {
             Yii::$app->getSession()->setFlash('error', 'Error removing your request. Maybe it has already been removed?');
@@ -280,6 +271,9 @@ class SiteController extends Controller
           Yii::$app->getSession()->setFlash('success', 'Your request to access ' . Html::beginTag('b') . 
           $projectname . Html::endTag('b') .' has been noted and is pending approval.');
         }else {
+            /* Assumes that user has refreshed the page- because 90% of the time, it is not a permission error. Redirects
+            to default projects page with no query. Prevents error thrown due to the request of a renamed project from occurring*/
+            return $this->redirect(['site/projects']);
             /*Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');*/
             // Commented out because error message keeps appearing after page is refreshed- including when project sort is used
         }
