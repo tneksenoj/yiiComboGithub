@@ -18,6 +18,14 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+  html, body { /* Prevents scrollbar from shifting the page. Use for all scrolling pages. */
+    margin-right: -1px; /*COMPENSATES THE VERTICAL SCROLLBAR*/
+    overflow-x: hidden; /*REMOVES HORIZONTAL SCROLLBAR THE ABOVE CREATES*/
+    margin-top: 0px; /*COMPENSATES THE HORIZONTAL SCROLLBAR*/
+}
+</style>
+
 
 <div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
     <div class="w3-card-8 w3-center" >
@@ -51,9 +59,16 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
         </div>
         </div>
 
-      <div id="id_<?php echo $model->Name?>" class="w3-modal modal" onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal'); 
-        document.getElementById('modal_<?php echo $model->Name?>').classList.remove('openModal');">
+      <div id="id_<?php echo $model->Name?>" class="w3-modal modal">
+      <!-- -->
+        <div id="modalClick" class="modalClick" onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal');
+        document.getElementById('modal_<?php echo $model->Name?>').classList.remove('openModal');"> X </div>
+        <!-- -->
+        <div id="modalClick2" class="modalClick" onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal');
+        document.getElementById('modal_<?php echo $model->Name?>').classList.remove('openModal');"> Y </div>
+                
         <div id="modal_<?php echo $model->Name?>"class="w3-modal-content w3-animate-top w3-card-8 modalBox"> 
+        
         <span onclick="document.getElementById('id_<?php echo $model->Name?>').classList.remove('activeModal');
         document.getElementById('modal_<?php echo $model->Name?>').classList.remove('openModal');" class="w3-closebtn closeX">&times;</span>  
         
@@ -71,7 +86,7 @@ $cloudurl = 'https://' . $_SERVER["SERVER_NAME"] . '/owncloud/index.php/apps/fil
                   echo '<a href="' . Url::to($cloudurl, true) . '" class="modalIcon" target="_blank" title="Open Files" data-toggle="tooltip">' . 
                   Icon::show('external-link-alt') . '&nbsp;Open in ownCloud </a>'; 
                 
-                }else if ($status_requested) {
+                }else if ($status_requested) { //
                 echo Html::tag('div', Icon::show('check-square').'&nbsp;Status: Pending Approval &nbsp;&nbsp;', [
                   'class' => 'modalStatus', 'title' => 'Pending Approval', 'data-toggle' => 'tooltip']); 
                   echo Html::a(Icon::show('times-circle').'&nbsp;Cancel Request', ['site/delereqtooc', 'username' => $username, 'projectname'=>$model->Name], [
