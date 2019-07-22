@@ -125,17 +125,17 @@ class RequestsController extends Controller
             $exists = Requests::find()->where(['username' => $user])->andWhere(['projectname' => $project])->exists();
             
             if ($exists) { 
-              Yii::$app->getSession()->setFlash('error', $user . ' has already requested access to ' . $project); //Unapproved request already made
+              Yii::$app->getSession()->setFlash('error', '<strong>' . $user . '</strong> has already requested access to <strong>' . $project . '</strong>'); //Unapproved request already made
               return $this->render('create', ['model' => $model]); //Brings user back to request form
             }else {
                 $access = OcShare::find()->where(['share_type' => 0])->andWhere(['share_with' => $user])->andWhere(['file_target' => '/'.$project])->exists();
                 
                 if ($access){
-                    Yii::$app->getSession()->setFlash('error', $user . ' already has access to ' . $project); //Access already approved
+                    Yii::$app->getSession()->setFlash('error', '<strong>' . $user . '</strong> already has access to <strong>' . $project . '</strong>'); //Access already approved
                     return $this->render('create', ['model' => $model]); //Brings user back to request form
                 }else {
                 $model->save();
-                Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.'); //Flash error message
+                Yii::$app->getSession()->setFlash('success', 'Your request has been noted and is pending approval.'); //Request submitted successfully
                 return $this->redirect(['view', 'username' => $model->username, 'projectname' => $model->projectname]);}}
             }else {
             return $this->render('create', [

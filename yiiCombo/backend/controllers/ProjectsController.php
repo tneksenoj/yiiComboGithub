@@ -119,6 +119,7 @@ class ProjectsController extends Controller
 
       if($curl->delete(yiicfg::WebDav . $projectName))
         {
+          Yii::$app->getSession()->setFlash('info', 'Project <strong>' . $projectName . '</strong> has been deleted.'); //Delete message, specified project is bolded
           return true;
         }
       return false;

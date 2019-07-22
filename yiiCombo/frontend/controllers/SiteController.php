@@ -160,7 +160,6 @@ class SiteController extends Controller
     /*public function actionCreateProject()
     {
         $model = new CreateProject();
-
         return $this->render('createProject', ['model' => $model]);
     }
     */
@@ -238,8 +237,8 @@ class SiteController extends Controller
         else if(!Requests::findOne(['username' => $username, 'projectname' => $projectname])->delete() ) {
             Yii::$app->getSession()->setFlash('error', 'Error removing your request. Maybe it has already been removed?');
         }else {
-            Yii::$app->getSession()->setFlash('success', 'Your request to access ' . Html::beginTag('b') . 
-          $projectname . Html::endTag('b') .' has been removed.');
+            Yii::$app->getSession()->setFlash('info', 'Removed your request to access <strong>' . 
+          $projectname . '</strong>.');
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -259,38 +258,39 @@ class SiteController extends Controller
 
 
     public function actionRequestooc($username, $projectname) {
+        $logged_in_user = Yii::$app->user->identity->username;
 
+        if ( $logged_in_user == $username ) {
+            $model = new Requests();
+            $model->username = $username;
+            $model->projectname = $projectname;
+        
+            if( ! Requests::find()->where(['username' => $username])->andWhere(['projectname' => $projectname])->exists()) {        
+                $model->save();        
+                Yii::$app->getSession()->setFlash('success', 'Your request to access ' . Html::beginTag('b') .         
+                $projectname . Html::endTag('b') .' has been noted and is pending approval.');
+            }        
+            else {
+                // Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');
+                // Commented out because error message keeps appearing after page is refreshed- including when project sort is used
+        
+                // The line below redirects to index.php/site/projects instead, so that the query in the URL isn't submitted again
+                return $this->redirect(['site/projects']);
+            }
 
-      $logged_in_user = Yii::$app->user->identity->username;
-      if ( $logged_in_user == $username ) {
-        $model = new Requests();
-        $model->username = $username;
-        $model->projectname = $projectname;
-        if( ! Requests::find()->where(['username' => $username])->andWhere(['projectname' => $projectname])->exists()) {
-          $model->save();
-          Yii::$app->getSession()->setFlash('success', 'Your request to access ' . Html::beginTag('b') . 
-          $projectname . Html::endTag('b') .' has been noted and is pending approval.');
-        }else {
-            /* Assumes that user has refreshed the page- because 90% of the time, it is not a permission error. Redirects
-            to default projects page with no query. Prevents error thrown due to the request of a renamed project from occurring*/
-            return $this->redirect(['site/projects']);
-            /*Yii::$app->getSession()->setFlash('error', 'Your request has either already been added or you do not have permissions.');*/
-            // Commented out because error message keeps appearing after page is refreshed- including when project sort is used
-        }
-
-        $dataProvider = new ActiveDataProvider([
-          'query' => Projects::find(),
-          'pagination' => [
-            'pageSize' => 20,
-          ],
-        ]);
-
-        return $this->render('projects/index', [
-            'dataProvider' => $dataProvider,
-        ]);
-      } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Projects::find(),
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+                ]);
+                return $this->render('projects/index', [
+                                'dataProvider' => $dataProvider,        
+                                ]);
+        }       
+        else {
             throw new ForbiddenHttpException('You do not have permission to access this page!');
-      }
+        }
     }
 
 
