@@ -13,6 +13,14 @@ $this->title = 'Project Permissions';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<style>
+  html, body { /* Prevents scrollbar from shifting the page. Use for all scrolling pages. */
+    margin-right: -1px; /*COMPENSATES THE VERTICAL SCROLLBAR*/
+    overflow-x: hidden; /*REMOVES HORIZONTAL SCROLLBAR THE ABOVE CREATES*/
+    margin-top: 0px; /*COMPENSATES THE HORIZONTAL SCROLLBAR*/
+}
+</style>
+
 <div class="oc-share-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

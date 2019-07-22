@@ -22,6 +22,24 @@ h1 {
     font-weight: 500;
 }
 
+body::-webkit-scrollbar {
+    width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(193, 225, 243);
+  outline: 1px solid slategrey;
+}
+
+.navbar-logo {
+    width: 30px;
+    height: 32px;
+}
+
 /* PROJECTS TAB               
 =================================================================*/
 

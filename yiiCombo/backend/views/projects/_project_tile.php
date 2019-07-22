@@ -12,6 +12,14 @@ use kartik\icons\Icon;
 Icon::map($this);
 ?>
 
+<style>
+  html, body { /* Prevents scrollbar from shifting the page. Use for all scrolling pages. */
+    margin-right: -1px; /*COMPENSATES THE VERTICAL SCROLLBAR*/
+    overflow-x: hidden; /*REMOVES HORIZONTAL SCROLLBAR THE ABOVE CREATES*/
+    margin-top: 0px; /*COMPENSATES THE HORIZONTAL SCROLLBAR*/
+}
+</style>
+
 <div class="w3-col s12 m4 l3 w3-margin-bottom w3-padding">
     <div class="w3-card-8 w3-center" >
       <?php echo "<a href = '" . Yii::getAlias('@web') . "/index.php/projects/view?id=". $model->PID . "' >" ; ?>
