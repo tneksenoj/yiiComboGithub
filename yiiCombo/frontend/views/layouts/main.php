@@ -65,7 +65,7 @@ SCRIPT;
 <div class="wrap">
     <?php
     NavBar::begin([
-
+        'brandLabel' => Html::img('@web/images/sharebio-light.png', ['id'=>'sharebio-icon']), //Sharebio logo on left navbar
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

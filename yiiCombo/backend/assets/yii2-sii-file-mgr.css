@@ -40,6 +40,25 @@ body::-webkit-scrollbar-thumb {
     height: 32px;
 }
 
+.create-btn{
+    border-radius: 10px;
+    transition: .4s ease-out;
+    font-size: 1.3em;
+    color: rgb(199, 241, 255);
+    /* padding-top: 2px; */
+    display: flex;
+    width: 2em;
+    justify-content: end;
+}
+
+.create-btn:hover{
+    color: white;
+    border-radius: 10px;
+    background-color: #337ab7;
+    box-shadow: 3px 2px 5px #0b3050 inset;
+    justify-content: center;
+}
+
 /* PROJECTS TAB               
 =================================================================*/
 

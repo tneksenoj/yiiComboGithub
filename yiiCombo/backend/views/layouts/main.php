@@ -48,8 +48,8 @@ $this->registerJs($js);
 <div class="wrap">
     <?php
     NavBar::begin([
-        /*'brandLabel' => Html::img('@web/images/sharebio_logo.gif'), //Sharebio logo on left navbar
-        'brandOptions' => ['class' => 'pull-left', 'brand-icon'],*/
+       /* 'brandLabel' => Html::img('@web/../../common/images/white.gif'), //Sharebio logo on left navbar*/
+        'brandOptions' => ['class' => 'pull-left navbar-logo', 'brand-icon'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
