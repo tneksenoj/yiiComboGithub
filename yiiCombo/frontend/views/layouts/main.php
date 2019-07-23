@@ -29,6 +29,22 @@ $(function () {
 $(function () { 
     $("[data-toggle='popover']").popover(); 
 });
+/* For modal navigation */
+$(document).keydown(
+    var modalProj = getElementById('id_<?php echo ?>'); /* .style.display='block';*/
+    function(e)
+    {    
+        if (e.keyCode == 39) {      
+        modalProj.nextSibling.style.display='block';    
+
+        }
+        if (e.keyCode == 37) {      
+/*            $(".move:focus").prev().focus();
+*/
+        }
+    }
+);
+
 SCRIPT;
 
 ?>

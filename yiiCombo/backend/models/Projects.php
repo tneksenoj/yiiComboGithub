@@ -33,22 +33,20 @@ class Projects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Description', 'System'], 'string'],
+            [['Description', 'System'], 'string', 'max' => 1500],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 1],
             ['logo', 'default', 'value' => '/../../../common/images/uploadFile.png'],
             [['Name', 'logo'], 'string', 'max' => 255],
             [['Name'], function ($attribute, $params){
                   if(preg_match('/\s/', $this->$attribute)) {
-                    //error_log("EL1");
                     $this->$attribute = preg_replace('/\s+/','_', $this->$attribute);
-                    /*
-                    $this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');*/
+                    //$this->addError($this->$attribute, 'Sorry, spaces are not allowed in project names.');
                   }
                 }],
                 [['logo'], function ($attribute, $params){
                     if(preg_match('/\s/', $this->$attribute)) {
                     $this->$attribute = preg_replace('/\s+/','_', $this->$attribute);
-                    /*  $this->addError($this->$attribute, 'Sorry, spaces are not allowed in file names.');*/
+                      //$this->addError($this->$attribute, 'Sorry, spaces are not allowed in file names.');
                     }
                   }],
         ];
