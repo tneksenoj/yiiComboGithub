@@ -24,21 +24,22 @@ $username = Yii::$app->user->identity->username;
     <a class="btn btn-md btn-primary pull-right proj-btn"> Add Project </a>-->
 
 
-<h1><?= Html::encode($this->title) ?></h1>
-    <div class="projects-index">
-      <div class='w3-container w3-center'>
+<h1 id='project-header'><?= Html::encode($this->title) ?></h1>
+    <div id='projects-index'>
+      <div id='project-container' class='w3-container w3-center'>
           <div class='w3-row-padding' style = "max-height:10em">
               <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
               <?= ListView::widget([
                   'dataProvider' => $dataProvider,
                   // 'filterModel' => $searchModel,
 
-                  'layout' => "{sorter}\n{summary}\n{items}\n{pager}",
+                  'layout' => "{sorter}\n{items}\n{summary}\n{pager}",
                   'itemView' => function($model, $key, $index, $column) use ($username) {
                       return $this->render('_project_tile', ['model' => $model,
                                                              'username' => $username,
                                                             ]);
                   },
+                  
                   'pager' => [
                     'firstPageLabel' => 'first',
                     'lastPageLabel' => 'last',
