@@ -51,7 +51,6 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
-
 .navbar-inverse{
     background-color: rgb(17, 17, 17);
 }
@@ -63,13 +62,16 @@ body::-webkit-scrollbar-thumb {
     padding: 13px;
     padding-left: 15px;
     float: left;
-    margin-left: -19px!important;
 }
 
 #sharebio-icon{ /* Lefthand navbar "Sharebio" icon */
-    height: 1.3em;
-    width: auto;
     float: left;
+    height: 1.6em;
+    width: auto;
+    margin-top: 13px;
+    z-index: 1047;
+    position: absolute;
+    margin-left: 20vw;
 }
 
 #sharebio-icon:hover{
@@ -81,41 +83,83 @@ body::-webkit-scrollbar-thumb {
         50% { -webkit-filter: hue-rotate(360deg); }
 }
 
-.navbar-inverse .navbar-nav > li > a,
-.navbar-inverse .btn-link { /* Nav tabs */
-    transition: .2s linear;
-    margin-top: 4px;
-    margin-left: 1px;
-    margin-bottom: -2px;
-    border-radius: 18px 18px 0 0;
-    background-color: #202020;
+.navbar-inverse .navbar-nav > li > a {
+    color: rgb(70, 70, 70);
+}
+
+button.btn-link,
+.nav > li > a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
     min-width: 84px;
+    margin-top: 0px;
+    padding: 1.4em 1em .5em 2em;
     text-align: center;
-    padding: 13px 12px;
-    width: 100%;
 }
 
-.navbar-inverse .navbar-nav > li > a:hover, 
-.navbar-inverse .btn-link:hover {
-    background-color: rgb(9, 55, 70);
+.nav > li.logout-btn::before{
+    display: none;
 }
 
-.navbar-inverse .navbar-nav > .active > a {
-    background-color: rgb(0, 107, 139);
-    z-index: 10;
+.nav > li::before {
+    content: ''; /* To generate the box */
+	position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    z-index: -1;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    background: #ddd;
+    transform: perspective(5px) rotateX(2deg);
+    transform-origin: bottom right;
+    margin-right: 0px;
 }
 
+.navbar-inverse .navbar-nav > .active::before {
+    content: ''; /* To generate the box */
+	position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+    z-index: 0;
+    border-bottom: none;
+    background-color: #203f53 !important;
+    border-radius: 10px 10px 0 0;
+    transform: perspective(5px) rotateX(2deg);
+    transform-origin: bottom right;
+    margin-right: 0px;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover {
-    background-color:  rgb(17, 84, 104);
+    min-width: 84px;
+    margin-top: 0px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.logout-btn > form {
+    margin-bottom: -3px;
+}
+
+button.btn-link{
+    padding-top: 1.55em;
 }
 
 .nav > li > form{
     padding: 0px;
-    
 }
 
 .navbar-inverse{
     border: none;
+}
+
+[name=contact-button]{
+    margin-top: 2em;
 }
 
 /* 2. Homepage 
@@ -173,8 +217,31 @@ h4#sii-dynam { /* "A dynamic inter-collegiate ...platform" text */
 }
 
 
+
 .projects-update > h1{ /* add to update projects page */
     word-break: break-word;
+}
+
+.site-about,
+.site-contact{
+    max-width: 75%;
+    margin: auto;
+}
+
+.site-about > p{
+    margin-bottom: 25px;
+}
+
+.col-lg-3 {
+    width: auto;
+}
+
+
+
+@media (min-width: 1200px){
+.col-lg-5 {
+    width: 50.666667%;
+}
 }
 
 /* 3. Projects Tab              
@@ -209,6 +276,8 @@ div#w0.list-view ul.sorter { /* Project sort bar */
     flex-direction: row;
     border-radius: 5px;
 }
+
+div#w0.list-view ul.sorter::-webkit-scrollbar { width: 0 !important }
 
 div#w0.list-view ul.sorter li a {
     display: block;
@@ -255,7 +324,7 @@ div#w0.list-view ul.sorter li a.desc  {
     padding: 0.6em 0.2em 0.6em 0.6em;
 }
 
-@media only screen and (max-width: 285px) {
+@media only screen and (max-width: 990px) {
     #sharebio-icon{
         display: none;
     }
@@ -458,7 +527,7 @@ hr {
 .modalIcon:hover{
     text-decoration: none;
     color: rgb(8, 105, 216);
-    animation: fadein .75s;
+    animation: fadein 5s;
     border: 1px solid rgb(8, 105, 216);
     border-radius: 15px;
 }
@@ -497,8 +566,9 @@ hr {
 }
 
 #project-header{
-    margin-bottom: 0em;
+    margin-bottom: -.75em;
     margin-top: 25px;
+    margin-left: 16px;
 }
 
 #project-container{
@@ -507,26 +577,38 @@ hr {
 }
 
 .breadcrumb {
-    background-color: #ffffff;
+    border-radius: 0px;
     margin-bottom: 0px;
     left: 0;
     right: 0;
     position: absolute!important;
     top: 50px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #203f53;
+    color: #6dd4fdaf;
     max-height: 340px;
     display: block;
+    border: none;
+    padding: 2px 2px 2px 0px;
 }
 
-.breadcrumb > li > a{
+.breadcrumb > li > a {
     margin-right: 20px;
-    margin-left: 39px;
+    margin-left: 20vw;
+}
+
+.breadcrumb > li > a:hover {
+    color: #6fd6ff;
+    text-decoration: none;
+}
+
+.breadcrumb > li.active {
+    color: #ddedf0ce;
 }
 
 .breadcrumb > li + li:before {
     content: "\276D";
-    color: #00000050;
+    color: #a0dfeb4f;
     padding-top: -1px;
     font-size: .85em;
     position: absolute;

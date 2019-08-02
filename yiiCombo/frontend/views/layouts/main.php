@@ -62,11 +62,15 @@ SCRIPT;
 <body>
 <?php $this->beginBody() ?>
 
+<a href="<?= Html::encode(Yii::$app->homeUrl) ?>">
+<img src="<?php echo Yii::getAlias('@web') . '/images/sharebio-light.png'; ?>" id="sharebio-icon">
+</a>
+
 <div class="wrap">
     <?php
-    NavBar::begin([
+    NavBar::begin([/*
         'brandLabel' => Html::img('@web/images/sharebio-light.png', ['id'=>'sharebio-icon']), //Sharebio logo on left navbar
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => Yii::$app->homeUrl,*/
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -92,7 +96,7 @@ SCRIPT;
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
+        $menuItems[] = '<li class="logout-btn">'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
